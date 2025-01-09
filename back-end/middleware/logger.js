@@ -25,9 +25,6 @@ const logger = (req,res,next) => {
         console.log(`Method: ${methodColor(method)} | Time: [${chalk.yellow(time)}] | Status: ${statusColor(status)}`)
     })
     
-    
-
-
     next()
 }
 

@@ -1,6 +1,7 @@
 // imports
 import express from "express"
-import router from "./routes/routes.js"
+import apartmentsRouter from "./routes/apartmentsRoutes.js"
+import reviewsRouter from "./routes/reviewsRoutes.js"
 import logger from "./middleware/logger.js"
 
 
@@ -21,4 +22,5 @@ server.listen(PORT, () => {
 // middleware
 server.use('/', logger)
 
-server.use('/', router)
+server.use('/apartments', apartmentsRouter)
+server.use('/reviews', reviewsRouter)
