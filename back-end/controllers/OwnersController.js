@@ -1,5 +1,6 @@
 import connection from '../database/connection.js'
 
+// get all elements from owners
 function index(req, res) {
 
     const sql = 'SELECT * FROM owners'
@@ -10,6 +11,7 @@ function index(req, res) {
     })
 }
 
+// get a single element from owners
 function show(req, res) {
 
     const id = req.params.id
@@ -24,6 +26,7 @@ function show(req, res) {
     })
 }
 
+// store new owner
 function store(req, res) {
 
     const owner = {
@@ -35,8 +38,10 @@ function store(req, res) {
     }
 }
 
+// update owner
 function update(req, res) { }
 
+// delete owner
 function destroy(req, res) { }
 
 export default {

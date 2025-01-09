@@ -1,6 +1,6 @@
 import connection from "../database/connection.js";
 
-
+// get all elements from reviews
 function index(req,res){
     const sql = `SELECT * FROM reviews`
 
@@ -10,7 +10,7 @@ function index(req,res){
     })
 }
 
-
+// get a single review
 function show(req,res){
 
     const id = req.params.id

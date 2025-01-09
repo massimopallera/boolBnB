@@ -30,6 +30,13 @@ function show(req, res) {
 // store an apartment
 function store(req, res) {
 
+    //optimize code and query
+
+    // const sql = `
+    // INSERT INTO apartments
+    // VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+    // `
+
     const apartments = {
         // id: req.body.id, //auto increment
         descrizione_breve: req.body.descrizione_breve,
@@ -43,6 +50,8 @@ function store(req, res) {
         servizi_aggiuntivi: req.body.servizi_aggiuntivi,
         // counter_cuori: req.body.counter_cuori //default 0
     }
+
+    connection.query(sql, /* params ,*/ (err, res) => {})
 
 }
 
