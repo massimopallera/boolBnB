@@ -1,4 +1,4 @@
-const connection = require('../database/connection');
+import connection from '../Database/connection.js'
 
 function index(req, res) {
 
@@ -50,9 +50,15 @@ function store(req, res) {
 
 }
 
-function update(req, res) {
+function update(req, res) {}
+
+function destroy(req, res) {}
 
 
+export default {
+    index, 
+    show,
+    store,
+    update,
+    destroy
 }
-
-function destroy(req, res) { }

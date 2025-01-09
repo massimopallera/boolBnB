@@ -1,12 +1,11 @@
 import express from "express";
+import controller from "../controllers/RoomController.js"
 const router = express.Router();
 
-router.get('/',(req,res) => {
-    res.json({result : 'success'});
-})
+router.get('/', controller.index)
 
 // add to db
-// router.post('/',)
+// router.post('/', controller.store)
 
 // update element 
 // router.put('/',)
