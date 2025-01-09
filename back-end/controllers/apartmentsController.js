@@ -3,7 +3,7 @@ import connection from '../database/connection.js'
 // get all elements from apartments
 function index(req, res) {
 
-    const sql = 'SELECT * FROM appartamenti'
+    const sql = 'SELECT * FROM apartments'
 
     connection.query(sql, (err, results) => {
         if (err) return res.status(500).json({ error: 'Database query failed' });
@@ -15,7 +15,7 @@ function index(req, res) {
 function show(req, res) {
 
     const id = req.params.id
-    const sql = 'SELECT * FROM appartamenti WHERE id =?'
+    const sql = 'SELECT * FROM apartments WHERE id =?'
 
     connection.query(sql, [id], (err, results) => {
         if (err) return res.status(500).json({ error: err });
@@ -51,7 +51,7 @@ function store(req, res) {
         // counter_cuori: req.body.counter_cuori //default 0
     }
 
-    connection.query(sql, /* params ,*/ (err, res) => {})
+    connection.query(sql, /* params ,*/(err, res) => { })
 
 }
 
@@ -63,7 +63,7 @@ function store(req, res) {
 
 
 export default {
-    index, 
+    index,
     show,
     store,
     // update,
