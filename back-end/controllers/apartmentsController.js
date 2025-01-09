@@ -1,5 +1,6 @@
-import connection from '../Database/connection.js'
+import connection from '../database/connection.js'
 
+// get all elements from apartments
 function index(req, res) {
 
     const sql = 'SELECT * FROM appartamenti'
@@ -10,11 +11,11 @@ function index(req, res) {
     })
 }
 
+// get a single element from apartments
 function show(req, res) {
 
     const id = req.params.id
     const sql = 'SELECT * FROM appartamenti WHERE id =?'
-
 
     connection.query(sql, [id], (err, results) => {
         if (err) return res.status(500).json({ error: err });
@@ -23,17 +24,14 @@ function show(req, res) {
         }
 
         res.json({ apartment: results })
-
     })
-
-
-
 }
 
+// store an apartment
 function store(req, res) {
 
-    const Appartamento = {
-        id: req.body.id,
+    const apartments = {
+        // id: req.body.id, //auto increment
         descrizione_breve: req.body.descrizione_breve,
         nr_stanze: req.body.nr_stanze,
         nr_letti: req.body.nr_letti,
@@ -43,21 +41,22 @@ function store(req, res) {
         email_riferimento: req.body.email_riferimento,
         img_appartamento: req.body.img_appartamento,
         servizi_aggiuntivi: req.body.servizi_aggiuntivi,
-        counter_cuori: req.body.counter_cuori
+        // counter_cuori: req.body.counter_cuori //default 0
     }
-
 
 }
 
-function update(req, res) {}
+// update an apartment
+// function update(req, res) {}
 
-function destroy(req, res) {}
+// delete an apartment
+// function destroy(req, res) {}
 
 
 export default {
     index, 
     show,
     store,
-    update,
-    destroy
+    // update,
+    // destroy
 }

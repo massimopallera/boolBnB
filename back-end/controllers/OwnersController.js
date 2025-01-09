@@ -1,4 +1,4 @@
-import connection from '../Database/connection.js'
+import connection from '../database/connection.js'
 
 function index(req, res) {
 
@@ -27,11 +27,11 @@ function show(req, res) {
 function store(req, res) {
 
     const owner = {
-        id: req.body.id,
+        // id: req.body.id, //auto increment
         name: req.body.name,
-        surname: req.body.surname,
+        last_name: req.body.last_name,
         email: req.body.email,
-        telephone: req.body.telephone
+        phone: req.body.phone
     }
 }
 

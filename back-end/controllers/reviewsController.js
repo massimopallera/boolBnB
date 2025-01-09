@@ -1,4 +1,4 @@
-import connection from "../Database/connection.js";
+import connection from "../database/connection.js";
 
 
 function index(req,res){
