@@ -1,5 +1,5 @@
 import express from "express";
-import controller from "../controllers/OwnersController.js"
+import controller from "../controllers/ownersController.js"
 const router = express.Router();
 
 //all owners
