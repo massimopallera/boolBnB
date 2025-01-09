@@ -59,7 +59,7 @@ CREATE TABLE `apartments` (
   `reference_mail` varchar(45) NOT NULL,
   `apartment_images` varchar(100) NOT NULL,
   `added_services` text,
-  `hearts_container` tinyint NOT NULL DEFAULT '0',
+  `hearts_counter` tinyint NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   CONSTRAINT `owner_id_fk` FOREIGN KEY (`id`) REFERENCES `owners` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -114,7 +114,7 @@ CREATE TABLE `reviews` (
   `name` varchar(50) NOT NULL,
   `text` varchar(250) NOT NULL,
   `data` date NOT NULL,
-  `days of stay` tinyint NOT NULL,
+  `days_of_stay` tinyint NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
