@@ -20,7 +20,6 @@ function show(req, res) {
         if (err) return res.status(500).json({ error: err });
         if (results.length === 0) {
             return res.status(404).json({ err: 'Apartment not found' })
-
         }
 
         res.json({ apartment: results })
