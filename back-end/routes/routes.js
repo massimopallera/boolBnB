@@ -5,5 +5,13 @@ router.get('/',(req,res) => {
     res.json({result : 'success'});
 })
 
+// add to db
+// router.post('/',)
+
+// update element 
+// router.put('/',)
+
+// delete element
+// router.delete('/',)
 
 export default router
