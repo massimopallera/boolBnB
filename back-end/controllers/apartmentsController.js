@@ -15,7 +15,7 @@ function index(req, res) {
 function show(req, res) {
 
     const id = req.params.id
-    const sql = 'SELECT * FROM apartments WHERE id =?'
+    const sql = 'SELECT * FROM apartments WHERE id = ?'
 
     connection.query(sql, [id], (err, results) => {
         if (err) return res.status(500).json({ error: err });
@@ -34,24 +34,22 @@ function store(req, res) {
 
     // const sql = `
     // INSERT INTO apartments
-    // VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+    // VALUES ($1)
     // `
 
-    const apartments = {
-        // id: req.body.id, //auto increment
-        descrizione_breve: req.body.descrizione_breve,
-        nr_stanze: req.body.nr_stanze,
-        nr_letti: req.body.nr_letti,
-        nr_bagni: req.body.nr_bagni,
-        mt_quadri: req.body.quadri,
-        indirizzo_completo: req.body.id,
-        email_riferimento: req.body.email_riferimento,
-        img_appartamento: req.body.img_appartamento,
-        servizi_aggiuntivi: req.body.servizi_aggiuntivi,
-        // counter_cuori: req.body.counter_cuori //default 0
-    }
+    const apartment = {
+        description : req.body.description,
+        rooms : req.body.rooms,
+        beds : req.body.beds,
+        toilets : req.body.toilets,
+        sq_meters : req.body.sq_meters,
+        address : req.body.address,
+        reference_mail : req.body.reference_mail,
+        apartment_images : req.body.apartment_images,
+        added_services : req.body.added_services,
+}
 
-    connection.query(sql, /* params ,*/(err, res) => { })
+    connection.query(sql, [apartment],(err, results) => { })
 
 }
 
