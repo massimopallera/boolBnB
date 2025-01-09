@@ -22,5 +22,6 @@ server.listen(PORT, () => {
 // middleware
 server.use('/', logger)
 
+// routes
 server.use('/apartments', apartmentsRouter)
 server.use('/reviews', reviewsRouter)
