@@ -1,14 +1,20 @@
 import express from "express"
-const app = express()
+import router from "./routes/routes.js"
 
-app.use(express.json())
+
+const server = express()
+
+server.use(express.json())
+
 
 const HOST = process.env.HOST || "http://localhost"
 const PORT = process.env.PORT || 3000
 
 // start server listening 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Listening on ${HOST}:${PORT}`)
 })
 
-// app.get('/', (req, res) => {res.send('ciao')})
+server.use('/', router)
+
+// server.get('/', (req, res) => {res.json('ciao')})
