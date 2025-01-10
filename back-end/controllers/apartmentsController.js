@@ -82,7 +82,32 @@ function store(req, res) {
 
 
 // update an apartment
-// function update(req, res) {}
+
+function update(req, res) { }
+
+const id = req.params.id
+
+const {
+    description,
+    rooms,
+    beds,
+    toilets,
+    sq_meters,
+    address,
+    reference_mail,
+    apartment_images,
+    added_services
+} = req.body;
+
+if (!description && !rooms && !beds && !toilets && !sq_meters && !address && !reference_mail && !apartment_images && !added_services) {
+    return res.status(400).json({ error: 'Devi almeno modificare un campo' });
+}
+
+const sql = "UPDATE Customers
+SET ContactName = 'Alfred Schmidt', City = 'Frankfurt'
+WHERE CustomerID = 1"
+
+
 
 // delete an apartment //ma serve?
 // function destroy(req, res) {}
