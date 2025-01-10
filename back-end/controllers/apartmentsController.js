@@ -43,7 +43,7 @@ function store(req, res) {
 
 
     if (!description || !rooms || !beds || !toilets || !sq_meters || !address || !reference_mail || !apartment_images) {
-        return res.status(400).json({ error: 'Tutti i campi obbligatori devono essere compilai' });
+        return res.status(400).json({ error: 'Tutti i campi obbligatori devono essere compilati' });
     }
 
 
