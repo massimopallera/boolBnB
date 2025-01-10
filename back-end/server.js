@@ -2,6 +2,7 @@
 import express from "express"
 import apartmentsRouter from "./routes/apartmentsRoutes.js"
 import reviewsRouter from "./routes/reviewsRoutes.js"
+import OwnersRouter from "./routes/OwnersRoutes.js"
 import logger from "./middleware/logger.js"
 
 
@@ -25,3 +26,4 @@ server.use('/', logger)
 // routes
 server.use('/apartments', apartmentsRouter)
 server.use('/reviews', reviewsRouter)
+server.use('/owner', OwnersRouter)

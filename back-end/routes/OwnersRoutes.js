@@ -1,5 +1,5 @@
 import express from "express";
-import controller from "../controllers/ownersController.js"
+import controller from "../controllers/OwnersController.js"
 const router = express.Router();
 
 //all owners
@@ -9,7 +9,7 @@ router.get('/', controller.index)
 router.get('/:id', controller.show)
 
 // add to db
-// router.post('/', controller.store)
+router.post('/', controller.store)
 
 // update element 
 // router.put('/',)

@@ -29,18 +29,18 @@ function show(req, res) {
 // store new owner
 function store(req, res) {
 
-    const newOwner = {...req.body}
+    const newOwner = { ...req.body }
 
     const sql = `
     INSERT INTO owners 
-    VALUES ($1, $2, $3, $4)
+    VALUES ($1, $2, $3, $4, $5)
     `
 
     //control if body request is correct
 
     connection.query(sql, [Object.values(newOwner)], (err, results) => {
-        if (err) return res.status(err.code).json({ err: err.message})
-        
+        if (err) return res.status(err.code).json({ err: err.message })
+
         res.status(201).json({ owner: results })
     })
 }
@@ -51,12 +51,12 @@ function update(req, res) {
     const id = req.params.id
     // const sql = 'UPDATE owners SET /* values */ WHERE id = ?' 
 
-    connection.query(sql, [id], (err,results) => {
-    
+    connection.query(sql, [id], (err, results) => {
+
         /* logic here */
-    
+
     })
- }
+}
 
 // delete owner
 function destroy(req, res) {
@@ -65,9 +65,9 @@ function destroy(req, res) {
     const sql = 'DELETE FROM owners WHERE id = ?'
 
     connection.query(sql, [id], (err, results) => {
-        if (err) return res.status(err.code).json({ err: err})
-        res.status(204).json({message: 'deleted owner'})
-    })  
+        if (err) return res.status(err.code).json({ err: err })
+        res.status(204).json({ message: 'deleted owner' })
+    })
 
 }
 
