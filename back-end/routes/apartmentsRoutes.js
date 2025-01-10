@@ -11,7 +11,7 @@ router.get('/:id', controller.show)
 router.post('/', controller.store)
 
 // update element 
-router.put('/', controller.update)
+router.put('/:id', controller.update)
 
 // delete element
 // router.delete('/',)

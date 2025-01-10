@@ -89,7 +89,9 @@ function update(req, res) {
 
     const id = req.params.id
 
-    const {
+    const toUpdate = { ...req.body, id }
+
+    /* const {
         description,
         rooms,
         beds,
@@ -99,15 +101,17 @@ function update(req, res) {
         reference_mail,
         apartment_images,
         added_services
-    } = req.body;
+    } = req.body; */
 
-    if (!description && !rooms && !beds && !toilets && !sq_meters && !address && !reference_mail && !apartment_images && !added_services) {
-        return res.status(400).json({ error: 'You must compile at least one field' });
-    }
+    /*  if (!description || !rooms || !beds || !toilets || !sq_meters || !address || !reference_mail || !apartment_images || !added_services) {
+         return res.status(400).json({ error: 'You must fill at least one field' });
+     } */
 
     const sql = `
     UPDATE apartments
-    SET description = ?,
+    SET
+    owner_id = ?,
+    description = ?,
         rooms = ?,
         beds = ?,
         toilets = ?,
@@ -118,7 +122,17 @@ function update(req, res) {
         added_services = ?
     WHERE id = ?
     `
-    connection.query(sql,)
+    connection.query(sql, Object.values(toUpdate), (err, results) => {
+        if (err) {
+            console.error('Error during updating the apartment:', err);
+            return res.status(500).json({ error: 'Error during updating the apartment' });
+        }
+
+
+        res.status(201).json({
+            success: true
+        });
+    })
 }
 
 // delete an apartment //ma serve?
