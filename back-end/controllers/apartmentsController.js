@@ -38,22 +38,24 @@ function store(req, res) {
         address,
         reference_mail,
         apartment_images,
-        added_services
+        added_services,
+        owner_id
     } = req.body;
 
 
-    if (!description || !rooms || !beds || !toilets || !sq_meters || !address || !reference_mail || !apartment_images) {
+    if (!description || !rooms || !beds || !toilets || !sq_meters || !address || !reference_mail || !apartment_images || !owner_id) {
         return res.status(400).json({ error: 'All fields must be compiled!' });
     }
 
 
     const sql = `
-        INSERT INTO apartments (description, rooms, beds, toilets, sq_meters, address, reference_mail, apartment_images, added_services)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO apartments (owner_id, description, rooms, beds, toilets, sq_meters, address, reference_mail, apartment_images, added_services)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
 
     const values = [
+        owner_id,
         description,
         rooms,
         beds,
@@ -83,7 +85,7 @@ function store(req, res) {
 
 // update an apartment
 
-function update(req, res) { 
+function update(req, res) {
 
     const id = req.params.id
 
@@ -99,9 +101,9 @@ function update(req, res) {
         added_services
     } = req.body;
 
-if (!description && !rooms && !beds && !toilets && !sq_meters && !address && !reference_mail && !apartment_images && !added_services) {
-    return res.status(400).json({ error: 'You must compile at least one field' });
-}
+    if (!description && !rooms && !beds && !toilets && !sq_meters && !address && !reference_mail && !apartment_images && !added_services) {
+        return res.status(400).json({ error: 'You must compile at least one field' });
+    }
 
     const sql = `
     UPDATE apartments
@@ -116,6 +118,7 @@ if (!description && !rooms && !beds && !toilets && !sq_meters && !address && !re
         added_services = ?
     WHERE id = ?
     `
+    connection.query(sql,)
 }
 
 // delete an apartment //ma serve?

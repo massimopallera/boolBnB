@@ -8,7 +8,7 @@ router.get('/', controller.index)
 router.post('/', controller.store)
 
 // update element 
-// router.put('/',)
+router.put('/', controller.update)
 
 // delete element
 // router.delete('/',)
