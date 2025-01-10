@@ -1,3 +1,5 @@
+import md5 from 'md5';
+import sha1 from 'sha1';
 import connection from '../database/connection.js'
 
 // get all elements from owners
@@ -30,15 +32,17 @@ function show(req, res) {
 function store(req, res) {
 
     const newOwner = { ...req.body }
+    newOwner.password = sha1(md5(newOwner.password))
 
     const sql = `
-    INSERT INTO owners 
-    VALUES ($1, $2, $3, $4, $5)
+    INSERT INTO owners
+    (name, last_name, email, phone, password)
+    VALUES (?,?,?,?,?)
     `
 
     //control if body request is correct
 
-    connection.query(sql, [Object.values(newOwner)], (err, results) => {
+    connection.query(sql, Object.values(newOwner), (err, results) => {
         if (err) return res.status(err.code).json({ err: err.message })
 
         res.status(201).json({ owner: results })
