@@ -83,41 +83,40 @@ function store(req, res) {
 
 // update an apartment
 
-function update(req, res) { }
+function update(req, res) { 
 
-const id = req.params.id
+    const id = req.params.id
 
-const {
-    description,
-    rooms,
-    beds,
-    toilets,
-    sq_meters,
-    address,
-    reference_mail,
-    apartment_images,
-    added_services
-} = req.body;
+    const {
+        description,
+        rooms,
+        beds,
+        toilets,
+        sq_meters,
+        address,
+        reference_mail,
+        apartment_images,
+        added_services
+    } = req.body;
 
-if (!description && !rooms && !beds && !toilets && !sq_meters && !address && !reference_mail && !apartment_images && !added_services) {
-    return res.status(400).json({ error: 'Devi almeno modificare un campo' });
+    if (!description && !rooms && !beds && !toilets && !sq_meters && !address && !reference_mail && !apartment_images && !added_services) {
+        return res.status(400).json({ error: 'Devi almeno modificare un campo' });
+    }
+
+    const sql = `
+    UPDATE apartments
+    SET description = ?,
+        rooms = ?,
+        beds = ?,
+        toilets = ?,
+        sq_meters = ?,
+        address = ?,
+        reference_mail = ?,
+        apartment_images = ?,
+        added_services = ?
+    WHERE id = ?
+    `
 }
-
-const sql = `
-UPDATE apartments
-SET description = ?,
-    rooms = ?,
-    beds = ?,
-    toilets = ?,
-    sq_meters = ?,
-    address = ?,
-    reference_mail = ?,
-    apartment_images = ?,
-    added_services = ?
-WHERE id = ?
-`
-
-
 
 // delete an apartment //ma serve?
 // function destroy(req, res) {}
