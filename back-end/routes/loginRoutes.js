@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/:id', controller.show)
 
-router.get('/:id', controller.update)
+router.put('/:id', controller.update)
 
 
 

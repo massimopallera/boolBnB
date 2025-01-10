@@ -4,7 +4,6 @@ import apartmentsRouter from "./routes/apartmentsRoutes.js"
 import reviewsRouter from "./routes/reviewsRoutes.js"
 import ownersRouter from "./routes/ownersRoutes.js"
 import logger from "./middleware/logger.js"
-
 import loginRouter from "./routes/loginRoutes.js"
 
 const server = express()
