@@ -3,7 +3,7 @@ import controller from "../controllers/loginController.js"
 const router = express.Router();
 
 
-router.get('/:id', controller.show)
+router.get('/', controller.show)
 
 router.put('/:id', controller.update)
 
