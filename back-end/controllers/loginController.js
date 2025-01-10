@@ -1,6 +1,7 @@
 import connection from '../database/connection.js'
 import md5 from 'md5';
 import sha1 from 'sha1'
+import handlers from '../middleware/handlers.js';
 
 
 
@@ -14,11 +15,7 @@ function show(req, res) {
     `
 
     connection.query(sql, [email, password], (err, results) => {
-        if (err) return res.status(err).json({ error: err.message })
-
-        if (results.length === 0) return res.status(404).json({ message: 'Email or Password incorrect' })
-
-        res.status(200).json({ success: true, results: results })
+        handlers.handler(req, res, results)
     })
 }
 
@@ -34,9 +31,7 @@ function update(req, res) {
     `
 
     connection.query(sql, [password, id], (err, results) => {
-        if (err) res.json({ err: err.message })
-
-        res.status(200).json({ success: true })
+        handlers.handler(req, res, results)
     })
 
 }
