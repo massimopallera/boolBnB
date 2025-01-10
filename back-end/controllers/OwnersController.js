@@ -69,7 +69,7 @@ function destroy(req, res) {
         res.status(204).json({message: 'deleted owner'})
     })  
 
- }
+}
 
 export default {
     index,

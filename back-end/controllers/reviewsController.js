@@ -23,14 +23,31 @@ function show(req,res){
     })
 }
 
-// function store(req,res){}
+function store(req,res){
+    const newReview = {...req.body}
+
+    const sql = `
+    INSERT INTO reviews 
+    VALUES ($1, $2, $3, $4)
+    `
+
+    //control if body request is correct
+
+    connection.query(sql, [Object.values(newReview)], (err, results) => {
+        if (err) return res.status(err.code).json({ err: err.message})
+        
+        res.status(201).json({ review: results })
+    })
+}
+
+
 // function update(){}
 // function destroy(){}
 
 export default {
     index,
-    show
-    // store
+    show,
+    store
     // update
     // destroy
 }
