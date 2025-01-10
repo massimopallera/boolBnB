@@ -43,7 +43,7 @@ function store(req, res) {
 
 
     if (!description || !rooms || !beds || !toilets || !sq_meters || !address || !reference_mail || !apartment_images) {
-        return res.status(400).json({ error: 'Tutti i campi obbligatori devono essere compilati' });
+        return res.status(400).json({ error: 'All fields must be compiled!' });
     }
 
 
@@ -68,13 +68,13 @@ function store(req, res) {
 
     connection.query(sql, values, (err, results) => {
         if (err) {
-            console.error('Errore durante linserimento dellappartamento:', err);
-            return res.status(500).json({ error: 'Errore durante linserimento dellappartamento' });
+            console.error('Error during inserting the apartment:', err);
+            return res.status(500).json({ error: 'Error during inserting the apartment' });
         }
 
 
         res.status(201).json({
-            message: 'Appartamento inserito con successo!',
+            message: 'Apartment inserted succesfully',
 
         });
     });
@@ -100,7 +100,7 @@ const {
 } = req.body;
 
 if (!description && !rooms && !beds && !toilets && !sq_meters && !address && !reference_mail && !apartment_images && !added_services) {
-    return res.status(400).json({ error: 'Devi almeno modificare un campo' });
+    return res.status(400).json({ error: 'You must compile at least one field' });
 }
 
 const sql = "UPDATE Customers
