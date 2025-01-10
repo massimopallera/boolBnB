@@ -10,9 +10,7 @@ function index(req, res) {
     const sql = 'SELECT * FROM owners'
 
     connection.query(sql, (err, results) => {
-        // handler(res.statusCode)
         res.json(handler(req,res,results))
-
     })
 }
 
@@ -23,12 +21,6 @@ function show(req, res) {
     const sql = 'SELECT * FROM owners WHERE id =?'
 
     connection.query(sql, [id], (err, results) => {
-        // if (err) return res.status(500).json({ error: err });
-        // if (results.length === 0) {
-        //     return res.status(404).json({ err: 'Owner not found' })
-        // }
-        // res.json({ owner: results })
-
         handler.handler(req, res, results)
     })
 }
@@ -45,12 +37,16 @@ function store(req, res) {
     VALUES (?,?,?,?,?)
     `
 
+    const query = `
+    INSERT INTO owners (name, last_name, email, phone, password)
+    VALUES (?, ?, ?, ?, ?)
+    ON DUPLICATE KEY UPDATE email = email; -- Non fa nulla se email esiste
+`;
+
+
     //control if body request is correct
-
-    connection.query(sql, Object.values(newOwner), (err, results) => {
-
-        handler.handler(req, res, results)
-        // res.status(201).json({ success: true})
+    connection.query(query, Object.values(newOwner), (err, results) => {
+        handler.controlFields(newOwner, req, res, results,err)
     })
 }
 

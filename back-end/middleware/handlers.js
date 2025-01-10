@@ -9,16 +9,31 @@
     401 NOT AUTHORIZED
     404 NOT FOUND
     403 FORBIDDEN ??
-
+    409 CONFLICT
 */
 
-const handler = (req,res,results) => {
+const controlFields = (data, req,res, results, err) => {
+    for (const key in data) {
+        if (!data[key]){
+            return res.status(400).json({message: 'All fields are required'})
+        }
+    }
+    
+    return handler(req,res,results, err);
+}
+
+const handler = (req,res,results, err) => {
+
+    console.log(results);
 
     // control if there is a new id inserted. If there is it'll mean there is a new row
     if(results.affectedRows > 0 && results.insertId != 0){ 
         return res.status(201).json({statusCode: 201, status: "Created" , result: results}); //created new element
 
-    } else if (results.affectedRows > 0 && results.insertId === 0){
+    }else if (results.affectedRows > 0 && results.insertId === 0){
+        if (req.method === 'POST'){
+            return res.status(409).json({statusCode: 409, status: "Conflict" , result: results}); //Already exists in db
+        }
         return res.status(204).json({statusCode: 204, status: "No Content" , result: results}); //updated element
     }
     if(results[0]){
@@ -38,5 +53,6 @@ const NotFound = (req,res,next) => {
 
 export default { 
     handler, 
+    controlFields,
     NotFound 
 }
