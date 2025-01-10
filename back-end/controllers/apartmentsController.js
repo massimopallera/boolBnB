@@ -103,9 +103,19 @@ if (!description && !rooms && !beds && !toilets && !sq_meters && !address && !re
     return res.status(400).json({ error: 'Devi almeno modificare un campo' });
 }
 
-const sql = "UPDATE Customers
-SET ContactName = 'Alfred Schmidt', City = 'Frankfurt'
-WHERE CustomerID = 1"
+const sql = `
+UPDATE apartments
+SET description = ?,
+    rooms = ?,
+    beds = ?,
+    toilets = ?,
+    sq_meters = ?,
+    address = ?,
+    reference_mail = ?,
+    apartment_images = ?,
+    added_services = ?
+WHERE id = ?
+`
 
 
 
@@ -117,6 +127,6 @@ export default {
     index,
     show,
     store,
-    // update,
+    update,
     // destroy
 }
