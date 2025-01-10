@@ -5,6 +5,7 @@ import reviewsRouter from "./routes/reviewsRoutes.js"
 import ownersRouter from "./routes/ownersRoutes.js"
 import logger from "./middleware/logger.js"
 import loginRouter from "./routes/loginRoutes.js"
+import handlers from "./middleware/handlers.js"
 
 const server = express()
 
@@ -29,3 +30,4 @@ server.use('/reviews', reviewsRouter)
 server.use('/owner', ownersRouter)
 server.use('/login', loginRouter)
 
+server.use(handlers.NotFound)
