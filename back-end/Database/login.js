@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
     connection.query(sql,[email, password],(err,results) => {
         if (err) return res.status(err).json({error: err.message})
 
-        if (!results) return res.status(404).json({message: 'Email or Password incorrect'})
+        if (results.length===0) return res.status(404).json({message: 'Email or Password incorrect'})
 
         res.status(200).json({success: true, results: results})
     })
