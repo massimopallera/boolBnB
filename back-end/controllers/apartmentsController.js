@@ -29,34 +29,62 @@ function show(req, res) {
 
 // store an apartment
 function store(req, res) {
+    const {
+        description,
+        rooms,
+        beds,
+        toilets,
+        sq_meters,
+        address,
+        reference_mail,
+        apartment_images,
+        added_services
+    } = req.body;
 
-    //optimize code and query
 
-    // const sql = `
-    // INSERT INTO apartments
-    // VALUES ($1)
-    // `
+    if (!description || !rooms || !beds || !toilets || !sq_meters || !address || !reference_mail || !apartment_images) {
+        return res.status(400).json({ error: 'Tutti i campi obbligatori devono essere compilai' });
+    }
 
-    const apartment = {
-        description : req.body.description,
-        rooms : req.body.rooms,
-        beds : req.body.beds,
-        toilets : req.body.toilets,
-        sq_meters : req.body.sq_meters,
-        address : req.body.address,
-        reference_mail : req.body.reference_mail,
-        apartment_images : req.body.apartment_images,
-        added_services : req.body.added_services,
+
+    const sql = `
+        INSERT INTO apartments (description, rooms, beds, toilets, sq_meters, address, reference_mail, apartment_images, added_services)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+
+
+    const values = [
+        description,
+        rooms,
+        beds,
+        toilets,
+        sq_meters,
+        address,
+        reference_mail,
+        apartment_images,
+        added_services || null
+    ];
+
+
+    connection.query(sql, values, (err, results) => {
+        if (err) {
+            console.error('Errore durante linserimento dellappartamento:', err);
+            return res.status(500).json({ error: 'Errore durante linserimento dellappartamento' });
+        }
+
+
+        res.status(201).json({
+            message: 'Appartamento inserito con successo!',
+
+        });
+    });
 }
 
-    connection.query(sql, [apartment],(err, results) => { })
-
-}
 
 // update an apartment
 // function update(req, res) {}
 
-// delete an apartment
+// delete an apartment //ma serve?
 // function destroy(req, res) {}
 
 
