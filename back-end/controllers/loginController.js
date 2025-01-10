@@ -9,9 +9,6 @@ function show(req, res) {
     const email = req.body.email
     const password = sha1(md5(req.body.password))
 
-    console.log(`Email: ${email}, Password: ${password} ${req.body.password}`);
-
-
     const sql = `
     SELECT * FROM owners WHERE email = ? AND password = ?
     `
