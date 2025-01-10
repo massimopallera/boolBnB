@@ -4,8 +4,8 @@ const router = express.Router();
 
 router.get('/', controller.index)
 
-// add to db
-// router.post('/', controller.store)
+
+router.post('/', controller.store)
 
 // update element 
 // router.put('/',)
