@@ -2,7 +2,7 @@ import md5 from 'md5';
 import sha1 from 'sha1';
 import connection from '../database/connection.js'
 
-import handler from '../middleware/handlers.js';
+import statusCode from '../middleware/handlers.js';
 
 // get all elements from owners
 function index(req, res) {
@@ -10,7 +10,7 @@ function index(req, res) {
     const sql = 'SELECT * FROM owners'
 
     connection.query(sql, (err, results) => {
-        res.json(handler(req,res,results))
+        res.json(statusCode(req,res,results))
     })
 }
 
@@ -21,7 +21,7 @@ function show(req, res) {
     const sql = 'SELECT * FROM owners WHERE id =?'
 
     connection.query(sql, [id], (err, results) => {
-        handler.handler(req, res, results)
+        statusCode.statusCode(req, res, results)
     })
 }
 
@@ -46,7 +46,7 @@ function store(req, res) {
 
     //control if body request is correct
     connection.query(query, Object.values(newOwner), (err, results) => {
-        handler.controlFields(newOwner, req, res, results,err)
+        statusCode.controlFields(newOwner, req, res, results,err)
     })
 }
 

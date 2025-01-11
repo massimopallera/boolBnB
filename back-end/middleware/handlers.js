@@ -19,10 +19,10 @@ const controlFields = (data, req,res, results, err) => {
         }
     }
     
-    return handler(req,res,results, err);
+    return statusCode(req,res,results, err);
 }
 
-const handler = (req,res,results, err) => {
+const statusCode = (req,res,results, err) => {
 
     console.log(results);
 
@@ -52,7 +52,7 @@ const NotFound = (req,res,next) => {
 }
 
 export default { 
-    handler, 
+    statusCode, 
     controlFields,
     NotFound 
 }

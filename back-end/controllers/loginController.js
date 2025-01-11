@@ -15,7 +15,7 @@ function show(req, res) {
     `
 
     connection.query(sql, [email, password], (err, results) => {
-        handlers.handler(req, res, results)
+        handlers.statusCode(req, res, results)
     })
 }
 
@@ -31,7 +31,7 @@ function update(req, res) {
     `
 
     connection.query(sql, [password, id], (err, results) => {
-        handlers.handler(req, res, results)
+        handlers.statusCode(req, res, results)
     })
 
 }
