@@ -6,6 +6,7 @@ import ownersRouter from "./routes/ownersRoutes.js"
 import logger from "./middleware/logger.js"
 import loginRouter from "./routes/loginRoutes.js"
 import handlers from "./middleware/handlers.js"
+// import sendEmail from "./dev-mail-api/testMail.js"
 
 const server = express()
 
@@ -33,6 +34,30 @@ server.use('/apartments', apartmentsRouter)
 server.use('/reviews', reviewsRouter)
 server.use('/owner', ownersRouter)
 server.use('/login', loginRouter)
+
+import sgMail from '@sendgrid/mail'
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+
+const msg = {
+  to: 'test@example.com', // Change to your recipient
+  from: process.env.EMAIL_SENDGRID, // Change to your verified sender
+  subject: 'Sending with SendGrid is Fun',
+  text: 'and easy to do anywhere, even with Node.js',
+  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+}
+sgMail
+  .send(msg)
+  .then(() => {
+    console.log('Email sent')
+  })
+  .catch((error) => {
+    console.error(error)
+  })
+
+
+
+
+// server.use('/testAPImail', sendEmail)
 
 // 🤝 handler
 server.use(handlers.NotFound)
