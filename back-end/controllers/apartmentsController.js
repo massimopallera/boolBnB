@@ -1,4 +1,5 @@
 import connection from '../database/connection.js'
+import handlers from '../middleware/handlers.js'
 
 // get all elements from apartments
 function index(req, res) {
@@ -6,8 +7,7 @@ function index(req, res) {
     const sql = 'SELECT * FROM apartments'
 
     connection.query(sql, (err, results) => {
-        if (err) return res.status(500).json({ error: 'Database query failed' });
-        return res.json(results);
+        handlers.statusCode(req, res, results)
     })
 }
 
@@ -18,12 +18,7 @@ function show(req, res) {
     const sql = 'SELECT * FROM apartments WHERE id = ?'
 
     connection.query(sql, [id], (err, results) => {
-        if (err) return res.status(500).json({ error: err });
-        if (results.length === 0) {
-            return res.status(404).json({ err: 'Apartment not found' })
-        }
-
-        res.json({ apartment: results })
+        handlers.statusCode(req, res, results)
     })
 }
 
@@ -43,9 +38,6 @@ function store(req, res) {
     } = req.body;
 
 
-    if (!description || !rooms || !beds || !toilets || !sq_meters || !address || !reference_mail || !apartment_images || !owner_id) {
-        return res.status(400).json({ error: 'All fields must be compiled!' });
-    }
 
 
     const sql = `
@@ -69,16 +61,7 @@ function store(req, res) {
 
 
     connection.query(sql, values, (err, results) => {
-        if (err) {
-            console.error('Error during inserting the apartment:', err);
-            return res.status(500).json({ error: 'Error during inserting the apartment' });
-        }
-
-
-        res.status(201).json({
-            message: 'Apartment inserted succesfully',
-
-        });
+        handlers.controlFields({...req.body}, req, res, results)
     });
 }
 
