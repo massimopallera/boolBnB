@@ -1,22 +1,24 @@
 // ⏬ imports
 import express from "express"
+import cors from 'cors'
+import cookieParser from 'cookie-parser'
 
 // import routes
 import apartmentsRouter from "./routes/apartmentsRoutes.js"
+import loginRouter from "./routes/loginLogoutRoutes.js"
+import authenticateJWT from './auth/authentication.js'
 import reviewsRouter from "./routes/reviewsRoutes.js"
 import ownersRouter from "./routes/ownersRoutes.js"
-import loginRouter from "./routes/loginRoutes.js"
 import infoRouter from "./routes/infoRoutes.js"
 
 // import middlewares
 import logger from "./middleware/logger.js"
 import handlers from "./middleware/handlers.js"
 
-import cors from 'cors'
-
 const server = express()
 
 server.use(express.json())
+server.use(cookieParser());
 server.use(cors())
 
 const HOST = process.env.HOST || "http://localhost"
@@ -40,9 +42,12 @@ server.use('/', logger)
 server.use('/apartments', apartmentsRouter)
 server.use('/reviews', reviewsRouter)
 server.use('/owner', ownersRouter)
-server.use('/login', loginRouter)
 server.use('/info', infoRouter)
+server.use('/', loginRouter)
 
+server.get('/dashboard', authenticateJWT, (req, res) => {
+    res.json({ message: `Benvenuto, ${req.user.user} ${req.user.lastname}!` })
+})
 
 // 🤝 handler
 server.use(handlers.NotFound)
