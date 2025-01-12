@@ -38,10 +38,6 @@ function store(req, res) {
     })
 }
 
-
-// function update(){}
-// function destroy(){}
-
 export default {
     index,
     show,

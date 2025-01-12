@@ -45,10 +45,10 @@ const statusCode = (req, res, results) => {
             // In case a user update the password, it will be logged out automatically
             auth.logout(req,res)
 
-            return res.status(200).json({ messsage: 'password updated' })
+            return res.status(200).json({ messsage: 'password updated'})
         }
 
-        // Update the password
+        // Update
         return res.status(204).json({ statusCode: 204, status: "No Content", data: '' });
     }
 
@@ -63,7 +63,7 @@ const statusCode = (req, res, results) => {
         return res.status(200).json({ statusCode: 200, status: "OK", data: results }) 
     }
 
-    //
+    //Not Found
     if (!results[0]) {
         //if the original url is /login, it will return just a boolean, the response is in its own file
         if(req.originalUrl === '/login'){

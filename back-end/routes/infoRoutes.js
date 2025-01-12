@@ -9,11 +9,11 @@ router.post('/', (req,res) => {
       from: process.env.EMAIL_SENDGRID, // Change to your verified sender
       subject: req.body.subject, 
       text: req.body.text,
-      html: req.body.html || null,
+      html: `<body>${req.body.html || null}</body>`,
     }
     
     controller.sendEmail(req,res, msg) 
-  })
+})
 
 
 export default router
