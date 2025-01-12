@@ -33,10 +33,7 @@ server.listen(PORT, () => {
 // middleware
 server.use('/', logger)
 
-//Create a Server Error to test Server Error Handling
-// server.use((req, res, next) => {
-//     throw new Error('Try Server Error Handling')
-//})
+
 
 // 🔁 routes
 server.use('/apartments', apartmentsRouter)
