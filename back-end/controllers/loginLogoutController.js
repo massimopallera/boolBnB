@@ -2,21 +2,11 @@ import connection from '../database/connection.js'
 import md5 from 'md5';
 import sha1 from 'sha1'
 import handlers from '../middleware/handlers.js';
+import auth from '../auth/loginLogout.js';
 
 
-
-function show(req, res) {
-    // get email and password
-    const email = req.body.email
-    const password = sha1(md5(req.body.password))
-
-    const sql = `
-    SELECT * FROM owners WHERE email = ? AND password = ?
-    `
-
-    connection.query(sql, [email, password], (err, results) => {
-        handlers.statusCode(req, res, results)
-    })
+function login(req, res) {
+    auth.login(req,res)
 }
 
 function update(req, res) {
@@ -36,10 +26,15 @@ function update(req, res) {
 
 }
 
+
+const logout = (req, res) => {
+    auth.logout(req, res)
+    res.json({message: 'logout successful'})
+}
+
+
 export default {
-    //index,
-    show,
-    //store,
+    login,
     update,
-    // destroy
+    logout
 }
