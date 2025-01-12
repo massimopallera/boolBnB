@@ -1,7 +1,7 @@
 // ⏬ imports
 import express from "express"
 import cors from 'cors'
-import cookieParser from 'cookie-parser'
+import cookieParser from 'cookie-parser' // for cookies parsing
 
 // import routes
 import apartmentsRouter from "./routes/apartmentsRoutes.js"
@@ -45,6 +45,7 @@ server.use('/owner', ownersRouter)
 server.use('/info', infoRouter)
 server.use('/', loginRouter)
 
+// authenticateJWT controls if a user is authenticated
 server.get('/dashboard', authenticateJWT, (req, res) => {
     res.json({ message: `Benvenuto, ${req.user.user} ${req.user.lastname}!` })
 })

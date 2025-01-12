@@ -1,8 +1,10 @@
 import sgMail from '../api_keys/setMailApi.js'
 
+
+// send an email
 const sendEmail = (req,res,msg) => {
   sgMail
-    .send(msg)
+    .send(msg) 
     .then(() => {
     //   console.log('Email sent')
       res.status(200).json({message: 'Email sent'})
@@ -13,4 +15,4 @@ const sendEmail = (req,res,msg) => {
     })
 }
 
-export default {sendEmail}
+export default {sendEmail} //in an object in case of future functions for controller

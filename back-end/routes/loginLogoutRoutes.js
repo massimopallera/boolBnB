@@ -4,10 +4,13 @@ const router = express.Router();
 
 
 router.post('/login', controller.login)
+
 router.post('/logout', controller.logout);
 
-router.put('/changePassword/:id', controller.update)
+//TO FIX
 
+// to change password
+router.put('/changePassword/:id', controller.update)
 
 
 export default router

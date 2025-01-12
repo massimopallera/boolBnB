@@ -5,11 +5,11 @@ const router = express.Router()
 
 router.post('/', (req,res) => { 
     const msg = {
-      to: req.body.to, // Change to your recipient
+      to: req.body.to,
       from: process.env.EMAIL_SENDGRID, // Change to your verified sender
-      subject: req.body.subject, // Change to your
-      text: req.body.text, // Change to your
-      html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+      subject: req.body.subject, 
+      text: req.body.text,
+      html: req.body.html || null,
     }
     
     controller.sendEmail(req,res, msg) 

@@ -7,10 +7,5 @@ router.get('/', controller.index)
 // add to db
 router.post('/', controller.store)
 
-// update element 
-// router.put('/',) //might be deleted
-
-// delete element
-// router.delete('/',) //might be deleted
 
 export default router

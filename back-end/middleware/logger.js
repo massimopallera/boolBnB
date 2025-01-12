@@ -12,7 +12,6 @@ const logger = (req, res, next) => {
     if (method === "PUT") methodColor = chalk.yellow
     if (method === "DELETE") methodColor = chalk.red
 
-    // const path = req.baseUrl !== '' ? '/' : req.baseUrl //doesn't find path
 
     res.on('finish', () => {
         const status = res.statusCode

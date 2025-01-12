@@ -13,7 +13,5 @@ router.post('/', controller.store)
 // update element 
 router.put('/:id', controller.update)
 
-// delete element
-// router.delete('/',)
 
 export default router

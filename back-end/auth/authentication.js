@@ -2,6 +2,7 @@ import dotenv from 'dotenv'
 import jwt from 'jsonwebtoken'
 
 const authenticateJWT = (req, res, next) => {
+  
     const token = req.cookies.jwt;
     const SECRET_KEY = dotenv.config().parsed.JWT_SECRET
     

@@ -74,22 +74,6 @@ function update(req, res) {
 
     const toUpdate = { ...req.body, id }
 
-    /* const {
-        description,
-        rooms,
-        beds,
-        toilets,
-        sq_meters,
-        address,
-        reference_mail,
-        apartment_images,
-        added_services
-    } = req.body; */
-
-    /*  if (!description || !rooms || !beds || !toilets || !sq_meters || !address || !reference_mail || !apartment_images || !added_services) {
-         return res.status(400).json({ error: 'You must fill at least one field' });
-     } */
-
     const sql = `
     UPDATE apartments
     SET
@@ -106,20 +90,17 @@ function update(req, res) {
     WHERE id = ?
     `
     connection.query(sql, Object.values(toUpdate), (err, results) => {
-        if (err) {
-            console.error('Error during updating the apartment:', err);
-            return res.status(500).json({ error: 'Error during updating the apartment' });
-        }
+        // if (err) {
+        //     console.error('Error during updating the apartment:', err);
+        //     return res.status(500).json({ error: 'Error during updating the apartment' });
+        // }
 
-
-        res.status(201).json({
-            success: true
-        });
+        // res.status(201).json({
+        //     success: true
+        // });
+        handlers.controlFields({...req.body}, req, res, results)
     })
 }
-
-// delete an apartment //ma serve?
-// function destroy(req, res) {}
 
 
 export default {
@@ -127,5 +108,4 @@ export default {
     show,
     store,
     update,
-    // destroy
 }
