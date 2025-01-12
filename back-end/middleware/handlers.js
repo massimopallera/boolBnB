@@ -12,47 +12,47 @@
     409 CONFLICT
 */
 
-const controlFields = (data, req,res, results) => {
+const controlFields = (data, req, res, results) => {
     for (const key in data) {
-        if (!data[key] && [key] != 'added_services'){
-            return res.status(400).json({message: 'All fields are required'})
+        if (!data[key] && [key] != 'added_services') {
+            return res.status(400).json({ message: 'All fields are required' })
         }
     }
-    
-    return statusCode(req,res,results);
+
+    return statusCode(req, res, results);
 }
 
-const statusCode = (req,res,results) => {
+const statusCode = (req, res, results) => {
 
-    // console.log(results);
+    console.log(results);
 
     // control if there is a new id inserted. If there is it'll mean there is a new row
-    if(results.affectedRows > 0 && results.insertId != 0){ 
-        return res.status(201).json({statusCode: 201, status: "Created" , data: ''}); //created new element
+    if (results.affectedRows > 0 && results.insertId != 0) {
+        return res.status(201).json({ statusCode: 201, status: "Created", data: '' }); //created new element
 
-    } else if (results.affectedRows > 0 && results.insertId === 0){
-        if (req.method === 'POST'){
-            return res.status(409).json({statusCode: 409, status: "Conflict" , data: ''}); //Already exists in db
+    } else if (results.affectedRows > 0 && results.insertId === 0) {
+        if (req.method === 'POST') {
+            return res.status(409).json({ statusCode: 409, status: "Conflict", data: '' }); //Already exists in db
         }
-        return res.status(204).json({statusCode: 204, status: "No Content" , data: ''}); //updated element
+        return res.status(204).json({ statusCode: 204, status: "No Content", data: '' }); //updated element
     }
-    if(results[0]){
-        return res.status(200).json({statusCode:200, status: "OK" , data: results})
+    if (results[0]) {
+        return res.status(200).json({ statusCode: 200, status: "OK", data: results })
     }
-    if(!results[0]){
-        return res.status(404).json({statusCode: 404, status: "Not Found" , data: ''});
+    if (!results[0]) {
+        return res.status(404).json({ statusCode: 404, status: "Not Found", data: '' });
     }
 
 }
 
 
-const NotFound = (req,res,next) => {
-    res.status(404).json({status: 404, result: 'Page Not Found'})
+const NotFound = (req, res, next) => {
+    res.status(404).json({ status: 404, result: 'Page Not Found' })
     next()
 }
 
-export default { 
-    statusCode, 
+export default {
+    statusCode,
     controlFields,
-    NotFound 
+    NotFound
 }

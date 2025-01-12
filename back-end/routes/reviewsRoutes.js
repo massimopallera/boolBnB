@@ -5,12 +5,12 @@ const router = express.Router();
 router.get('/', controller.index)
 
 // add to db
-// router.post('/', controller.store)
+router.post('/', controller.store)
 
 // update element 
-// router.put('/',)
+// router.put('/',) //might be deleted
 
 // delete element
-// router.delete('/',)
+// router.delete('/',) //might be deleted
 
 export default router
