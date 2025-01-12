@@ -27,14 +27,14 @@ function store(req, res) {
 
     const sql = `
     INSERT INTO reviews
-     (id_apartment_fk, name, text, data, days_of_stay)
+    (id_apartment_fk, name, text, data, days_of_stay)
     VALUES (?,?,?,?,?)
     `
 
     //control if body request is correct
 
     connection.query(sql, Object.values(newReview), (err, results) => {
-        handlers.controlFields(newReview, req, res, results)
+         handlers.controlFields(newReview, req, res, results)
     })
 }
 
