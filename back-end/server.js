@@ -23,6 +23,8 @@ server.use(cors())
 // dev
 import jwt from 'jsonwebtoken'
 import cookieParser from 'cookie-parser'
+import devAuthRouter from './auth.js'
+
 
 server.use(cookieParser());
 
@@ -73,11 +75,15 @@ server.use('/info', infoRouter)
   };
 
 server.get('/dashboard', authenticateJWT, (req, res) => {
-    res.json({ message: `Benvenuto, ${req.user.username}!` })
+    res.json({ message: `Benvenuto, ${req.user.user} ${req.user.lastname}!` })
 })
 
 
-server.post('/login', (req, res) => {
+/* server.post('/login', (req, res) => {
+
+    // console.log(req.baseUrl);
+    // console.log(req.originalUrl);
+    
 
     const { username, password } = req.body;
       
@@ -99,8 +105,23 @@ server.post('/login', (req, res) => {
           return res.status(401).json({ message: 'Credenziali non valide' });
         }
 
-})
+}) */
 
+//LOGOUT PROCEDURE
+       /*  app.post('/logout', (req, res) => {
+            // Rimuove il cookie 'jwt' con gli stessi parametri usati al momento del login
+            res.clearCookie('jwt', {
+              httpOnly: true,
+              secure: false, // Imposta a true se usi HTTPS
+              sameSite: 'strict',
+            });
+          
+            return res.json({ message: 'Logout riuscito!' });
+          });
+          
+
+          */
+server.use('/login', devAuthRouter) 
 
 // 🤝 handler
 server.use(handlers.NotFound)

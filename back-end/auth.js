@@ -1,23 +1,37 @@
 import express from 'express'
 import jwt from 'jsonwebtoken'
+
+import sha1 from 'sha1'
+import md5 from 'md5'
+
 import cookieParser from 'cookie-parser'
 
-import dotenv from dotenv
+import dotenv from 'dotenv'
+import handlers from './middleware/handlers.js'
+import connection from './database/connection.js'
 
 
-const server = express()
-server.use(express.json())
+// const server = express()
+// server.use(express.json())
 
-server.use(cookieParser());
+// server.use(cookieParser());
 
 const SECRET_KEY = dotenv.config().parsed.JWT_SECRET
 
-server.post('/login', (req, res) => {
-    const { username, password } = req.body;
+
+const router = express.Router()
+
+router.post('/', (req, res) => {
+    const { email, password } = req.body; 
+
+    // query
+    const sql = `SELECT * FROM owners WHERE email = ? AND password = ?`
+    connection.query(sql, [email, sha1(md5(password))], (err, results) => {
+
   
     // Autenticazione fittizia
-    if (username === 'user1' && password === 'password123') {
-      const token = jwt.sign({ username }, SECRET_KEY, { expiresIn: '1h' });
+    if (handlers.statusCode(req,res,results) === true) {
+      const token = jwt.sign({ user: results[0].name, lastname: results[0].last_name }, SECRET_KEY, { expiresIn: '30d' });
   
       res.cookie('jwt', token, {
         httpOnly: process.env.COOKIE_HTTPONLY === 'true',
@@ -29,8 +43,10 @@ server.post('/login', (req, res) => {
   
       return res.json({ message: 'Login riuscito!' });
     } else {
-      return res.status(401).json({ message: 'Credenziali non valide' });
+      return res.status(401).json({ message: 'Email o password errata' });
     }
+  })
+
   });
   
   // Middleware per autenticazione
@@ -49,12 +65,14 @@ server.post('/login', (req, res) => {
     }
   };
   
-  // Endpoint protetto
+/*   // Endpoint protetto
   server.get('/dashboard', authenticateJWT, (req, res) => {
-    res.json({ message: `Benvenuto, ${req.user.username}!` });
+    res.json({ message: `Benvenuto, ${req.user.email}!` });
   });
   
   server.listen(3000, () => {
     console.log('Server in esecuzione su http://localhost:3000');
   });
-  
+   */
+
+  export default router;

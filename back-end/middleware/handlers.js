@@ -24,7 +24,8 @@ const controlFields = (data, req, res, results) => {
 
 const statusCode = (req, res, results) => {
 
-    console.log(results);
+    // console.log(results);
+    // console.log(req);
 
     // control if there is a new id inserted. If there is it'll mean there is a new row
     if (results.affectedRows > 0 && results.insertId != 0) {
@@ -37,9 +38,15 @@ const statusCode = (req, res, results) => {
         return res.status(204).json({ statusCode: 204, status: "No Content", data: '' }); //updated element
     }
     if (results[0]) {
+        if(req.originalUrl === '/login'){
+            return true
+        } 
         return res.status(200).json({ statusCode: 200, status: "OK", data: results })
     }
     if (!results[0]) {
+        if(req.originalUrl === '/login'){
+            return false
+        } 
         return res.status(404).json({ statusCode: 404, status: "Not Found", data: '' });
     }
 

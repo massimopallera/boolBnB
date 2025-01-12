@@ -17,12 +17,12 @@ connection.connect((err) => {
 	console.log(`+------------------------------------------------------------+
 | ${chalk.blueBright('Database Connection Information')}                            |
 +------------------------------------------------------------+
-| Host: ${dotenv.config().parsed.DB_HOST}                      			     |
-| Port: ${dotenv.config().parsed.DB_PORT}                      			     |
-| User: ${dotenv.config().parsed.DB_USER}						     |
-| Database: ${dotenv.config().parsed.DB_DATABASE}			             |
+| ${chalk.blue('Host')}: ${dotenv.config().parsed.DB_HOST}                      			     |
+| ${chalk.blue('Port')}: ${dotenv.config().parsed.DB_PORT}                      			     |
+| ${chalk.blue('User')}: ${dotenv.config().parsed.DB_USER}						     |
+| ${chalk.blue('Database')}: ${dotenv.config().parsed.DB_DATABASE}			             |
 +------------------------------------------------------------+
-| Connection Status: ${(!err) ? (chalk.green('Connected')+"\t\t\t\t    ") : (chalk.red('Not Connected')+"\t\t\t    ")} |
+| ${chalk.blue('Connection Status')}: ${(!err) ? (chalk.green('Connected')+"\t\t\t\t    ") : (chalk.red('Not Connected')+"\t\t\t    ")} |
 +------------------------------------------------------------+
 `)
 });
