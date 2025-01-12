@@ -4,7 +4,7 @@ const sendEmail = (req,res,msg) => {
   sgMail
     .send(msg)
     .then(() => {
-      console.log('Email sent')
+    //   console.log('Email sent')
       res.status(200).json({message: 'Email sent'})
     })
     .catch((error) => {
