@@ -4,7 +4,7 @@ export default function Header() {
 
     return (
         <>
-            <header className="shadow p-2 mb-5">
+            <header className="shadow p-2 mb-5 bg-light">
                 <nav>
                     <NavLink to="/" className="text-decoration-none">
                         <h1>BOOLBNB</h1>

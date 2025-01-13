@@ -7,21 +7,25 @@ header {
 
 
 .card {
-    height: 350px;
+    min-height: 350px;
     transition: transform 0.3s ease;
     cursor: pointer;
     text-decoration: none;
 
     &:hover {
         transform: scale(1.20);
-        z-index: 10;
     }
 }
 
 
-footer {
-    position: absolute;
-    bottom: 0;
-    width: 100vw;
+body {
+    display: flex;
+    flex-direction: column;
 
+}
+
+
+main {
+    flex: 1;
+    min-height: 100vh;
 }
