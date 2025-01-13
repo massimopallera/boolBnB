@@ -28,7 +28,7 @@ const controlFields = (data, req, res, results) => {
 const statusCode = (req, res, results) => {
 
     // control if there is a new id inserted. If there is it'll mean there is a new row
-    if (results.affectedRows > 0 && results.insertId != 0) {
+    if (results?.affectedRows > 0 && results?.insertId != 0) {
         return res.status(201).json({ statusCode: 201, status: "Created", data: '' }); //created new element
 
     } 

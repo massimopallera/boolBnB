@@ -14,6 +14,7 @@ const login = (req, res) => {
     
     // query
     const sql = `SELECT * FROM owners WHERE email = ? AND password = ?`
+    
     connection.query(sql, [email, sha1(md5(password))], (err, results) => {
         
         //Authentication 
