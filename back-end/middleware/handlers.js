@@ -13,7 +13,7 @@ import auth from '../auth/loginLogout.js'
     409 CONFLICT
 */
 
-// Control fields of a fomr. If a key is not specified it'll give 400, unless it's 'added_services' that could be empty
+// Control fields of a form. If a key is not specified it'll give 400, unless it's 'added_services' that could be empty
 const controlFields = (data, req, res, results) => {
     for (const key in data) {
         if (!data[key] && [key] != 'added_services') {
@@ -31,21 +31,21 @@ const statusCode = (req, res, results) => {
     if (results?.affectedRows > 0 && results?.insertId != 0) {
         return res.status(201).json({ statusCode: 201, status: "Created", data: '' }); //created new element
 
-    } 
-    
+    }
+
     else if (results.affectedRows > 0 && results.insertId === 0) {
-        
+
         if (req.method === 'POST') {
             //Already exists in db
-            return res.status(409).json({ statusCode: 409, status: "Conflict", data: '' }); 
+            return res.status(409).json({ statusCode: 409, status: "Conflict", data: '' });
         }
 
         // Update the password (just for change the password)
         if (req.method === 'PUT' && req.originalUrl.includes('changePassword')) {
             // In case a user update the password, it will be logged out automatically
-            auth.logout(req,res)
+            auth.logout(req, res)
 
-            return res.status(200).json({ messsage: 'password updated'})
+            return res.status(200).json({ messsage: 'password updated' })
         }
 
         // Update
@@ -53,22 +53,22 @@ const statusCode = (req, res, results) => {
     }
 
     if (results[0]) {
-        
+
         //if the original url is /login, it will return just a boolean, the response is in its own file
-        if(req.originalUrl === '/login'){
+        if (req.originalUrl === '/login') {
             return true
-        } 
-        
+        }
+
         //else it will return OK response
-        return res.status(200).json({ statusCode: 200, status: "OK", data: results }) 
+        return res.status(200).json({ statusCode: 200, status: "OK", data: results })
     }
 
     //Not Found
     if (!results[0]) {
         //if the original url is /login, it will return just a boolean, the response is in its own file
-        if(req.originalUrl === '/login'){
+        if (req.originalUrl === '/login') {
             return false
-        } 
+        }
 
         //else it will return NOT FOUND response
         return res.status(404).json({ statusCode: 404, status: "Not Found", data: '' });
