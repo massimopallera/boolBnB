@@ -8,7 +8,7 @@ export default function ApartmentCard({ apartment }) {
 
 
             <div className="col">
-                <div className="card shadow-sm d-flex flex-column p-3">
+                <Link to={`/apartments/${apartment.id}`} className="card shadow-sm d-flex flex-column p-3">
                     <span> <strong>Immagine:</strong> {apartment.apartment_images}</span>
                     <span> <strong>Descrizione:</strong> {apartment.description}</span>
                     <span> <strong>Stanze:</strong> {apartment.rooms}</span>
@@ -19,10 +19,10 @@ export default function ApartmentCard({ apartment }) {
                     <span> <strong>Email (da eliminare):</strong> {apartment.reference_email}</span>
                     <span> <strong>Servizi aggiuntivi:</strong> {apartment.added_services}</span>
                     <span> <strong>Cuori:</strong> {apartment.hearts_counter}</span>
-                    <Link to={`/apartments/${apartment.id}`} className="btn btn-primary mt-auto">Dettagli</Link>
+                </Link>
 
-                </div>
             </div>
+
 
 
 
