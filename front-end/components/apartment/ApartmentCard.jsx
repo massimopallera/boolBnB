@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 export default function ApartmentCard({ apartment }) {
 
     return (
@@ -13,6 +15,7 @@ export default function ApartmentCard({ apartment }) {
                 <div> <strong>Immagine:</strong> {apartment.apartment_images}</div>
                 <div> <strong>Servizi aggiuntivi:</strong> {apartment.added_services}</div>
                 <div> <strong>Cuori:</strong> {apartment.hearts_counter}</div>
+                <Link to={`/apartments/${apartment.id}`} className="btn btn-primary">Dettagli</Link>
                 <hr />
             </div>
         </>
