@@ -39,7 +39,7 @@ async function update(req, res) {
 
 const logout = (req, res) => {
     auth.logout(req, res)
-    res.json({ message: 'logout successful' })
+    res.json({ message: 'logout eseguito correttamente' })
 }
 
 

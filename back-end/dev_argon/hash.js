@@ -9,28 +9,36 @@ function hashPassword(user_password) {
 }
 
 
-  async function loginUser(username, password) {
+  async function loginUser(db_password, password) {
     try {
       // Recupera l'hash dal database
-      const storedHash = database[username];
+      const storedHash = db_password;
       if (!storedHash) {
         console.log("Utente non trovato");
         return;
       }
   
       // Verifica la password con l'hash memorizzato
-      const isPasswordValid = await argon2.verify(storedHash, password);
+      const isPasswordValid = await argon2.verify(storedHash, password+PEPPER_KEY);
   
       if (isPasswordValid) {
-        console.log("Accesso consentito!");
-        // Procedi con il login
+          // Procedi con il login
+            console.log("Accesso consentito!");
+            return true
       } else {
-        console.log("Password errata!");
-        // Rifiuta l'accesso
+            // Rifiuta l'accesso
+            console.log("Password errata!");
+            return false;
       }
     } catch (err) {
       console.error("Errore durante la verifica della password:", err);
     }
   }
 
-  export default { hashPassword, loginUser };
+
+  function isValid(stored, password) {
+    const combinedPassword = password + PEPPER_KEY; // Combina la password con la Pepper
+    return argon2.verify(stored, combinedPassword); // Verifica se la password è valida
+  }
+
+  export default { hashPassword, loginUser, isValid };
