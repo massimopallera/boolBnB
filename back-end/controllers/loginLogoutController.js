@@ -16,7 +16,7 @@ async function update(req, res) {
         const hash_password = await argon.hashPassword(password);  
 
         const sql = `
-        UPDATE owners
+        UPDATE users
         SET password = ?
         WHERE id = ?
         `

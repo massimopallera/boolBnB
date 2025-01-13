@@ -8,7 +8,7 @@ const login = (req, res) => {
     const SECRET_KEY = dotenv.config().parsed.JWT_SECRET;
 
     // Query
-    const sql = `SELECT * FROM owners WHERE email = ?`;
+    const sql = `SELECT * FROM users WHERE email = ?`;
 
     connection.query(sql, [email], async (err, results) => { // Rimosso password dal filtro SQL
         if (err) {

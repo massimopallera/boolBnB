@@ -1,21 +1,21 @@
 import connection from '../database/connection.js'
 import handlers from '../middleware/handlers.js';
 
-// get all elements from owners
+// get all elements from users
 function index(req, res) {
 
-    const sql = 'SELECT * FROM owners'
+    const sql = 'SELECT * FROM users'
 
     connection.query(sql, (err, results) => {
         handlers.statusCode(req,res,results)
     })
 }
 
-// get a single element from owners
+// get a single element from users
 function show(req, res) {
 
     const id = req.params.id
-    const sql = 'SELECT * FROM owners WHERE id =?'
+    const sql = 'SELECT * FROM users WHERE id =?'
 
     connection.query(sql, [id], (err, results) => {
         handlers.statusCode(req, res, results)
@@ -29,13 +29,13 @@ function store(req, res) {
     newOwner.password = sha1(md5(newOwner.password))
 
     const sql = `
-    INSERT INTO owners
+    INSERT INTO users
     (name, last_name, email, phone, password)
     VALUES (?,?,?,?,?)
     `
 
     const query = `
-    INSERT INTO owners (name, last_name, email, phone, password)
+    INSERT INTO users (name, last_name, email, phone, password)
     VALUES (?, ?, ?, ?, ?)
     ON DUPLICATE KEY UPDATE email = email; -- Non fa nulla se email esiste
 `;
@@ -51,7 +51,7 @@ function store(req, res) {
 function update(req, res) {
 
     const id = req.params.id
-    // const sql = 'UPDATE owners SET /* values */ WHERE id = ?' 
+    // const sql = 'UPDATE users SET /* values */ WHERE id = ?' 
 
     connection.query(sql, [id], (err, results) => {
 
@@ -64,7 +64,7 @@ function update(req, res) {
 function destroy(req, res) {
 
     const id = req.params.id
-    const sql = 'DELETE FROM owners WHERE id = ?'
+    const sql = 'DELETE FROM users WHERE id = ?'
 
     connection.query(sql, [id], (err, results) => {
         if (err) return res.status(err.code).json({ err: err })

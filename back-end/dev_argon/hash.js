@@ -15,7 +15,7 @@ function hashPassword(user_password) {
       const storedHash = db_password;
       if (!storedHash) {
         console.log("Utente non trovato");
-        return;
+        return false;
       }
   
       // Verifica la password con l'hash memorizzato
