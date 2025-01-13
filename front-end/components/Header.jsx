@@ -1,11 +1,15 @@
-/* import { Link } from "react-router-dom" */
+import { NavLink } from "react-router-dom"
 
 export default function Header() {
 
     return (
         <>
             <header className="">
-                <h1>BoolBnb</h1>
+                <nav>
+                    <NavLink to="/" className="text-decoration-none">
+                        <h1>BOOLBNB</h1>
+                    </NavLink>
+                </nav>
             </header>
         </>
     )
