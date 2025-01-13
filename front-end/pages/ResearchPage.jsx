@@ -1,1 +1,8 @@
-//ciao
+export default function ReasearchPage() {
+
+    return (
+        <>
+
+        </>
+    )
+}
