@@ -1,10 +1,6 @@
 import connection from '../database/connection.js'
-import md5 from 'md5';
-import sha1 from 'sha1'
 import handlers from '../middleware/handlers.js';
 import auth from '../auth/loginLogout.js';
-
-
 import argon from '../dev_argon/hash.js'
 
 
