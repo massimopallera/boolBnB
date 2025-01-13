@@ -22,18 +22,7 @@ export default function HomePage() {
                 {
                     apartments.map(apartment => (
                         <div key={apartment.id}>
-                            <div>{apartment.id}</div>
-                            <div>{apartment.owner_id}</div>
-                            <div>{apartment.description}</div>
-                            <div>{apartment.rooms}</div>
-                            <div>{apartment.beds}</div>
-                            <div>{apartment.toilets}</div>
-                            <div>{apartment.sq_meters}</div>
-                            <div>{apartment.address}</div>
-                            <div>{apartment.reference_email}</div>
-                            <div>{apartment.apartment_images}</div>
-                            <div>{apartment.added_services}</div>
-                            <div>{apartment.hearts_counter}</div>
+                            <ApartmentCard apartment={apartment} />
                         </div>
                     ))
                 }
