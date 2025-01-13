@@ -68,7 +68,7 @@ function destroy(req, res) {
 
     connection.query(sql, [id], (err, results) => {
         if (err) return res.status(err.code).json({ err: err })
-        res.status(204).json({ message: 'deleted owner' })
+        res.status(204).json({ message: 'utente rimosso' })
     })
 
 }

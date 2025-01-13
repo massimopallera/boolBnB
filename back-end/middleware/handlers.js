@@ -45,7 +45,7 @@ const statusCode = (req, res, results) => {
             // In case a user update the password, it will be logged out automatically
             auth.logout(req, res)
 
-            return res.status(200).json({ messsage: 'password updated' })
+            return res.status(200).json({ messsage: 'password aggiornata' })
         }
 
         // Update

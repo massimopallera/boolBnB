@@ -3,11 +3,30 @@ import argon2 from 'argon2'
 // Recupero la chiave Pepper
 const PEPPER_KEY = process.env.PEPPER_KEY;
 
-function hashPassword(user_password) {
+async function hashPassword(user_password) {
     const combinedPassword = user_password + PEPPER_KEY; // Combina la password con la Pepper
     return argon2.hash(combinedPassword); // Genera l'hash
 }
 
+async function isValid(storedHash, mail){
+
+  try {
+    const isValid = await argon2.verify(storedHash, mail+PEPPER_KEY)
+  
+    if (!isValid) {
+      console.log('token non valido');
+      return false    
+    } 
+
+    console.log('Token valido');
+    return true
+
+} catch (error) {
+    console.log(error);
+    return error.message
+  }
+  
+}
 
   async function loginUser(db_password, password) {
     try {
@@ -36,9 +55,4 @@ function hashPassword(user_password) {
   }
 
 
-  function isValid(stored, password) {
-    const combinedPassword = password + PEPPER_KEY; // Combina la password con la Pepper
-    return argon2.verify(stored, combinedPassword); // Verifica se la password è valida
-  }
-
-  export default { hashPassword, loginUser, isValid };
+  export default { hashPassword, loginUser };

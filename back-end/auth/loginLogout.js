@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import dotenv from 'dotenv'
 import connection from "../database/connection.js";
 import argon from "../dev_argon/hash.js";
+// import hash from "../dev_argon/hash.js";
 
 const login = (req, res) => {
     const { email, password } = req.body; 
@@ -26,14 +27,18 @@ const login = (req, res) => {
 
         try {
             // Verifica della password
-            const isPasswordValid = await argon.loginUser(storedHash, password);
+            const isPasswordValid = argon.loginUser(storedHash, password);
 
             if (!isPasswordValid) {
                 return res.status(401).json({ message: 'Email o password errata' });
             }
 
+            console.log(results);
+            console.log('ARGON', isPasswordValid); // Controllo la password hashata per sicurezza
+            
+
             // Autenticazione riuscita, generazione del token JWT
-            const token = jwt.sign({ user: results[0].name, lastname: results[0].last_name },SECRET_KEY,{ expiresIn: '30d' });
+            const token = jwt.sign({ user: results[0].name, lastname: results[0].last_name, email: argon.hashPassword(results[0].email) },SECRET_KEY,{ expiresIn: '30d' });
 
             res.cookie('jwt', token, {
                 httpOnly: process.env.COOKIE_HTTPONLY === 'true',
@@ -64,5 +69,6 @@ const logout = (req, res) => {
     // return res.json({ message: 'Logout riuscito!' });
 }
 
+const verifyToken = (token) => jwt.verify(token, process.env.JWT_SECRET)
 
-export default {login, logout}
+export default {login, logout, verifyToken}

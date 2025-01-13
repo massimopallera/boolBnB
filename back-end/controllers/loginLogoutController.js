@@ -12,16 +12,25 @@ async function update(req, res) {
 
     const { password } = req.body;
     const id = req.params.id
+   
+    const decoded = auth.verifyToken(req.cookies.jwt)
+
+    console.log(decoded)
+    
     try {
         const hash_password = await argon.hashPassword(password);  
+
+        // controlla che la mail in jwt corrisponda alla mail della query
 
         const sql = `
         UPDATE users
         SET password = ?
-        WHERE id = ?
+        WHERE ID = ?
         `
     
         connection.query(sql, [hash_password, id], (err, results) => {
+
+
             handlers.statusCode(req, res, results)
         })
     }catch (err) {
