@@ -1,25 +1,39 @@
-import md5 from "md5";
-import sha1 from "sha1";
 import jwt from "jsonwebtoken";
 import dotenv from 'dotenv'
-
 import connection from "../database/connection.js";
-import handlers from "../middleware/handlers.js";
-
+import argon from "../dev_argon/hash.js";
 
 const login = (req, res) => {
-    
     const { email, password } = req.body; 
-    const SECRET_KEY = dotenv.config().parsed.JWT_SECRET
-    
-    // query
-    const sql = `SELECT * FROM owners WHERE email = ? AND password = ?`
-    connection.query(sql, [email, sha1(md5(password))], (err, results) => {
-        
-        //Authentication 
-        if (handlers.statusCode(req,res,results) === true) {
+    const SECRET_KEY = dotenv.config().parsed.JWT_SECRET;
 
-            const token = jwt.sign({ user: results[0].name, lastname: results[0].last_name }, SECRET_KEY, { expiresIn: '30d' });
+    // Query
+    const sql = `SELECT * FROM owners WHERE email = ?`;
+
+    connection.query(sql, [email], async (err, results) => { // Rimosso password dal filtro SQL
+        if (err) {
+            console.error('Errore nella query:', err);
+            return res.status(500).json({ message: 'Errore interno del server' });
+        }
+
+        // Controllo se l'utente esiste
+        if (results.length === 0) {
+            return res.status(401).json({ message: 'Email o password errata' });
+        }
+
+        // Estrazione dell'hash della password dal database
+        const storedHash = results[0].password;
+
+        try {
+            // Verifica della password
+            const isPasswordValid = await argon.loginUser(storedHash, password);
+
+            if (!isPasswordValid) {
+                return res.status(401).json({ message: 'Email o password errata' });
+            }
+
+            // Autenticazione riuscita, generazione del token JWT
+            const token = jwt.sign({ user: results[0].name, lastname: results[0].last_name },SECRET_KEY,{ expiresIn: '30d' });
 
             res.cookie('jwt', token, {
                 httpOnly: process.env.COOKIE_HTTPONLY === 'true',
@@ -28,12 +42,14 @@ const login = (req, res) => {
                 maxAge: parseInt(process.env.COOKIE_MAXAGE, 10) || 3600000, // Token expiration
             });
 
-
-            return res.json({ message: 'Login riuscito!' });
-        } else {
-            return res.status(401).json({ message: 'Email o password errata' });
+            return res.json({ message: 'Login riuscito!'});
+        } catch (err) {
+            // console.error('Errore durante la verifica della password:', err);
+            return res.status(500).json({ message: 'Errore interno del server' });
         }
-})}
+    });
+};
+
 
 
 const logout = (req, res) => {
