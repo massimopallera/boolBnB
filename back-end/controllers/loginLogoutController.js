@@ -5,8 +5,11 @@ import handlers from '../middleware/handlers.js';
 import auth from '../auth/loginLogout.js';
 
 
+
+
+
 function login(req, res) {
-    auth.login(req,res)
+    auth.login(req, res)
 }
 
 function update(req, res) {
@@ -29,7 +32,7 @@ function update(req, res) {
 
 const logout = (req, res) => {
     auth.logout(req, res)
-    res.json({message: 'logout successful'})
+    res.json({ message: 'logout successful' })
 }
 
 
