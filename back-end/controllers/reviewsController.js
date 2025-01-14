@@ -14,7 +14,10 @@ function index(req, res) {
 function show(req, res) {
 
     const id = req.params.id
-    const sql = `SELECT * FROM reviews WHERE id = ?`
+    const sql = `
+        SELECT name, text, date, days_of_stay
+        FROM reviews
+        WHERE id_apartment_fk = 1`
 
     connection.query(sql, [id], (err, results) => {
         handlers.statusCode(req, res, results)
