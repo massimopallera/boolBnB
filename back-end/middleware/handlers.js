@@ -21,6 +21,8 @@ const controlFields = (data, req, res, results) => {
         }
     }
 
+    // console.log(results)
+
     return statusCode(req, res, results); // If all fields are filled, return a function thath handle status codes
 }
 

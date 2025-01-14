@@ -13,7 +13,7 @@ export default function ReviewsSection({id}){
         .catch(err => console.error(err))
     }, [] )
     
-    console.log(reviews);
+    // console.log(reviews);
     
 
     return(

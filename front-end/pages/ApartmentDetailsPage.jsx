@@ -4,6 +4,7 @@ import DetailApartmentCard from '../components/apartment/DetailApartmentCard';
 
 
 import ReviewsSection from "../components/apartment/ReviewsSection"
+import ReviewForm from '../components/apartment/ReviewForm';
 
 
 
@@ -45,6 +46,7 @@ export default function ApartmentDetailsPage() {
                     }
 
                     <ReviewsSection id={id}></ReviewsSection>
+                    <ReviewForm id={id}></ReviewForm>
                 </div>
             </div>
 
