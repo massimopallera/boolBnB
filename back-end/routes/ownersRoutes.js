@@ -2,10 +2,10 @@ import express from "express";
 import controller from "../controllers/ownersController.js"
 const router = express.Router();
 
-//all owners
+//all users
 router.get('/', controller.index)
 
-//signle owners by id
+//signle users by id
 router.get('/:id', controller.show)
 
 // add to db
