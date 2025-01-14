@@ -17,7 +17,8 @@ function show(req, res) {
     const sql = `
         SELECT name, text, date, days_of_stay
         FROM reviews
-        WHERE id_apartment_fk = 1`
+        WHERE id_apartment_fk = ?
+        ORDER BY date DESC`
 
     connection.query(sql, [id], (err, results) => {
         handlers.statusCode(req, res, results)

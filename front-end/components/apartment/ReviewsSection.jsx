@@ -1,21 +1,25 @@
 import { useEffect, useState } from "react";
+import dayjs from 'dayjs';
+import { useGlobalContext } from "../../context/GlobalContext";
+
 
 export default function ReviewsSection({id}){
-     
+
     const [reviews, setReviews] = useState([])
     
-    const getReviews = 'http://localhost:3000/reviews/' + id;
+    const reviewsApi = import.meta.env.VITE_EXPRESS_SERVER + "/reviews/"+ id
 
-    useEffect( () => {
-        fetch(getReviews)
-        .then(resp => resp.json())
-        .then(data => {setReviews(data.data)})
-        .catch(err => console.error(err))
-    }, [] )
-    
-    // console.log(reviews);
-    
+    // const date = Date.now()
+    // const dayjsObj = dayjs(date)
 
+   useEffect( () => {
+    fetch(reviewsApi)
+    .then(resp => resp.json())
+    .then(data => {setReviews(data.data)})
+    .catch(err => console.error(err))
+}, [])
+  
+   
     return(
         <>
             <div>
@@ -24,7 +28,7 @@ export default function ReviewsSection({id}){
                     <div key={index}>
                         <div> <strong>name</strong> : {review.name}</div>
                         <div> <strong>text</strong> : {review.text}</div>
-                        <div> <strong>date</strong> : {review.date}</div>
+                        <div> <strong>date</strong> : {dayjs(review.date).format('YYYY-MM-DD')}</div>
                         <div> <strong>days of stay</strong> : {review.days_of_stay}</div>
                     </div>
                 ))}

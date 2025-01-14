@@ -6,7 +6,7 @@ import ApartmentDetailsPage from "../pages/ApartmentDetailsPage"
 import InsertmentPage from "../pages/InsertmentPage"
 import ResearchPage from "../pages/ResearchPage"
 
-import { ApartmentProvider } from '../context/GlobalContext.jsx'
+import { GlobalContextProvider } from '../context/GlobalContext.jsx'
 
 import './App.css'
 
@@ -14,7 +14,7 @@ function App() {
 
   return (
     <>
-      <ApartmentProvider>
+      <GlobalContextProvider>
         <BrowserRouter>
           <Routes>
             <Route element={<DefaultLayout />}>
@@ -27,7 +27,7 @@ function App() {
             </Route>
           </Routes>
         </BrowserRouter >
-      </ApartmentProvider>
+      </GlobalContextProvider>
     </>
   )
 }
