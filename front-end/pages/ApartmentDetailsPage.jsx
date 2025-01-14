@@ -18,9 +18,9 @@ export default function ApartmentDetailsPage() {
 
     useEffect(() => {
         fetch(apartmentsApi)
-        .then(resp => resp.json())
-        .then(result => setApartment(result.data[0]))
-        .catch(err => console.log(err))
+            .then(resp => resp.json())
+            .then(result => setApartment(result.data[0]))
+            .catch(err => console.log(err))
     }, []);
 
 
@@ -31,18 +31,19 @@ export default function ApartmentDetailsPage() {
 
     return (
         <>
-            <div className="container m-auto">
-                <div className='row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-5'>
-                    {
-                        <div key={apartment.id}>
-                            <DetailApartmentCard apartment={apartment} />
-                        </div>
-                    }
+            <div className="container m-auto ">
+                {
+                    <div key={apartment.id}>
+                        <DetailApartmentCard apartment={apartment} />
+                    </div>
+                }
 
-                    {/* Reviews */}
-                    <ReviewsSection id={id}></ReviewsSection>
+                <h3 className='text-center my-4'>Recensioni</h3>
+                <div className='d-flex justify-content-center'>
                     {/* Reviews Form */}
                     <ReviewForm id={id}></ReviewForm>
+                    {/* Reviews */}
+                    <ReviewsSection id={id}></ReviewsSection>
                 </div>
             </div>
 

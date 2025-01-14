@@ -18,18 +18,18 @@ export default function ReviewsSection({ id }) {
 
 
     return (
-    <>
-        <div>
-            <h3>Recensioni</h3>
-            {reviews.map((review, index) => (
-                <div key={index}>
-                    <div> <strong>name</strong> : {review.name}</div>
-                    <div> <strong>text</strong> : {review.text}</div>
-                    <div> <strong>date</strong> : {dayjs(review.date).format('YYYY-MM-DD')}</div>
-                    <div> <strong>days of stay</strong> : {review.days_of_stay}</div>
-                </div>
-            ))}
-        </div>
-    </>
+        <>
+            <div className="container">
+
+                {reviews.map((review, index) => (
+                    <div className="card bg-light bg-gradient shadow-sm d-flex flex-column p-3 my-3" key={index}>
+                        <div> <h4>{review.name}</h4></div>
+                        <div> <p>{review.text}</p></div>
+                        <div> <strong>Data</strong> : {dayjs(review.date).format('YYYY-MM-DD')}</div>
+                        <div> <strong>Giorni di permanenza</strong> : {review.days_of_stay}</div>
+                    </div>
+                ))}
+            </div>
+        </>
     )
 }
