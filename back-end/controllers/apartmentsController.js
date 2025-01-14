@@ -14,11 +14,14 @@ function index(req, res) {
 // get a single element from apartments
 function show(req, res) {
 
-    const id = req.params.id
-    const sql = `SELECT ap.*, users.email AS email
+    const id = Number(req.params.id)
+    
+    const sql = `
+    SELECT ap.*, users.email AS email
     FROM apartments AS ap
     INNER JOIN users ON users.id = ap.id_user
-    WHERE ap.id = ?`
+    WHERE ap.id = ?
+    `
 
     connection.query(sql, [id], (err, results) => {
         handlers.statusCode(req, res, results)
@@ -58,7 +61,6 @@ function store(req, res) {
 
 
 // update an apartment
-
 function update(req, res) {
 
     const id = req.params.id
@@ -81,14 +83,6 @@ function update(req, res) {
     WHERE id = ?
     `
     connection.query(sql, Object.values(toUpdate), (err, results) => {
-        // if (err) {
-        //     console.error('Error during updating the apartment:', err);
-        //     return res.status(500).json({ error: 'Error during updating the apartment' });
-        // }
-
-        // res.status(201).json({
-        //     success: true
-        // });
         handlers.controlFields({ ...req.body }, req, res, results)
     })
 }
