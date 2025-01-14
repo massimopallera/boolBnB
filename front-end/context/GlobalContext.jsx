@@ -1,4 +1,4 @@
-import { createContext, useState, useContext, } from 'react';
+import { createContext, useState, useContext, useEffect } from 'react';
 
 
 export const ApartmentContext = createContext();
@@ -18,16 +18,17 @@ export function ApartmentProvider({ children }) {
             fetch(apartmentsApi)
                 .then(resp => resp.json())
                 .then(result => {
-                    console.log(result.data);
-                    SetApartments(result.data)
+
+                    SetApartments(result.data || [])
                 })
+                .catch(error => console.error("Error fetching apartments:", error));
         }, [])
     }
 
 
 
     return (
-        <ApartmentContext.Provider value={{ apartments }}>
+        <ApartmentContext.Provider value={{ apartments, fetchApartments }}>
             {children}
         </ApartmentContext.Provider>
     )

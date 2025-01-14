@@ -4,7 +4,9 @@ import { useApartmentContext } from '../context/GlobalContext'
 
 export default function HomePage() {
 
-    const { apartments } = useApartmentContext()
+    const { apartments, fetchApartments } = useApartmentContext()
+
+    const apartmentList = fetchApartments()
 
     return (
         <>
