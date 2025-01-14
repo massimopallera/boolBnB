@@ -1,37 +1,35 @@
 import { createContext, useState, useContext, useEffect } from 'react';
 
 
-export const ApartmentContext = createContext();
+export const GlobalContext = createContext();
 
-export function useApartmentContext() {
-    return useContext(ApartmentContext);
+export function useGlobalContext() {
+    return useContext(GlobalContext);
 };
 
-export function ApartmentProvider({ children }) {
+export function GlobalContextProvider({ children }) {
 
-    const [apartments, SetApartments] = useState([])
+    const [apartments, setApartments] = useState([])
+    const baseUrl = import.meta.env.VITE_EXPRESS_SERVER
+    const apartmentsApi = baseUrl + "/apartments"
 
-    // show all apartments 
-    const fetchApartments = () => {
-        const apartmentsApi = "http://127.0.0.1:3000/apartments"
+    useEffect(() => {
+        fetch(apartmentsApi)
+        .then(resp => resp.json())
+        .then(result => {setApartments(result.data || [])})
+        .catch(error => console.error("Error fetching apartments:", error));
+    }, [])
+    
 
-        useEffect(() => {
-            fetch(apartmentsApi)
-                .then(resp => resp.json())
-                .then(result => {
+    const [reviews, setReviews] = useState([])
 
-                    SetApartments(result.data || [])
-                })
-                .catch(error => console.error("Error fetching apartments:", error));
-        }, [])
-    }
-
+    
 
 
     return (
-        <ApartmentContext.Provider value={{ apartments, fetchApartments }}>
+        <GlobalContext.Provider value={{ apartments, reviews }}>
             {children}
-        </ApartmentContext.Provider>
+        </GlobalContext.Provider>
     )
 
 }

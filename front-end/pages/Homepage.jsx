@@ -1,13 +1,11 @@
-import { useState, useEffect } from 'react'
-
-import { useApartmentContext } from '../context/GlobalContext'
+import { useGlobalContext } from '../context/GlobalContext'
 import HomepageApartmentCard from '../components/apartment/HomepageApartmentCard'
 
 export default function HomePage() {
 
-    const { apartments, fetchApartments } = useApartmentContext()
+    const { apartments } = useGlobalContext()
 
-    const apartmentList = fetchApartments()
+    
 
     return (
         <>

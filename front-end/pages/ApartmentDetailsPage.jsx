@@ -18,18 +18,12 @@ export default function ApartmentDetailsPage() {
 
     useEffect(() => {
         fetch(apartmentsApi)
-            .then(resp => resp.json())
-            .then(result => {
-                
-                // console.log(result.data);
-                // console.log(result.data[0]);
-                setApartment(result.data[0])
-            })
+        .then(resp => resp.json())
+        .then(result => setApartment(result.data[0]))
+        .catch(err => console.log(err))
     }, []);
 
 
-    // reviews
-    // reviews form
     // email form
     // hearts logic
 
@@ -45,7 +39,9 @@ export default function ApartmentDetailsPage() {
                         </div>
                     }
 
+                    {/* Reviews */}
                     <ReviewsSection id={id}></ReviewsSection>
+                    {/* Reviews Form */}
                     <ReviewForm id={id}></ReviewForm>
                 </div>
             </div>
