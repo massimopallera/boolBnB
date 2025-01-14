@@ -6,24 +6,28 @@ import ApartmentDetailsPage from "../pages/ApartmentDetailsPage"
 import InsertmentPage from "../pages/InsertmentPage"
 import ResearchPage from "../pages/ResearchPage"
 
+import { ApartmentProvider } from '../context/GlobalContext.jsx'
+
 import './App.css'
 
 function App() {
 
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<DefaultLayout />}>
+      <ApartmentProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<DefaultLayout />}>
 
-            <Route index element={<Homepage />} />
-            <Route path="apartments/:id" element={<ApartmentDetailsPage />} />
-            <Route path=".................." element={<InsertmentPage />} />
-            {/* <Route path=".................." element={<ResearchPage />} /> */}
+              <Route index element={<Homepage />} />
+              <Route path="apartments/:id" element={<ApartmentDetailsPage />} />
+              <Route path=".................." element={<InsertmentPage />} />
+              {/* <Route path=".................." element={<ResearchPage />} /> */}
 
-          </Route>
-        </Routes>
-      </BrowserRouter >
+            </Route>
+          </Routes>
+        </BrowserRouter >
+      </ApartmentProvider>
     </>
   )
 }
