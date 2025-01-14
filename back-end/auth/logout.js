@@ -10,4 +10,4 @@ const logout = (req, res) => {
     res.json({ message: 'logout eseguito correttamente' })
 }
 
-export default {login, logout, verifyToken}
+export default logout

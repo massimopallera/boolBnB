@@ -1,4 +1,4 @@
-import sgMail from '../api_keys/setMailApi.js'
+import sgMail from '../keys/setMailApi.js'
 
 
 // send an email

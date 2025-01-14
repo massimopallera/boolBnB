@@ -8,6 +8,7 @@ async function hashPassword(user_password) {
     return argon2.hash(combinedPassword); // Genera l'hash
 }
 
+// for emails and updating password -- it takes email from token 
 async function isValid(storedHash, mail){
 
   try {
@@ -31,6 +32,7 @@ async function isValid(storedHash, mail){
 
 async function loginUser(db_password, password) {
   try {
+
     // Recupera l'hash dal database
     const storedHash = db_password;
     if (!storedHash) {
@@ -42,13 +44,13 @@ async function loginUser(db_password, password) {
     const isPasswordValid = await argon2.verify(storedHash, password+PEPPER_KEY);
 
     if (isPasswordValid) {
-        // Procedi con il login
-          console.log("Accesso consentito!");
-          return true
+      // Procedi con il login
+        console.log("Accesso consentito!");
+        return true
     } else {
-          // Rifiuta l'accesso
-          console.log("Password errata!");
-          return false;
+        // Rifiuta l'accesso
+        console.log("Password errata!");
+        return false;
     }
   } catch (err) {
     console.error("Errore durante la verifica della password:", err);
