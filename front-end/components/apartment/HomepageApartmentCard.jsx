@@ -11,7 +11,7 @@ export default function HomepageApartmentCard({ apartment }) {
                         src={apartment.apartment_images || "/placeholder.png"}
                         alt="Apartment"
                         className="img-fluid rounded shadow-sm"
-                        style={{ maxHeight: '250px', objectFit: 'cover' }}
+                        style={{ maxHeight: '150px', objectFit: 'cover' }}
                     /></span>
                     <div className="card-body bg-white border mt-4">
                         <strong>Descrizione:</strong><p>  {apartment.description}</p>

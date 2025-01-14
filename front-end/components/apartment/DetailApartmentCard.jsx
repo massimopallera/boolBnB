@@ -4,14 +4,14 @@ export default function DetailApartmentCard({ apartment }) {
 
     return (
         <>
-            <div className="">
+            <div className="container-sm m-auto ">
                 <div className="card bg-light bg-gradientd-flex flex-column p-3">
                     <div className="d-flex justify-content-center mb-3">
                         <img
                             src={apartment.apartment_images || "/placeholder.png"}
                             alt="Apartment"
                             className="img-fluid rounded shadow-sm"
-                            style={{ maxHeight: '700px', objectFit: 'cover' }}
+                            style={{ maxHeight: '500px', objectFit: 'cover' }}
                         />
                     </div>
                     <div className="card mb-4">

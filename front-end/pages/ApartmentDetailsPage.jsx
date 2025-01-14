@@ -31,7 +31,7 @@ export default function ApartmentDetailsPage() {
 
     return (
         <>
-            <div className="container m-auto ">
+            <div className="container-sm m-auto ">
 
                 <div>
                     <DetailApartmentCard apartment={apartment} />
