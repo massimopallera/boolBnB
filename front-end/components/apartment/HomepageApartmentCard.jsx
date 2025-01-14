@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
 export default function HomepageApartmentCard({ apartment }) {
+
 
     return (
         <>
@@ -17,7 +19,9 @@ export default function HomepageApartmentCard({ apartment }) {
                         <strong>Descrizione:</strong><p>  {apartment.description}</p>
                         <span> <strong>Indirizzo:</strong> {apartment.address}</span>
                     </div>
-                    <i className="bi bi-heart-fill mt-3 text-danger">  {apartment.hearts_counter}</i>
+                    <div className="p-2">
+                        <i className="bi bi-heart-fill mt-3 text-danger">  {apartment.hearts_counter}</i>
+                    </div>
                 </Link>
             </div>
 

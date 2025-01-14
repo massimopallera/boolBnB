@@ -34,7 +34,7 @@ export default function ApartmentDetailsPage() {
             <div className="container-sm m-auto ">
 
                 <div>
-                    <DetailApartmentCard apartment={apartment} />
+                    <DetailApartmentCard id={id} />
                 </div>
 
 

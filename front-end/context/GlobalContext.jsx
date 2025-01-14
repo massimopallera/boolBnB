@@ -16,7 +16,7 @@ export function GlobalContextProvider({ children }) {
     useEffect(() => {
         fetch(apartmentsApi)
         .then(resp => resp.json())
-        .then(result => {setApartments(result.data || [])})
+        .then(result => {setApartments(result.data)})
         .catch(error => console.error("Error fetching apartments:", error));
     }, [])
     
