@@ -11,6 +11,7 @@ export function ApartmentProvider({ children }) {
 
     const [apartments, SetApartments] = useState([])
 
+    // show all apartments 
     const fetchApartments = () => {
         const apartmentsApi = "http://127.0.0.1:3000/apartments"
 
