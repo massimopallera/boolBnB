@@ -6,7 +6,7 @@ import cookieParser from 'cookie-parser' // for cookies parsing
 // import routes
 import apartmentsRouter from "./routes/apartmentsRoutes.js"
 import loginRouter from "./routes/loginLogoutRoutes.js"
-import authenticateJWT from './auth/authentication.js'
+import authenticateJWT from './auth/authenticateJWT.js'
 import reviewsRouter from "./routes/reviewsRoutes.js"
 import ownersRouter from "./routes/ownersRoutes.js"
 import infoRouter from "./routes/infoRoutes.js"

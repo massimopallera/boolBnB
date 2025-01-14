@@ -1,4 +1,4 @@
-import auth from '../auth/loginLogout.js'
+import auth from '../auth/logout.js'
 /* 
     Create handlers for these status codes
 
