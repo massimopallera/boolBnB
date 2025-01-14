@@ -4,10 +4,10 @@ export default function Header() {
 
     return (
         <>
-            <header className="shadow p-2 mb-5 bg-light">
+            <header className="shadow p-2 mb-5 bg-white">
                 <nav>
                     <NavLink to="/" className="text-decoration-none">
-                        <h1>BOOLBNB</h1>
+                        <img className="logo" src="/logo.png" alt="Logo" />
                     </NavLink>
                 </nav>
             </header>
