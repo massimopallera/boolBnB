@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import ApartmentCard from '../components/apartment/ApartmentCard'
 import { useApartmentContext } from '../context/GlobalContext'
+import HomepageApartmentCard from '../components/apartment/HomepageApartmentCard'
 
 export default function HomePage() {
 
@@ -15,7 +16,7 @@ export default function HomePage() {
                     {
                         apartments.map(apartment => (
                             <div key={apartment.id}>
-                                <ApartmentCard apartment={apartment} />
+                                <HomepageApartmentCard apartment={apartment} />
                             </div>
                         ))
                     }
