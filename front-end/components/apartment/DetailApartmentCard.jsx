@@ -25,10 +25,10 @@ export default function DetailApartmentCard({ apartment }) {
                                 <li><strong>Indirizzo:</strong> {apartment.address}</li>
                                 <li><strong>Email:</strong> {apartment.email}</li>
                                 <li><strong>Servizi aggiuntivi:</strong> {apartment.added_services}</li>
-                                <li><strong>Cuori:</strong> {apartment.hearts_counter}</li>
                             </ul>
                         </div>
                     </div>
+                    <i className="bi bi-heart-fill fs-1 mt-3 text-danger">  {apartment.hearts_counter}</i>
                 </div>
             </div>
         </>

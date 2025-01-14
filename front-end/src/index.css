@@ -17,14 +17,27 @@ footer {
 
 
 .overviewCard {
-    min-height: 350px;
+    height: 400px;
     transition: transform 0.3s ease;
     cursor: pointer;
     text-decoration: none;
 
+    .card-body {
+        overflow-y: scroll;
+        /* Consente lo scorrimento */
+        scrollbar-width: none;
+        /* Nasconde la scrollbar su Firefox */
+    }
+
+    .card-body::-webkit-scrollbar {
+        display: none;
+        /* Nasconde la scrollbar in Webkit (Chrome, Safari, etc.) */
+    }
+
     &:hover {
         transform: scale(1.20);
     }
+
 }
 
 
