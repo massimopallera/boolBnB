@@ -1,6 +1,5 @@
 import connection from '../database/connection.js'
 import handlers from '../middleware/handlers.js';
-import logout from '../auth/logout.js';
 import verifyToken from './verify.js'
 import argon from './hash.js'
 
@@ -35,7 +34,6 @@ export default async function update(req, res) {
     } catch (err) {
         // Gestione errori durante l'hashing della password
         console.error(err);
-        // res.status(500).json({ error: "Errore durante il caricamento dei dati" });
         return res.status(500).json({ error: "Errore durante l'hashing della password" });
     }
 }
