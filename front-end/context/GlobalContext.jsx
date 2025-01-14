@@ -9,27 +9,27 @@ export function useApartmentContext() {
 
 export function ApartmentProvider({ children }) {
 
-    const [apartments, SetApartments] = useState([])
+    const [apartments, setApartments] = useState([])
 
     // show all apartments 
-    const fetchApartments = () => {
-        const apartmentsApi = "http://127.0.0.1:3000/apartments"
+    // const fetchApartments = () => {
+        
+        // }
+    const apartmentsApi = import.meta.env.VITE_EXPRESS_SERVER + "/apartments"
 
-        useEffect(() => {
-            fetch(apartmentsApi)
-                .then(resp => resp.json())
-                .then(result => {
-
-                    SetApartments(result.data || [])
-                })
-                .catch(error => console.error("Error fetching apartments:", error));
-        }, [])
-    }
+    useEffect(() => {
+        fetch(apartmentsApi)
+            .then(resp => resp.json())
+            .then(result => {
+                setApartments(result.data || [])
+            })
+            .catch(error => console.error("Error fetching apartments:", error));
+    }, [])
 
 
 
     return (
-        <ApartmentContext.Provider value={{ apartments, fetchApartments }}>
+        <ApartmentContext.Provider value={{ apartments }}>
             {children}
         </ApartmentContext.Provider>
     )
