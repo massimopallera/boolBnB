@@ -31,8 +31,8 @@ function store(req, res) {
         toilets,
         sq_meters,
         address,
-        apartment_images,
-        added_services,
+        apartments_images,
+        // added_services,
         // user_id
     } = req.body;
 
@@ -40,8 +40,8 @@ function store(req, res) {
 
     // DA CONTROLLARE LA QUERY
     const sql = `
-        INSERT INTO apartments (user_id, description, rooms, beds, toilets, sq_meters, address, reference_mail, apartment_images, added_services)
-        VALUES (1, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO apartments (id_user, description, rooms, beds, toilets, sq_meters, address, apartments_images)
+        VALUES (1, ?, ?, ?, ?, ?, ?, ?)
     `;
 
 
@@ -59,14 +59,14 @@ function store(req, res) {
 
 
     connection.query(sql, [
-        owner_id,
+
         description,
-        rooms,
-        beds,
-        toilets,
-        sq_meters,
+        Number(rooms),
+        Number(beds),
+        Number(toilets),
+        Number(sq_meters),
         address,
-        apartment_images,
+        apartments_images,
     ], (err, results) => {
         handlers.controlFields({ ...req.body }, req, res, results)
     });

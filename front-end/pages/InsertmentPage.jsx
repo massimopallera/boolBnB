@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+
 const initialFormData = {
     rooms: '',
     beds: '',
@@ -6,7 +7,6 @@ const initialFormData = {
     sq_meters: '',
     address: '',
     apartments_images: '',
-    hearts_counter: '',
     description: ''
 
 }
@@ -33,8 +33,8 @@ export default function InsertmentPage() {
             .then(data => {
 
                 setFormData(initialFormData);
-
-                window.location.reload()
+                console.log(data)
+                /*  window.location.reload() */
             })
             .catch(err => console.log(err))
 
