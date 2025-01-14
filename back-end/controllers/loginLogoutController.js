@@ -11,15 +11,19 @@ function login(req, res) {
 async function update(req, res) {
 
     const { password } = req.body;
-    const id = req.params.id
+    // const id = req.params.id;
    
-    const decoded = auth.verifyToken(req.cookies.jwt)
-
-    console.log(decoded)
+    
+    // console.log(decoded)
     
     try {
-        const hash_password = await argon.hashPassword(password);  
+        const decoded = auth.verifyToken(req.cookies.jwt)
+        const userId = decoded.id
+        // if(parseInt(id) !== decoded.id){
+        //     return res.status(403).json({message: 'not authorized'})
+        // }
 
+        const hash_password = await argon.hashPassword(password);  
         // controlla che la mail in jwt corrisponda alla mail della query
 
         const sql = `
@@ -28,9 +32,7 @@ async function update(req, res) {
         WHERE ID = ?
         `
     
-        connection.query(sql, [hash_password, id], (err, results) => {
-
-
+        connection.query(sql, [hash_password, userId], (err, results) => {
             handlers.statusCode(req, res, results)
         })
     }catch (err) {

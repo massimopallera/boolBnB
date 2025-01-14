@@ -33,12 +33,8 @@ const login = (req, res) => {
                 return res.status(401).json({ message: 'Email o password errata' });
             }
 
-            console.log(results);
-            console.log('ARGON', isPasswordValid); // Controllo la password hashata per sicurezza
-            
-
             // Autenticazione riuscita, generazione del token JWT
-            const token = jwt.sign({ user: results[0].name, lastname: results[0].last_name, email: argon.hashPassword(results[0].email) },SECRET_KEY,{ expiresIn: '30d' });
+            const token = jwt.sign({ user: results[0].name, lastname: results[0].last_name, id: results[0].id },SECRET_KEY,{ expiresIn: '30d' });
 
             res.cookie('jwt', token, {
                 httpOnly: process.env.COOKIE_HTTPONLY === 'true',

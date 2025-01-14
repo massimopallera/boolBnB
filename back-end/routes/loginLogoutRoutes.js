@@ -11,7 +11,7 @@ router.post('/logout', controller.logout);
 //TO FIX
 
 // to change password
-router.put('/changePassword/:id', authenticateJWT ,controller.update)
+router.put('/changePassword', authenticateJWT ,controller.update)
 
 
 export default router
