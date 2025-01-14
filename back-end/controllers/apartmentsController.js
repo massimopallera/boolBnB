@@ -31,22 +31,34 @@ function store(req, res) {
         toilets,
         sq_meters,
         address,
-        reference_mail,
         apartment_images,
         added_services,
-        owner_id
+        // user_id
     } = req.body;
 
 
 
-
+    // DA CONTROLLARE LA QUERY
     const sql = `
-        INSERT INTO apartments (owner_id, description, rooms, beds, toilets, sq_meters, address, reference_mail, apartment_images, added_services)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO apartments (user_id, description, rooms, beds, toilets, sq_meters, address, reference_mail, apartment_images, added_services)
+        VALUES (1, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
 
-    const values = [
+    /*  const values = [
+         owner_id,
+         description,
+         rooms,
+         beds,
+         toilets,
+         sq_meters,
+         address,
+         apartment_images,
+         added_services || null
+     ]; */
+
+
+    connection.query(sql, [
         owner_id,
         description,
         rooms,
@@ -54,14 +66,9 @@ function store(req, res) {
         toilets,
         sq_meters,
         address,
-        reference_mail,
         apartment_images,
-        added_services || null
-    ];
-
-
-    connection.query(sql, values, (err, results) => {
-        handlers.controlFields({...req.body}, req, res, results)
+    ], (err, results) => {
+        handlers.controlFields({ ...req.body }, req, res, results)
     });
 }
 
@@ -98,7 +105,7 @@ function update(req, res) {
         // res.status(201).json({
         //     success: true
         // });
-        handlers.controlFields({...req.body}, req, res, results)
+        handlers.controlFields({ ...req.body }, req, res, results)
     })
 }
 

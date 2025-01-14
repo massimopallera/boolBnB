@@ -21,7 +21,7 @@ function App() {
 
               <Route index element={<Homepage />} />
               <Route path="apartments/:id" element={<ApartmentDetailsPage />} />
-              <Route path=".................." element={<InsertmentPage />} />
+              <Route path="apartments/addNew" element={<InsertmentPage />} />
               {/* <Route path=".................." element={<ResearchPage />} /> */}
 
             </Route>
