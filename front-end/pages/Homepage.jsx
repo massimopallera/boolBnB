@@ -1,20 +1,13 @@
 import { useState, useEffect } from 'react'
+import ApartmentCard from '../components/apartment/ApartmentCard'
+import { useApartmentContext } from '../context/GlobalContext'
 import HomepageApartmentCard from '../components/apartment/HomepageApartmentCard'
 
 export default function HomePage() {
 
-    const apartmentsApi = "http://127.0.0.1:3000/apartments"
+    const { apartments, fetchApartments } = useApartmentContext()
 
-    const [apartments, SetApartments] = useState([])
-
-    useEffect(() => {
-        fetch(apartmentsApi)
-            .then(resp => resp.json())
-            .then(result => {
-                console.log(result.data);
-                SetApartments(result.data)
-            })
-    }, [])
+    const apartmentList = fetchApartments()
 
     return (
         <>
