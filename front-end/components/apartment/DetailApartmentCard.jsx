@@ -15,7 +15,7 @@ export default function DetailApartmentCard({ apartment }) {
                     <span> <strong>Bagni:</strong> {apartment.toilets}</span>
                     <span> <strong>Mq:</strong> {apartment.sq_meters}</span>
                     <span> <strong>Indirizzo:</strong> {apartment.address}</span>
-                    <span> <strong>Email:</strong> {apartment.reference_email}</span>
+                    <span> <strong>Email:</strong> {apartment.email}</span>
                     <span> <strong>Servizi aggiuntivi:</strong> {apartment.added_services}</span>
                     <span> <strong>Cuori:</strong> {apartment.hearts_counter}</span>
                 </div>

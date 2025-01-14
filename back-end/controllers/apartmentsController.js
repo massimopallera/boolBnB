@@ -15,7 +15,10 @@ function index(req, res) {
 function show(req, res) {
 
     const id = req.params.id
-    const sql = 'SELECT * FROM apartments WHERE id = ?'
+    const sql = `SELECT ap.*, users.email AS email
+    FROM apartments AS ap
+    INNER JOIN users ON users.id = ap.id_user
+    WHERE ap.id = ?`
 
     connection.query(sql, [id], (err, results) => {
         handlers.statusCode(req, res, results)
@@ -32,34 +35,15 @@ function store(req, res) {
         sq_meters,
         address,
         apartments_images,
-        // added_services,
-        // user_id
     } = req.body;
 
 
-
-    // DA CONTROLLARE LA QUERY
     const sql = `
         INSERT INTO apartments (id_user, description, rooms, beds, toilets, sq_meters, address, apartments_images)
         VALUES (1, ?, ?, ?, ?, ?, ?, ?)
     `;
 
-
-    /*  const values = [
-         owner_id,
-         description,
-         rooms,
-         beds,
-         toilets,
-         sq_meters,
-         address,
-         apartment_images,
-         added_services || null
-     ]; */
-
-
     connection.query(sql, [
-
         description,
         Number(rooms),
         Number(beds),
@@ -116,3 +100,5 @@ export default {
     store,
     update,
 }
+
+
