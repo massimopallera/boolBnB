@@ -32,11 +32,11 @@ export default function ApartmentDetailsPage() {
     return (
         <>
             <div className="container m-auto ">
-                {
-                    <div key={apartment.id}>
-                        <DetailApartmentCard apartment={apartment} />
-                    </div>
-                }
+
+                <div>
+                    <DetailApartmentCard apartment={apartment} />
+                </div>
+
 
                 <h3 className='text-center my-4'>Recensioni</h3>
                 <div className='d-flex justify-content-center'>
