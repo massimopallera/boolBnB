@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import ApartmentCard from '../components/apartment/ApartmentCard'
+
 import { useApartmentContext } from '../context/GlobalContext'
 import HomepageApartmentCard from '../components/apartment/HomepageApartmentCard'
 
