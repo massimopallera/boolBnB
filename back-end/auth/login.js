@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import dotenv from 'dotenv'
-import connection from "../database/connection.js";
+import pool from "../database/pool.js";
 import argon from "./hash.js";
 
 const login = (req, res) => {
@@ -13,7 +13,7 @@ const login = (req, res) => {
     const sql = `SELECT * FROM users WHERE email = ?`;
 
 
-    connection.query(sql, [email], async (err, results) => {
+    pool.query(sql, [email], async (err, results) => {
         
         if (err) return res.status(500).json({ success: false, message: 'Errore Interno del Server'})
 

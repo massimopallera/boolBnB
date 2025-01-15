@@ -1,4 +1,4 @@
-import connection from '../database/connection.js'
+import pool from '../database/pool.js'
 import handlers from '../middleware/handlers.js';
 import verifyToken from './verify.js'
 import argon from './hash.js'
@@ -19,7 +19,7 @@ export default async function update(req, res) {
         WHERE ID = ?
         `
     
-        connection.query(sql, [hash_password, userId], (err, results) => {
+        pool.query(sql, [hash_password, userId], (err, results) => {
             // Logout
             res.clearCookie('jwt', {
                 httpOnly: true,

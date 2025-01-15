@@ -1,11 +1,11 @@
-import connection from "../database/connection.js";
+import pool from "../database/pool.js";
 import handlers from "../middleware/handlers.js";
 import dayjs from 'dayjs';
 // get all elements from reviews
 function index(req, res) {
     const sql = `SELECT * FROM reviews`
 
-    connection.query(sql, (err, results) => {
+    pool.query(sql, (err, results) => {
         handlers.statusCode(req, res, results)
     })
 }
@@ -20,7 +20,7 @@ function show(req, res) {
         WHERE id_apartment_fk = ?
         ORDER BY date DESC`
 
-    connection.query(sql, [id], (err, results) => {
+    pool.query(sql, [id], (err, results) => {
         handlers.statusCode(req, res, results)
     })
 }
@@ -39,7 +39,7 @@ function store(req, res) {
 
     //control if body request is correct
 
-    connection.query(sql, [
+    pool.query(sql, [
         id_apartment_fk,
         name,
         text,
