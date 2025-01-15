@@ -12,7 +12,7 @@ export default function ReviewsSection({ id }) {
     useEffect(() => {
         fetch(reviewsApi)
             .then(resp => resp.json())
-            .then(data => { setReviews(data.data) })
+            .then(data => {setReviews(data.data) })
             .catch(err => console.error(err))
     }, [])
 

@@ -7,7 +7,7 @@ export default function DetailApartmentCard({ id }) {
     useEffect(() => {
         fetch(`http://127.0.0.1:3000/apartments/${id}`)
            .then(resp => resp.json())
-           .then(data => { setApartment(data.data[0]); setLikesCounter(data.data[0].hearts_counter);})
+           .then(data => {setApartment(data.data[0]); setLikesCounter(data.data[0].hearts_counter);})
            .catch(err => console.log(err))
     },[])
 

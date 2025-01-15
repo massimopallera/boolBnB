@@ -8,7 +8,8 @@ const initialFormData = {
     sq_meters: '',
     address: '',
     apartments_images: '',
-    description: ''
+    description: '',
+    added_services: []
 
 }
 
@@ -16,6 +17,7 @@ export default function InsertmentPage() {
 
     const [formData, setFormData] = useState(initialFormData);
     const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const [services, setServices] = useState()
     const [apartments, setAparments] = useState([])
 
     const navigate = useNavigate()
@@ -32,13 +34,14 @@ export default function InsertmentPage() {
             headers: {
                 "Content-Type": "application/json" // Specifica il tipo di contenuto come JSON
             },
+            credentials: 'include',
             body: JSON.stringify({ ...formData })
         })
             .then(resp => resp.json())
             .then(data => {
-                const aux = apartments
-                aux.unshift(formData)
-                setAparments(aux)
+                // const aux = apartments
+                // aux.unshift(formData)
+                // setAparments(aux)
                 setFormData(initialFormData);
                 // window.location.reload() 
             })
@@ -57,12 +60,42 @@ export default function InsertmentPage() {
                 .then(resp => resp.json())
                 .then(data => {
                     setAparments(data.data)
+
                 })
                 .catch(err => console.log(err))
         } else console.log('nuh uh');
-        
     }
 
+    function getServices(){       
+        fetch('http://localhost:3000/apartments/services')
+        .then(resp => resp.json())
+        .then(data => 
+             setServices(data.data)
+         )
+        .catch(err => console.log(err))
+
+    }
+
+    function handleCheckbox(e) {
+        const { value, checked } = e.target;
+    
+        let updatedServices = [...formData.added_services];
+    
+        if (checked) {
+            if (!updatedServices.includes(value)) {
+                updatedServices.push(value);
+            }
+        } else {
+            updatedServices = updatedServices.filter(service => service !== value);
+        }
+    
+        setFormData({ ...formData, added_services: updatedServices });
+    
+        // console.log(updatedServices);
+    }
+    
+
+    //check authentication
     useEffect(() => {
         const checkAuthentication = async () => {
             const baseUrl = import.meta.env.VITE_EXPRESS_SERVER;
@@ -77,12 +110,13 @@ export default function InsertmentPage() {
                 if (response.ok) {
                     console.log('Utente autenticato');
                     setIsAuthenticated(true)
+
                     getApartments(true)
                     // navigate('/'); // Redirigi se autenticato
                 } else {
                     setIsAuthenticated(false)
                     console.log('Utente non autenticato');
-                    navigate('/')
+                    navigate('/') // if not authenticated, it will return the user to home page
                 }
             } catch (error) {
                 console.error('Errore durante la verifica della sessione:', error);
@@ -92,19 +126,16 @@ export default function InsertmentPage() {
         checkAuthentication();
         
     }, [navigate]);
-
-    console.log(apartments);
-    
-
+   
+    useEffect(() => {
+        getServices()
+    }, [])
 
     return (
         <>
             {isAuthenticated ? (
-
-
-                <> 
-                    
-             
+            <> 
+           
             <div className="container mt-5 ">
                 <form className="card bg-light bg-gradientd-flex flex-column p-3 mb-3" onSubmit={handleForm}>
                     <h4 className="text-center">Aggiungi inserzione</h4>
@@ -136,6 +167,17 @@ export default function InsertmentPage() {
                         <label htmlFor="description" className="form-label">Descrizione</label>
                         <textarea className="form-control" name="text" id="description" placeholder="Descrivi brevemente l'appartamento" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })}></textarea>
                     </div>
+
+                    {services ? (services.map(service => 
+                        <div key={service.id} className="form-check">
+                            <input className="form-check-input" type="checkbox" value={service.id} id={`service-${service.id}`} onChange={(e) => handleCheckbox(e)} />
+                            <label className="form-check-label" htmlFor={`service-${service.id}`}>{service.name}</label>
+                        </div>
+                    )) : null
+
+                    }
+
+
                     <button type="submit" className="btn btn-primary">Salva</button>
                 </form>
             </div>
