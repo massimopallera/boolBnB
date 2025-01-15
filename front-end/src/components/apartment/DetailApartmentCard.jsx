@@ -6,10 +6,10 @@ export default function DetailApartmentCard({ id }) {
 
     useEffect(() => {
         fetch(`http://127.0.0.1:3000/apartments/${id}`)
-            .then(resp => resp.json())
-            .then(data => { setApartment(data.data[0]); setLikesCounter(data.data[0].hearts_counter); })
-            .catch(err => console.log(err))
-    }, [])
+           .then(resp => resp.json())
+           .then(data => {setApartment(data.data[0]); setLikesCounter(data.data[0].hearts_counter);})
+           .catch(err => console.log(err))
+    },[])
 
 
     function handleClick() {
@@ -20,10 +20,10 @@ export default function DetailApartmentCard({ id }) {
             body: JSON.stringify({ hearts_counter: likesCounter }),
             headers: { "Content-Type": "application/json" }
         })
-            .then(resp => resp.json())
-            .then(data => console.log('fatto')
-            )
-            .catch(err => console.log(err))
+           .then(resp => resp.json())
+        //    .then(data => )
+           .catch(err => console.log(err))
+
     }
 
     return (

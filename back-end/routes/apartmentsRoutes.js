@@ -5,6 +5,10 @@ const router = express.Router();
 router.get('/', controller.index)
 
 //show element with specific index
+router.get('/owner-apartments', controller.showOwnerApartments)
+
+router.get('/services', controller.serviceIndex)
+
 router.get('/:id', controller.show)
 
 //add new element

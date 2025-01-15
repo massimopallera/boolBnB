@@ -17,9 +17,16 @@ import handlers from "./middleware/handlers.js"
 
 const server = express()
 
+
+const corsOptions = {
+    origin: 'http://localhost:5173', // Indica l'origine esatta del frontend
+    credentials: true, // Consenti l'invio di credenziali
+  };
+
+
 server.use(express.json())
 server.use(cookieParser());
-server.use(cors())
+server.use(cors(corsOptions))
 
 const HOST = process.env.HOST || "http://localhost"
 const PORT = process.env.PORT || 3000
@@ -38,7 +45,7 @@ server.use('/', logger)
 // 🔁 routes
 server.use('/apartments', apartmentsRouter)
 server.use('/reviews', reviewsRouter)
-server.use('/owner', ownersRouter)
+server.use('/user', ownersRouter)
 server.use('/info', infoRouter)
 server.use('/', authRouter)
 

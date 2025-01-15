@@ -4,8 +4,13 @@ import argon2 from 'argon2'
 const PEPPER_KEY = process.env.PEPPER_KEY;
 
 async function hashPassword(user_password) {
+  try{
     const combinedPassword = user_password + PEPPER_KEY; // Combina la password con la Pepper
-    return argon2.hash(combinedPassword); // Genera l'hash
+    const pass = await argon2.hash(combinedPassword); // Genera l'hash
+    return pass
+  } 
+  catch (err) 
+  { console.log(err); }
 }
 
 // for emails and updating password -- it takes email from token 
