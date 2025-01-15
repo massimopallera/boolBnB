@@ -1,3 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img {
+    object-fit: cover;
+}
+
 header {
     position: sticky;
     top: 0;
@@ -13,7 +23,6 @@ header {
 
 
 
-
 .overviewCard {
     height: 300px;
     width: 220px;
@@ -22,17 +31,18 @@ header {
     text-decoration: none;
     font-size: 12px;
 
-    .card-body {
-        overflow-y: scroll;
-
-        scrollbar-width: none;
-    }
 
 
     &:hover {
         transform: scale(1.20);
     }
 
+}
+
+.card-body {
+    overflow-y: scroll;
+
+    scrollbar-width: none;
 }
 
 .card-body::-webkit-scrollbar {
