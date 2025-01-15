@@ -5,7 +5,7 @@ const router = express.Router();
 router.get('/', controller.index)
 
 //show element with specific index
-router.get('/:id', controller.show)
+router.get('/owner-apartments', controller.show)
 
 //add new element
 router.post('/', controller.store)

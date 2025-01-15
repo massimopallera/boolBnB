@@ -1,5 +1,6 @@
 import connection from '../database/connection.js'
 import handlers from '../middleware/handlers.js'
+import verifyToken from '../auth/verify.js'
 
 // get all elements from apartments
 function index(req, res) {
@@ -18,16 +19,27 @@ function show(req, res) {
 
     const id = Number(req.params.id)
     
-    const sql = `
-    SELECT ap.*, users.email AS email
-    FROM apartments AS ap
-    INNER JOIN users ON users.id = ap.id_user
-    WHERE ap.id = ?
-    `
+    const token = req.cookies.jwt
+    if (token) {
+        const decoded = verifyToken(token)
+        const id_user = decoded.id
 
-    connection.query(sql, [id], (err, results) => {
-        handlers.statusCode(req, res, results)
-    })
+        // (SELECT COUNT(*) FROM reviews WHERE reviews.apartment_id = ap.id) AS reviews_counter
+
+        const sql = `
+        SELECT ap.*, users.email AS email
+        FROM apartments AS ap
+        INNER JOIN users ON users.id = ap.id_user
+        WHERE ap.id_user = ?
+        ORDER BY id DESC
+        `
+
+        connection.query(sql, [id_user], (err, results) => {
+            handlers.statusCode(req, res, results)
+            // if (err) return res.status(500).json({message: err.message})
+            // res.status(200).json(results)
+        })
+    } else res.status(404).json({message: 'nuh uh'})
     
 }
 

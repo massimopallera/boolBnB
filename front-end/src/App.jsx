@@ -10,6 +10,7 @@ import { GlobalContextProvider } from './context/GlobalContext.jsx'
 
 import './App.css'
 import Authentication from './pages/Authentication.jsx'
+import Logout from "./pages/Logout.jsx"
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
               <Route path="apartments/:id" element={<ApartmentDetailsPage />} />
               <Route path="apartments/addNew" element={<InsertmentPage />} />
               <Route path='auth' element={<Authentication />} />
+              <Route path='logout' element={<Logout />} />
               {/* <Route path=".................." element={<ResearchPage />} /> */}
 
             </Route>
