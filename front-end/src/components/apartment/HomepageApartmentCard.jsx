@@ -7,7 +7,7 @@ export default function HomepageApartmentCard({ apartment }) {
     return (
         <>
 
-            <div className="col">
+            <div className="col d-flex justify-content-center">
                 <Link to={`/apartments/${apartment.id}`} className="overviewCard card bg-light bg-gradient shadow-sm d-flex flex-column ">
                     <span> <img
                         src={apartment.apartment_images || "/placeholder.png"}
