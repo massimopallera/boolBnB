@@ -7,21 +7,23 @@ export default function HomepageApartmentCard({ apartment }) {
     return (
         <>
 
-            <div className="col">
-                <Link to={`/apartments/${apartment.id}`} className="overviewCard card bg-light bg-gradient shadow-sm d-flex flex-column p-3">
-                    <span> <img
-                        src={apartment.apartment_images || "/placeholder.png"}
-                        alt="Apartment"
-                        className="img-fluid rounded shadow-sm"
-                        style={{ maxHeight: '150px', objectFit: 'cover' }}
-                    /></span>
-                    <div className="card-body bg-white border mt-4">
-                        <strong>Descrizione:</strong><p>  {apartment.description}</p>
-                        <span> <strong>Indirizzo:</strong> {apartment.address}</span>
+            <div className="col d-flex justify-content-center">
+                <Link to={`/apartments/${apartment.id}`} className="overviewCard card bg-light bg-gradient shadow-sm d-flex flex-column ">
+                    <span>
+                        <div className="homeLike d-flex  align-items-center"> <span className="mb-1">{apartment.hearts_counter}</span> <i className=" mx-1 bi bi-heart-fill text-danger"></i></div>
+
+                        <img
+                            src={apartment.apartment_images || "/placeholder.png"}
+                            alt="Apartment"
+                            className="img-fluid rounded shadow-sm"
+                            style={{ maxHeight: '100%', objectFit: 'cover' }}
+                        /></span>
+                    <div className="card-body mt-2">
+                        <div className="mb-2"><strong>Descrizione:</strong>  {apartment.description}</div>
+
+                        <div> <strong>Indirizzo:</strong> {apartment.address}</div>
                     </div>
-                    <div className="p-2">
-                        <i className="bi bi-heart-fill mt-3 text-danger">  {apartment.hearts_counter}</i>
-                    </div>
+
                 </Link>
             </div>
 

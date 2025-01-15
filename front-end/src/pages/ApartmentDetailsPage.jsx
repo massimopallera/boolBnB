@@ -33,16 +33,20 @@ export default function ApartmentDetailsPage() {
 
     return (
         <>
-            <div className="container-sm m-auto ">
+            <div className="container">
 
                 <div>
                     <DetailApartmentCard id={id} />
                 </div>
 
 
-                <h3 className='text-center my-4'>Recensioni</h3>
-                <div className='d-flex justify-content-center'>
+                <h3 className='text-center mt-5'>Recensioni</h3>
+
+                <div className='d-flex flex-wrap justify-content-between'>
                     {/* Reviews Form */}
+
+                    <div className='col-12 col-lg-4 my-3'><ReviewForm id={id}></ReviewForm></div>
+
                     <ReviewForm id={id}></ReviewForm>
                     <div>
                         <form onSubmit={handleMail}>
@@ -63,9 +67,11 @@ export default function ApartmentDetailsPage() {
                             <button  className="btn btn-primary">Invia email</button>  {/* Send email button */}
                         </form>
                     </div>
+
                     {/* Reviews */}
-                    <ReviewsSection id={id}></ReviewsSection>
+                    <span className="col-12 col-lg-8 reviewBox my-3 "><ReviewsSection id={id}></ReviewsSection></span>
                 </div>
+
             </div>
 
         </>

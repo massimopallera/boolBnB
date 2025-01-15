@@ -1,3 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img {
+    object-fit: cover;
+}
+
 header {
     position: sticky;
     top: 0;
@@ -12,16 +22,21 @@ header {
 }
 
 
-.container-sm {
-    width: 65%;
-}
 
 .overviewCard {
-    height: 300px;
+    width: 400px;
+    aspect-ratio: 1;
+
     transition: transform 0.3s ease;
     cursor: pointer;
     text-decoration: none;
-    font-size: 12px;
+
+
+
+
+    &:hover {
+        transform: scale(1.20);
+    }
 
     .card-body {
         overflow-y: scroll;
@@ -29,21 +44,35 @@ header {
         scrollbar-width: none;
     }
 
+    .card-body::-webkit-scrollbar {
+        display: none;
 
-    &:hover {
-        transform: scale(1.20);
     }
-
 }
 
-.card-body::-webkit-scrollbar {
-    display: none;
+.homeLike {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
 
+.like {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.like:active {
+    transform: scale(1.5);
 }
 
 
+.reviewBox {
+    height: 475px;
+    overflow-y: scroll;
 
+    scrollbar-width: none;
 
+}
 
 main {
     flex: 1;
