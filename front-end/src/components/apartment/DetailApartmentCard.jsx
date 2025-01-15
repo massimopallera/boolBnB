@@ -21,8 +21,7 @@ export default function DetailApartmentCard({ id }) {
             headers:{ "Content-Type": "application/json" }
         })
            .then(resp => resp.json())
-           .then(data => console.log('fatto')
-           )
+           .then(data => console.log('fatto'))
            .catch(err => console.log(err))
     }
 
