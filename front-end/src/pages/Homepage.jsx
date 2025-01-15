@@ -9,8 +9,8 @@ export default function HomePage() {
 
     return (
         <>
-            <div className="container m-auto">
-                {<div className='row row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-5'>
+            <div className="mx-5">
+                {<div className='row row-cols-sm-12 row-cols-md-3 row-cols-lg-4 g-5'>
                     {
                         apartments.map(apartment => (
                             <div key={apartment.id}>

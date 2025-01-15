@@ -13,7 +13,7 @@ export default function HomepageApartmentCard({ apartment }) {
                         src={apartment.apartment_images || "/placeholder.png"}
                         alt="Apartment"
                         className="img-fluid rounded shadow-sm"
-                        style={{ maxHeight: '150px', objectFit: 'cover' }}
+                        style={{ maxHeight: '100%', objectFit: 'cover' }}
                     /></span>
                     <div className="card-body mt-2">
                         <div className="mb-2"><strong>Descrizione:</strong>  {apartment.description}</div>
