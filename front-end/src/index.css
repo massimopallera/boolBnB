@@ -49,6 +49,16 @@ header {
     }
 }
 
+.like {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.like:active {
+    transform: scale(1.5);
+}
+
+
 .reviewBox {
     height: 475px;
     overflow-y: scroll;
