@@ -123,6 +123,7 @@ const store = async (req, res) => {
             address,
             apartments_images,
             description,
+            price,
             added_services
         } = req.body;
 
@@ -131,8 +132,8 @@ const store = async (req, res) => {
 
         // Query per inserire l'appartamento
         const apartmentQuery = `
-            INSERT INTO apartments (id_user, description, rooms, beds, toilets, sq_meters, address, apartments_images)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO apartments (id_user, description, rooms, beds, toilets, sq_meters, address, apartments_images, price)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
         const [apartmentResult] = await connection.query(apartmentQuery, [
             id_user,
@@ -142,6 +143,7 @@ const store = async (req, res) => {
             Number(toilets),
             Number(sq_meters),
             address,
+            price,
             apartments_images
         ]);
 

@@ -9,6 +9,7 @@ const initialFormData = {
     address: '',
     apartments_images: '',
     description: '',
+    price: 0,
     added_services: []
 
 }
@@ -163,6 +164,10 @@ export default function InsertmentPage() {
                     <div className="mb-3">
                         <label htmlFor="description" className="form-label">Descrizione</label>
                         <textarea className="form-control" name="text" id="description" placeholder="Descrivi brevemente l'appartamento" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })}></textarea>
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="price" className="form-label">Prezzo a notte</label>
+                        <textarea className="form-control" name="number" id="price" placeholder="Insrisci prezzo a notte" value={formData.price} onChange={(e) => setFormData({ ...formData, price: e.target.value })}></textarea>
                     </div>
 
                     {services ? (services.map(service => 
