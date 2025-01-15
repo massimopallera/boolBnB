@@ -4,7 +4,7 @@ import handlers from '../middleware/handlers.js'
 // get all elements from apartments
 function index(req, res) {
 
-    const sql = 'SELECT * FROM apartments'
+    const sql = 'SELECT * FROM apartments ORDER BY hearts_counter DESC'
 
     connection.query(sql, (err, results) => {
         handlers.statusCode(req, res, results)
