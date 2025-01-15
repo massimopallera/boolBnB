@@ -56,10 +56,12 @@ export default function DetailApartmentCard({ id }) {
                                     </ul>
                                 </div>
                             </div>
-                            <div className="d-flex align-items-center fs-4 mx-3 mt-3">
-                                <i onClick={() => handleClick()} className="bi bi-heart-fill text-danger"> </i>
-                                <span>{likesCounter}</span>
+                            <div className="d-flex align-items-center justify-content-between fs-4 mx-3 mt-3">
+                                <div><i onClick={() => handleClick()} className="bi bi-heart-fill text-danger"> </i>
+                                    <span>{likesCounter} </span></div>
+                                <button className="btn btn-primary">Contatta proprietario</button>
                             </div>
+
                         </div>
                     </div>
                 </div>
