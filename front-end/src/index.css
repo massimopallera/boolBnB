@@ -50,6 +50,11 @@ header {
     }
 }
 
+.homeLike {
+    position: absolute;
+    top: 0;
+}
+
 .like {
     cursor: pointer;
     transition: transform 0.3s ease;
