@@ -56,8 +56,10 @@ export default function DetailApartmentCard({ id }) {
                                     </ul>
                                 </div>
                             </div>
-                            <div className="d-flex align-items-center justify-content-between fs-4 mx-3 mt-3">
-                                <div className="like "><i onClick={() => handleClick()} className="bi bi-heart-fill text-danger"> </i>
+                            <div className="d-flex align-items-center justify-content-between fs-4 mx-1 mt-3">
+                                <div className="d-flex">
+                                    <div className="like"><i onClick={() => handleClick()} className="bi bi-heart-fill text-danger mx-2"> </i>
+                                    </div>
                                     <span>{likesCounter} </span>
                                 </div>
 
