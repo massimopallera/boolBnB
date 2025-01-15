@@ -45,7 +45,7 @@ server.use('/', logger)
 // 🔁 routes
 server.use('/apartments', apartmentsRouter)
 server.use('/reviews', reviewsRouter)
-server.use('/owner', ownersRouter)
+server.use('/user', ownersRouter)
 server.use('/info', infoRouter)
 server.use('/', authRouter)
 

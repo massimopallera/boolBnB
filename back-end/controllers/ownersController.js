@@ -1,3 +1,4 @@
+import hash from '../auth/hash.js';
 import connection from '../database/connection.js'
 import handlers from '../middleware/handlers.js';
 
@@ -23,28 +24,39 @@ function show(req, res) {
 }
 
 // store new owner
-function store(req, res) {
+async function store(req, res) {
 
-    const newOwner = { ...req.body }
-    newOwner.password = sha1(md5(newOwner.password))
 
-    const sql = `
-    INSERT INTO users
-    (name, last_name, email, phone, password)
-    VALUES (?,?,?,?,?)
-    `
+    const hashed = await hash.hashPassword(req.body.password)
+    const newOwner = { ...req.body, password: hashed }
+
+    const {
+        name,
+        last_name,
+        email,
+        phone,
+        password
+    } = newOwner
+
+    // console.log(password);
+    // console.log(newOwner);
+    
 
     const query = `
     INSERT INTO users (name, last_name, email, phone, password)
     VALUES (?, ?, ?, ?, ?)
-    ON DUPLICATE KEY UPDATE email = email; -- Non fa nulla se email esiste
+    ON DUPLICATE KEY UPDATE email = email
 `;
 
 
     //control if body request is correct
-    connection.query(query, Object.values(newOwner), (err, results) => {
+    connection.query(query, [name, last_name, email, phone, password], (err, results) => {
         handlers.controlFields(newOwner, req, res, results,err)
     })
+        // if (err) return res.status(500).json({message: err.message})
+        //     res.status(201).json(results)
+        // })
+    
 }
 
 // update owner
