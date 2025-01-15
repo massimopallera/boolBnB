@@ -48,59 +48,26 @@ function showOwnerApartments(req, res) {
     } else res.status(404).json({message: 'nuh uh'})
     
 }
+
 function show(req, res) {
 
     const id = Number(req.params.id)
 
     const sql = `
-    SELECT ap.*
+    SELECT ap.*, u.email AS email, group_concat(\`as\`.name SEPARATOR ', ') AS \`added_services\`
     FROM apartments AS ap
-    WHERE id = ?
+    INNER JOIN  \`apartment-added_service\` AS bridge ON ap.id = bridge.apartment_id_fk
+    INNER JOIN added_services AS \`as\` ON bridge.added_service_id_fk = \`as\`.id
+    INNER JOIN users AS u ON ap.id_user = u.id
+    WHERE ap.id = ?
+    GROUP BY ap.id
     `
-
+    
     pool.query(sql, [id], (err, results) => {
         handlers.statusCode(req, res, results)
          
     })    
 }
-
-// store an apartment
-/* function store(req, res) {
-
-    console.log(req.body)
-
-    const {
-        description,
-        rooms,
-        beds,
-        toilets,
-        sq_meters,
-        address,
-        apartments_images,
-    } = req.body;
-
-
-    const sql = `
-        INSERT INTO apartments (id_user, description, rooms, beds, toilets, sq_meters, address, apartments_images)
-        VALUES (1, ?, ?, ?, ?, ?, ?, ?)
-    `;
-
-    pool.query(sql, [
-        description,
-        Number(rooms),
-        Number(beds),
-        Number(toilets),
-        Number(sq_meters),
-        address,
-        apartments_images,
-    ], (err, results) => {
-        handlers.controlFields({ ...req.body }, req, res, results)
-        // if (err) res.status(500).json({message: 'PAOLO BROSIO COCAINOMANE', err: err.message})
-        //     else res.json({message: 'ANDREA DIPRE RAPITORE DI ALDO MORO'})
-        // res.json({message: err.message})
-    });
-}
- */
 
 
 const store = async (req, res) => {
@@ -179,30 +146,6 @@ const store = async (req, res) => {
         if (connection) connection.release();
     }
 };
-
-// export default store;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // update an apartment
