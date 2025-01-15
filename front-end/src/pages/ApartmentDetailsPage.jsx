@@ -12,16 +12,16 @@ export default function ApartmentDetailsPage() {
 
     const { id } = useParams();
 
-    const apartmentsApi = `http://127.0.0.1:3000/apartments/${id}`;
+    // const apartmentsApi = `http://127.0.0.1:3000/apartments/${id}`;
 
-    const [apartment, setApartment] = useState({})
+    // const [apartment, setApartment] = useState({})
 
-    useEffect(() => {
-        fetch(apartmentsApi)
-            .then(resp => resp.json())
-            .then(result => setApartment(result.data[0]))
-            .catch(err => console.log(err))
-    }, []);
+    // useEffect(() => {
+    //     fetch(apartmentsApi)
+    //         .then(resp => resp.json())
+    //         .then(result => setApartment(result.data[0]))
+    //         .catch(err => console.log(err))
+    // }, []);
 
 
     // email form

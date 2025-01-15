@@ -39,11 +39,8 @@ export default function InsertmentPage() {
         })
             .then(resp => resp.json())
             .then(data => {
-                // const aux = apartments
-                // aux.unshift(formData)
-                // setAparments(aux)
                 setFormData(initialFormData);
-                // window.location.reload() 
+                window.location.reload() 
             })
             .catch(err => console.log(err))
     }
