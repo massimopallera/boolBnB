@@ -10,7 +10,7 @@ export default function HomepageApartmentCard({ apartment }) {
             <div className="col d-flex justify-content-center">
                 <Link to={`/apartments/${apartment.id}`} className="overviewCard card bg-light bg-gradient shadow-sm d-flex flex-column ">
                     <span>
-                        <i className="homeLike bi bi-heart-fill m-2 text-danger"> {apartment.hearts_counter}</i>
+                        <div className="homeLike d-flex  align-items-center"> <span className="mb-1">{apartment.hearts_counter}</span> <i className=" mx-1 bi bi-heart-fill text-danger"></i></div>
 
                         <img
                             src={apartment.apartment_images || "/placeholder.png"}
