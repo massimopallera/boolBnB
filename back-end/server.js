@@ -5,8 +5,8 @@ import cookieParser from 'cookie-parser' // for cookies parsing
 
 // import routes
 import apartmentsRouter from "./routes/apartmentsRoutes.js"
-import loginRouter from "./routes/loginLogoutRoutes.js"
-import authenticateJWT from './auth/authentication.js'
+import authRouter from "./routes/AuthenticationRoutes.js"
+import authenticateJWT from './auth/authenticateJWT.js'
 import reviewsRouter from "./routes/reviewsRoutes.js"
 import ownersRouter from "./routes/ownersRoutes.js"
 import infoRouter from "./routes/infoRoutes.js"
@@ -40,7 +40,7 @@ server.use('/apartments', apartmentsRouter)
 server.use('/reviews', reviewsRouter)
 server.use('/owner', ownersRouter)
 server.use('/info', infoRouter)
-server.use('/', loginRouter)
+server.use('/', authRouter)
 
 // authenticateJWT controls if a user is authenticated
 server.get('/dashboard', authenticateJWT, (req, res) => {
