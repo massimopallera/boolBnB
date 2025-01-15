@@ -9,6 +9,7 @@ import ResearchPage from "../pages/ResearchPage"
 import { GlobalContextProvider } from '../context/GlobalContext.jsx'
 
 import './App.css'
+import Authentication from '../pages/Authentication.jsx'
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
               <Route index element={<Homepage />} />
               <Route path="apartments/:id" element={<ApartmentDetailsPage />} />
               <Route path="apartments/addNew" element={<InsertmentPage />} />
+              <Route path='auth' element={<Authentication />} />
               {/* <Route path=".................." element={<ResearchPage />} /> */}
 
             </Route>
