@@ -80,7 +80,7 @@ export default function ReviewForm({ id }) {
 
 
                 <div className="mb-3">
-                    <label htmlFor="days_of_stay" className="form-label">Giorni di pernottamento</label>
+                    <label htmlFor="days_of_stay" className="form-label">Giorni di permanenza</label>
                     <input
                         type="number"
                         min="0"
