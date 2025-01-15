@@ -24,7 +24,7 @@ export default function ReviewsSection({ id }) {
             {reviews ? reviews.map((review, index) => (
                 <div className="card bg-light bg-gradient shadow-sm d-flex flex-column p-3 mb-2 mx-4" key={index}>
                     <div> <h4>{review.name}</h4></div>
-                    <div className="card-body bg-white border my-1">
+                    <div className="card-body bg-white rounded border my-1">
                         <p>{review.text}</p>
                     </div>
                     <div> <strong>Data</strong> : {dayjs(review.date).format('YYYY-MM-DD')}</div>
