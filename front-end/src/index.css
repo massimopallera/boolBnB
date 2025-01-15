@@ -1,0 +1,51 @@
+header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+
+    .logo {
+        width: 80px;
+        height: auto;
+
+    }
+}
+
+
+.container-sm {
+    width: 65%;
+}
+
+.overviewCard {
+    height: 300px;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 12px;
+
+    .card-body {
+        overflow-y: scroll;
+
+        scrollbar-width: none;
+    }
+
+
+    &:hover {
+        transform: scale(1.20);
+    }
+
+}
+
+.card-body::-webkit-scrollbar {
+    display: none;
+
+}
+
+
+
+
+
+main {
+    flex: 1;
+    min-height: 100vh;
+}
