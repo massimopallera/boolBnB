@@ -37,22 +37,25 @@ header {
         transform: scale(1.20);
     }
 
+    .card-body {
+        overflow-y: scroll;
+
+        scrollbar-width: none;
+    }
+
+    .card-body::-webkit-scrollbar {
+        display: none;
+
+    }
 }
 
-.card-body {
+.reviewBox {
+    height: 475px;
     overflow-y: scroll;
 
     scrollbar-width: none;
-}
-
-.card-body::-webkit-scrollbar {
-    display: none;
 
 }
-
-
-
-
 
 main {
     flex: 1;
