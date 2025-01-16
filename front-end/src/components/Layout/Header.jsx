@@ -13,7 +13,7 @@ export default function Header() {
 
                     </NavLink>
                     <div >
-                        <NavLink to="login" className="mx-3">
+                        <NavLink to="login" className="me-3">
                             < button
                                 type="button"
                                 className="btn btn-primary"
@@ -24,12 +24,23 @@ export default function Header() {
 
                         </NavLink>
 
-                        <NavLink to="apartments/AddNew" className="">
+                        <NavLink to="apartments/AddNew" className="me-3">
                             < button
                                 type="button"
                                 className="btn btn-primary"
                             >
                                 Aggiungi Un Appartamento
+
+                            </button>
+
+                        </NavLink>
+
+                        <NavLink to="logout" className="">
+                            < button
+                                type="button"
+                                className="btn btn-primary"
+                            >
+                                Logout
 
                             </button>
 
