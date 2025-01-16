@@ -51,16 +51,16 @@ export default function ApartmentDetailsPage() {
                         <form onSubmit={handleMail}>
 
                             <div>
-                                <input type="email" id="to" name="to" value={formData.to} onChange={(e) => setFormData({ ...formData, to: e.target.value })} />
                                 <label htmlFor="to">Cc</label>
+                                <input type="email" id="to" name="to" value={formData.to} onChange={(e) => setFormData({ ...formData, to: e.target.value })} />
                             </div>
                             <div>
-                                <input type="text" id="subject" name="subject" value={formData.subject} onChange={(e) => setFormData({ ...formData, subject: e.target.value })} />
                                 <label htmlFor="subject">Oggetto</label>
+                                <input type="text" id="subject" name="subject" value={formData.subject} onChange={(e) => setFormData({ ...formData, subject: e.target.value })} />
                             </div>
                             <div>
-                                <textarea name="text" id="" value={formData.text} onChange={(e) => setFormData({ ...formData, text: e.target.value })}></textarea>
                                 <label htmlFor="text">Text</label>
+                                <textarea name="text" id="" value={formData.text} onChange={(e) => setFormData({ ...formData, text: e.target.value })}></textarea>
                             </div>
 
                             <button className="btn btn-primary">Invia email</button>  {/* Send email button */}
