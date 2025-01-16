@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import SingleApartment from '../components/Cards/SingleApartment';
+import SingleApartmentCard from '../components/Cards/SingleApartmentCard';
 
 
 import ReviewsSection from "../components/Reviews/ShowReviews"
@@ -36,7 +36,7 @@ export default function SingleApartment() {
             <div className="container">
 
                 <div>
-                    <SingleApartment id={id} />
+                    <SingleApartmentCard id={id} />
                 </div>
 
 

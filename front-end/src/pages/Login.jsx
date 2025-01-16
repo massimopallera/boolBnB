@@ -7,7 +7,7 @@ const initialFormData = {
 }
 
 
-export default function Authentication(){
+export default function Login(){
 
     const [formData, setFormData] = useState(initialFormData)
     const navigate = useNavigate();
