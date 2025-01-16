@@ -1,39 +1,49 @@
-import { useNavigate } from "react-router-dom"
-import { useEffect } from "react";
-import { useGlobalContext } from "../context/GlobalContext";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // Importa gli stili per il toast
 
-export default function Logout() {
+export default function SignIn() {
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        email: "",
+        password: "",
+        name: "",
+        last_name: "",
+        phone: ""
+    });
 
-    const navigate = useNavigate()
+    const handleForm = (e) => {
+        e.preventDefault();
 
-    const { checkAuthentication, isAuthenticated } = useGlobalContext()
+        // Simula un'operazione di registrazione con un controllo base (modifica a seconda della logica effettiva)
+        if (formData.email && formData.password) {
+            // Successo nella registrazione
+            toast.success("Registrazione effettuata con successo!", {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+            });
 
-    useEffect(() => {
-        checkAuthentication();
-        try {
-            if (isAuthenticated) {
-                const baseUrl = import.meta.env.VITE_EXPRESS_SERVER;
-                fetch(baseUrl + '/logout', {
-                    method: 'POST',
-                    credentials: 'include', // Necessario per includere i cookie
-                })
-                console.log('Logout effettuato, redirezione alla home...');
-                navigate('/'); // Redirigi se autenticato
-                return;
-            } else {
-                // alert('Nessun login effettuato, redirect a login');
-                navigate('/login'); // Redirigi se non autenticato
-            }
-        } catch (error) {
-            console.error('Errore durante la verifica della sessione:', error);
+            setTimeout(() => { navigate("/"); window.location.reload() }, 1000); // Ritardo del redirect
+        } else {
+            // Errore nei dati
+            toast.error("Compila tutti i campi correttamente!", {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+            });
         }
-    }, []);
+    };
 
     return (
         <>
-<<<<<<< HEAD
-
-=======
             <div className="container">
                 <form onSubmit={handleForm} className="p-sm-5 p-2 rounded-3 shadow-lg bg-light">
                     <h2 className="text-center mb-4">Registrati</h2>
@@ -117,8 +127,7 @@ export default function Logout() {
                     </div>
                 </form>
             </div>
-            <ToastContainer />
->>>>>>> 594b5098661b73c5c1f568d96fe56bc6c3ce02ed
+            <ToastContainer /> {/* Mostra i toast sopra il contenuto */}
         </>
-    )
+    );
 }
