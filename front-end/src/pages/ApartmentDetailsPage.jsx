@@ -47,8 +47,8 @@ export default function ApartmentDetailsPage() {
                     {/* Reviews Form */}
                     <div className='col-12 col-lg-4 my-3'><ReviewForm id={id}></ReviewForm></div>
 
-                    <div>
-                        <form onSubmit={handleMail}>
+                    <div >
+                        <form className='d-flex flex-column gap-3' onSubmit={handleMail}>
 
                             <div>
                                 <label htmlFor="to">Cc</label>
