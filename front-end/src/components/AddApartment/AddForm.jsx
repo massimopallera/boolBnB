@@ -34,7 +34,7 @@ export default function AddForm({ isAuthenticated }) {
         if (!formData.sq_meters) formErrors.sq_meters = "La grandezza in metri quadri è obbligatoria";
         if (!formData.address) formErrors.address = "L'indirizzo è obbligatorio";
         if (!formData.apartments_images) formErrors.apartments_images = "L'indirizzo è obbligatorio";
-
+        if (!formData.description) formErrors.description = "L'indirizzo è obbligatorio";
 
 
         if (Object.keys(formErrors).length > 0) {

@@ -20,7 +20,15 @@ export default function Header() {
                         </button>
 
                     </NavLink>
+                    <NavLink to='/Apartments/AddNew'>
+                        < button
+                            type="button"
+                            className="btn btn-primary"
+                        >
+                            Aggiungi Un appartamento
 
+                        </button>
+                    </NavLink>
 
 
                 </nav>
