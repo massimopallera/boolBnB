@@ -4,9 +4,8 @@ import { Link } from "react-router-dom"
 export default function HomepageCard({ apartment }) {
 
     return (
-        <>
             <div className="col d-flex justify-content-center">
-                <Link to={`/apartments/${apartment.id}`} className="overviewCard card bg-light bg-gradient shadow-sm d-flex flex-column ">
+                <Link to={`/apartments/${apartment.id}`} className="overviewCard card bg-light bg-gradient shadow-sm d-flex flex-column">
 
                     {/* LIKE COUNTER & HEART ICON */}
                     <span>
@@ -31,7 +30,6 @@ export default function HomepageCard({ apartment }) {
 
                 </Link>
             </div>
-        </>
     )
 }
 

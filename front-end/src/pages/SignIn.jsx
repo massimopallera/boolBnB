@@ -49,10 +49,8 @@ export default function SignIn() {
 
     return (
         <>
-
-
             <div className="container">
-                <form onSubmit={handleForm} className="p-5 rounded-3 shadow-lg bg-light">
+                <form onSubmit={handleForm} className="p-sm-5 p-2 rounded-3 shadow-lg bg-light">
                     <h2 className="text-center mb-4">Registrati</h2>
 
                     <div className="mb-3">

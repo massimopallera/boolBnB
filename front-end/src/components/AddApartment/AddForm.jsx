@@ -8,7 +8,6 @@ const initialFormData = {
     address: '',
     apartments_images: '',
     description: '',
-    price: 0,
     added_services: []
 
 }
@@ -162,11 +161,7 @@ export default function AddForm({ isAuthenticated }) {
                         </label>
                     )}
                 </div>
-                <div className="mb-3">
-                    <label htmlFor="price" className="form-label">Prezzo a notte</label>
-                    <input type="number" min="0" className="form-control" name="number" id="price" placeholder="Insrisci prezzo a notte" value={formData.price} onChange={(e) => setFormData({ ...formData, price: e.target.value })}></input>
-                </div>
-
+                
                 {services ? (services.map(service =>
                     <div key={service.id} className="form-check">
                         <input className="form-check-input" type="checkbox" value={service.id} id={`service-${service.id}`} onChange={(e) => handleCheckbox(e)} />
