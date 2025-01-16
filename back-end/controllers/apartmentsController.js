@@ -56,8 +56,8 @@ function show(req, res) {
     const sql = `
     SELECT ap.*, u.email AS email, group_concat(\`as\`.name SEPARATOR ', ') AS \`added_services\`
     FROM apartments AS ap
-    INNER JOIN  \`apartment-added_service\` AS bridge ON ap.id = bridge.apartment_id_fk
-    INNER JOIN added_services AS \`as\` ON bridge.added_service_id_fk = \`as\`.id
+    LEFT JOIN  \`apartment-added_service\` AS bridge ON ap.id = bridge.apartment_id_fk
+    LEFT JOIN added_services AS \`as\` ON bridge.added_service_id_fk = \`as\`.id
     INNER JOIN users AS u ON ap.id_user = u.id
     WHERE ap.id = ?
     GROUP BY ap.id
@@ -65,7 +65,6 @@ function show(req, res) {
     
     pool.query(sql, [id], (err, results) => {
         handlers.statusCode(req, res, results)
-         
     })    
 }
 

@@ -52,7 +52,9 @@ export default function DetailApartmentCard({ id }) {
                                         <li><strong>Mq:</strong> {apartment.sq_meters}</li>
                                         <li><strong>Indirizzo:</strong> {apartment.address}</li>
                                         <li><strong>Email:</strong> {apartment.email}</li>
-                                        <li><strong>Servizi aggiuntivi:</strong> {apartment.added_services}</li>
+                                        {
+                                            apartment?.added_services !== null && <li><strong>Servizi aggiuntivi:</strong> {apartment.added_services}</li>
+                                        }
                                     </ul>
                                 </div>
                             </div>
