@@ -167,7 +167,7 @@ export default function InsertmentPage() {
                     </div>
                     <div className="mb-3">
                         <label htmlFor="price" className="form-label">Prezzo a notte</label>
-                        <textarea className="form-control" name="number" id="price" placeholder="Insrisci prezzo a notte" value={formData.price} onChange={(e) => setFormData({ ...formData, price: e.target.value })}></textarea>
+                        <input type="number" min="0" className="form-control" name="number" id="price" placeholder="Insrisci prezzo a notte" value={formData.price} onChange={(e) => setFormData({ ...formData, price: e.target.value })}></input>
                     </div>
 
                     {services ? (services.map(service => 
