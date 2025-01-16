@@ -8,8 +8,21 @@ export default function Header() {
                 <nav>
                     <NavLink to="/" className="text-decoration-none">
                         <img className="logo" src="/logo.png" alt="Logo" />
-                        <h1> BoolB&B </h1>
+
                     </NavLink>
+                    <NavLink to="/auth" className="">
+                        < button
+                            type="button"
+                            class="btn btn-primary"
+                        >
+                            Login/Registrati
+
+                        </button>
+
+                    </NavLink>
+
+
+
                 </nav>
             </header>
         </>
