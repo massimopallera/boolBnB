@@ -121,7 +121,7 @@ export default function Login() {
                             style={{ transition: "color 0.2s ease-in-out" }}
 
                         >
-                            Hai dimenticato la password?
+                            Non hai un account? Registrati.
                         </a>
                     </div>
 
