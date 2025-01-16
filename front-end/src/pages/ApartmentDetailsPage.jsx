@@ -47,6 +47,11 @@ export default function ApartmentDetailsPage() {
                     {/* Reviews Form */}
                     <div className='col-12 col-lg-4 my-3'><ReviewForm id={id}></ReviewForm></div>
 
+
+                    {/* Reviews */}
+                    <span className="col-12 col-lg-8 reviewBox my-3 "><ReviewsSection id={id}></ReviewsSection></span>
+                </div>
+                
                     <div >
                         <form className='d-flex flex-column gap-3' onSubmit={handleMail}>
 
@@ -66,10 +71,6 @@ export default function ApartmentDetailsPage() {
                             <button className="btn btn-primary">Invia email</button>  {/* Send email button */}
                         </form>
                     </div>
-
-                    {/* Reviews */}
-                    <span className="col-12 col-lg-8 reviewBox my-3 "><ReviewsSection id={id}></ReviewsSection></span>
-                </div>
 
             </div>
 
