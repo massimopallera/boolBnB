@@ -44,7 +44,7 @@ export default function Login() {
                     theme: "light",
                 });
 
-                setTimeout(() => navigate("/"), 1000); // Ritardo del redirect
+                setTimeout(() => {navigate("/");window.location.reload()}, 1000); // Ritardo del redirect
             } else {
                 toast.error("Errore nel login. Controlla le credenziali.", {
                     position: "top-center",
@@ -73,13 +73,13 @@ export default function Login() {
     };
 
     useEffect(() => {
-        checkAuthentication("/apartments/addNew");
+        checkAuthentication();
     }, []);
 
     return (
         <>
             <div className="container">
-                <form onSubmit={handleLogin} className="p-5 rounded-3 shadow-lg bg-light">
+                <form onSubmit={handleLogin} className="p-sm-5 p-2 rounded-3 shadow-lg bg-light">
                     <h2 className="text-center mb-4">Accedi al tuo account</h2>
 
                     <div className="mb-4">
@@ -115,19 +115,11 @@ export default function Login() {
                     </div>
 
                     <div className="text-center">
-                        <a
-                            href="sign-in"
-                            className="text-decoration-none text-muted"
-                            style={{ transition: "color 0.2s ease-in-out" }}
-
-                        >
-                            Non hai un account? Registrati.
-                        </a>
+                        <p className="text-muted">Non hai un account? <a href="sign-in" className="text-decoration-none text-primary">Registrati!</a></p>
                     </div>
 
 
                 </form>
-
             </div>
 
 
