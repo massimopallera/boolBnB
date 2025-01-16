@@ -15,7 +15,7 @@ export default function Header() {
                             type="button"
                             class="btn btn-primary"
                         >
-                            Logiin/Registrati
+                            Login/Registrati
 
                         </button>
 
