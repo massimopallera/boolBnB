@@ -5,13 +5,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { GlobalContextProvider } from './context/GlobalContext.jsx'
 
 // 📄 PAGES
-import DefaultLayout from "./layout/DefaultLayout"
-import Homepage from "./pages/Homepage"
 import SingleApartment from "./pages/SingleApartment"
+import DefaultLayout from "./layout/DefaultLayout"
 import AddApartment from "./pages/AddApartment"
-import Login from './pages/Login.jsx'
+import SendMail from "./pages/SendMail.jsx"
+import Homepage from "./pages/Homepage"
 import Logout from "./pages/Logout.jsx"
 import SignIn from "./pages/SignIn.jsx"
+import Login from './pages/Login.jsx'
 
 // CSS
 import './App.css'
@@ -33,6 +34,7 @@ function App() {
               <Route path='login' element={<Login />} />
               <Route path='logout' element={<Logout />} />
               <Route path='sign-in' element={<SignIn />} />
+              <Route path='send-mail' element={<SendMail />} />
 
             </Route>
             

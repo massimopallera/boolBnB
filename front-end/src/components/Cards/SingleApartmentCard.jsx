@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 export default function SingleApartment({ id }) {
 
     const [apartment, setApartment] = useState()
@@ -65,7 +66,9 @@ export default function SingleApartment({ id }) {
                                     <span>{likesCounter} </span>
                                 </div>
 
-                                <button className="btn btn-primary">Contatta proprietario</button>
+                                <Link to={'/send-mail'}>
+                                    <button className="btn btn-primary">Contatta proprietario</button>
+                                </Link>
                             </div>
 
                         </div>

@@ -84,6 +84,7 @@ export default function NewReview({ id }) {
                     <input
                         type="number"
                         min="0"
+                        max="30"
                         name="days_of_stay"
                         id="days_of_stay"
                         className="form-control"

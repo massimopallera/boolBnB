@@ -10,7 +10,7 @@ export default function Header() {
                         <img className="logo" src="/logo.png" alt="Logo" />
 
                     </NavLink>
-                    <NavLink to="/auth" className="">
+                    <NavLink to="/login" className="">
                         < button
                             type="button"
                             className="btn btn-primary"

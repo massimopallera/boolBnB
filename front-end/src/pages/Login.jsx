@@ -1,5 +1,6 @@
 import { useState, useEffect} from "react"
 import { useNavigate } from "react-router-dom";
+import { useGlobalContext } from "../context/GlobalContext";
 
 const initialFormData = {
     email: '',
@@ -10,9 +11,12 @@ const initialFormData = {
 export default function Login(){
 
     const [formData, setFormData] = useState(initialFormData)
-    const navigate = useNavigate();
 
-    const handleForm = async (e) => {
+    const { checkAuthentication } = useGlobalContext()
+
+    const navigate = useNavigate()
+
+    const handleLogin = async (e) => {
         e.preventDefault();
 
         const baseUrl = import.meta.env.VITE_EXPRESS_SERVER
@@ -39,56 +43,32 @@ export default function Login(){
         } catch (error) {
             console.error('Errore durante il login:', error);
         } 
-        
-
-        
               
     };
     
     
-    useEffect(() => {
-        const checkAuthentication = async () => {
-            const baseUrl = import.meta.env.VITE_EXPRESS_SERVER;
-            const path = baseUrl + '/check'; // Endpoint per verificare la sessione
-    
-            try {
-                const response = await fetch(path, {
-                    method: 'GET',
-                    credentials: 'include', // Necessario per includere i cookie
-                });
-    
-                if (response.ok) {
-                    console.log('Utente autenticato, redirezione alla home...');
-                    navigate('/'); // Redirigi se autenticato
-                } else {
-                    console.log('Utente non autenticato');
-                }
-            } catch (error) {
-                console.error('Errore durante la verifica della sessione:', error);
-            }
-        };
-    
-        checkAuthentication();
-    }, [navigate]);
+    useEffect(() => {  
+        checkAuthentication('/apartments/addNew'); //change with a message
+    }, []);
     
   
     
 
-     return(
-        <>
-            <form onSubmit={handleForm}>
-                <div>
-                    <label>Email</label>
-                    <input type="email" name="email" onChange={(e) => setFormData({...formData, email: e.target.value})}/>
-                </div>
-                <div>
-                    <label>Password</label>
-                    <input type="password" name="password" onChange={(e) => setFormData({...formData, password: e.target.value})}/>
-                </div>
+    return(
+    <>
+        <form onSubmit={handleLogin}>
+            <div>
+                <label>Email</label>
+                <input type="email" name="email" onChange={(e) => setFormData({...formData, email: e.target.value})}/>
+            </div>
+            <div>
+                <label>Password</label>
+                <input type="password" name="password" onChange={(e) => setFormData({...formData, password: e.target.value})}/>
+            </div>
 
-                <button type="submit">Login</button>
-            </form>
-        </>
+            <button type="submit">Login</button>
+        </form>
+    </>
     )
 }
 
