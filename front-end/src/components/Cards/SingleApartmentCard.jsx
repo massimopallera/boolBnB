@@ -7,10 +7,10 @@ export default function SingleApartment({ id }) {
 
     useEffect(() => {
         fetch(`http://127.0.0.1:3000/apartments/${id}`)
-           .then(resp => resp.json())
-           .then(data => {setApartment(data.data[0]); setLikesCounter(data.data[0].hearts_counter);})
-           .catch(err => console.log(err))
-    },[])
+            .then(resp => resp.json())
+            .then(data => { setApartment(data.data[0]); setLikesCounter(data.data[0].hearts_counter); })
+            .catch(err => console.log(err))
+    }, [])
 
 
     function handleClick() {
@@ -21,9 +21,8 @@ export default function SingleApartment({ id }) {
             body: JSON.stringify({ hearts_counter: likesCounter }),
             headers: { "Content-Type": "application/json" }
         })
-           .then(resp => resp.json())
-        //    .then(data => )
-           .catch(err => console.log(err))
+            .then(resp => resp.json())
+            .catch(err => console.log(err))
 
     }
 
@@ -32,6 +31,7 @@ export default function SingleApartment({ id }) {
             {apartment ? (
 
                 <div className="container m-auto ">
+
                     <div className="bg-lightflex-row bg-gradientd-flex row">
                         <div className=" d-flex  row justify-content-center flex-wrap border shadow rounded p-4 bg-light bg-gradient">
                             <div className="col-sm-12 col-lg-8 p-0 m-0">
