@@ -1,5 +1,5 @@
 import { useGlobalContext } from '../context/GlobalContext'
-import HomepageApartmentCard from '../components/apartment/HomepageApartmentCard'
+import HomepageApartmentCard from '../components/Cards/HomepageApartments'
 
 export default function HomePage() {
 

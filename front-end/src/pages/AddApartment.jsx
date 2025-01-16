@@ -14,7 +14,7 @@ const initialFormData = {
 
 }
 
-export default function InsertmentPage() {
+export default function AddApartment() {
 
     const [formData, setFormData] = useState(initialFormData);
     const [isAuthenticated, setIsAuthenticated] = useState(false)

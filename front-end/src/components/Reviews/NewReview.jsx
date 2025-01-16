@@ -9,7 +9,7 @@ const initialFormData = {
     date: ''
 }
 
-export default function ReviewForm({ id }) {
+export default function NewReview({ id }) {
 
     const [formData, setFormData] = useState(initialFormData);
 

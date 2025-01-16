@@ -2,8 +2,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import DefaultLayout from "./layout/DefaultLayout"
 import Homepage from "./pages/Homepage"
-import ApartmentDetailsPage from "./pages/ApartmentDetailsPage"
-import InsertmentPage from "./pages/InsertmentPage"
+import SingleApartment from "./pages/SingleApartment"
+import AddApartment from "./pages/AddApartment"
 // import ResearchPage from "./pages/ResearchPage"
 
 import { GlobalContextProvider } from './context/GlobalContext.jsx'
@@ -23,8 +23,8 @@ function App() {
             <Route element={<DefaultLayout />}>
 
               <Route index element={<Homepage />} />
-              <Route path="apartments/:id" element={<ApartmentDetailsPage />} />
-              <Route path="apartments/addNew" element={<InsertmentPage />} />
+              <Route path="apartments/:id" element={<SingleApartment />} />
+              <Route path="apartments/addNew" element={<AddApartment />} />
               <Route path='auth' element={<Authentication />} />
               <Route path='logout' element={<Logout />} />
               <Route path='sign-in' element={<SignIn />} />

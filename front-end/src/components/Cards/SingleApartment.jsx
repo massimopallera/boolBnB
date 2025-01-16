@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-export default function DetailApartmentCard({ id }) {
+export default function SingleApartment({ id }) {
 
     const [apartment, setApartment] = useState()
     const [likesCounter, setLikesCounter] = useState(0)

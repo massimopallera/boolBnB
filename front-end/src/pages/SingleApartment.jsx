@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import DetailApartmentCard from '../components/apartment/DetailApartmentCard';
+import SingleApartment from '../components/Cards/SingleApartment';
 
 
-import ReviewsSection from "../components/apartment/ReviewsSection"
-import ReviewForm from '../components/apartment/ReviewForm';
+import ReviewsSection from "../components/Reviews/ShowReviews"
+import NewReview from '../components/Reviews/NewReview';
 
 const initialFormData = {
     to: '',
@@ -13,7 +13,7 @@ const initialFormData = {
 }
 
 
-export default function ApartmentDetailsPage() {
+export default function SingleApartment() {
 
     const { id } = useParams();
 
@@ -36,7 +36,7 @@ export default function ApartmentDetailsPage() {
             <div className="container">
 
                 <div>
-                    <DetailApartmentCard id={id} />
+                    <SingleApartment id={id} />
                 </div>
 
 
@@ -45,7 +45,7 @@ export default function ApartmentDetailsPage() {
                 <div className='d-flex flex-wrap justify-content-between'>
 
                     {/* Reviews Form */}
-                    <div className='col-12 col-lg-4 my-3'><ReviewForm id={id}></ReviewForm></div>
+                    <div className='col-12 col-lg-4 my-3'><NewReview id={id}></NewReview></div>
 
 
                     {/* Reviews */}
