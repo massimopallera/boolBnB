@@ -28,8 +28,11 @@ function show(req, res) {
 function store(req, res) {
     
     const { name, text, id_apartment_fk, days_of_stay } = req.body
-    
+
     const formattedDate = dayjs().format('YYYY-MM-DD HH:mm:ss');
+    
+    console.log(req.body, formattedDate);
+    
 
     const sql = `
     INSERT INTO reviews

@@ -6,7 +6,6 @@ const initialFormData = {
     name: '',
     text: '',
     days_of_stay: 1,
-    date: ''
 }
 
 export default function NewReview({ id }) {
@@ -32,17 +31,17 @@ export default function NewReview({ id }) {
             alert('Il campo Days of stay deve essere un numero e maggiore di 0');
             return;
         }
-        if (formData.date === '') {
-            alert('Il campo Data non può essere vuoto');
-            return;
-        }
+        // if (formData.date === '') {
+        //     alert('Il campo Data non può essere vuoto');
+        //     return;
+        // }
 
         // controlla che il bro non sia nel futuro
-        const formattedDate = dayjs().format('YYYY-MM-DD');
-        if (formData.date > formattedDate) {
-            alert('Dove vai Marty McFly?!');
-            return
-        }
+        // const formattedDate = dayjs().format('YYYY-MM-DD');
+        // if (formData.date > formattedDate) {
+        //     alert('Dove vai Marty McFly?!');
+        //     return
+        // }
 
 
         // send form data to server
@@ -94,7 +93,7 @@ export default function NewReview({ id }) {
                     />
                 </div>
 
-                <div className="mb-3">
+                {/* <div className="mb-3">
                     <label htmlFor="date" className="form-label">Data</label>
                     <input
                         type="date"
@@ -104,7 +103,7 @@ export default function NewReview({ id }) {
                         value={formData.date}
                         onChange={(e) => setFormData({ ...formData, date: e.target.value })}
                     />
-                </div>
+                </div> */}
 
                 <div className="mb-3">
                     <label htmlFor="text" className="form-label">Recensione</label>
