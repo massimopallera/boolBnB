@@ -31,7 +31,7 @@ export default function ShowOwnerAps({ isAuthenticated }) {
                 {apartments ? (apartments.map((element) => (
                     <div key={element.id} className=" col mb-3">
                         <div className="card" >
-                            <img src={`http://localhost:3000/uploads${element.apartments_images}`} className="card-img-top" alt="..."></img>
+                            <img src={`http://localhost:3000/uploads/${element.apartments_images}`} className="card-img-top" alt="..."></img>
                             <div className="card-body">
                                 <h5 className="card-title">{element.address}</h5>
                                 <p className="card-text">{element.description}</p>

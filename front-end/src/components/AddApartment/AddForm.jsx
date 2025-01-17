@@ -89,20 +89,29 @@ export default function AddForm({ isAuthenticated }) {
 
         // Create a FormData instance for image upload
         const formImageData = new FormData();
-        formImageData.append("file", file);
+        setFormData({...formData, apartments_images: file.name}); 
 
+        formImageData.append("file", file);
+        // const imgName = formImageData.name
+
+        // const imageBlob = new Blob(file, { type: 'image/jpeg' }); 
+
+        console.log(formImageData);
+        
         try {
-            const response = await fetch("http://localhost:3000/apartments/image", {
+            fetch("http://localhost:3000/apartments/image", {
                 method: "POST",
                 body: formImageData,
                 credentials: "include", // Include cookies in the request
-            });
+            })
+            .then(response => response.json())
+            .then(data => {
 
-            if (response.ok) {
+            if (data.success) {
                 setMessage(`File ${fileName} was uploaded successfully!`);
-                const imageData = await response.json();
+                /* const imageData = await response.json();
                 // Assuming the image name is returned and stored in the database
-                formData.apartments_images = imageData.fileName;
+                */
             } else {
                 setMessage("Upload failed. Please try again.");
                 toast.error("Errore durante l'upload dell'immagine.", {
@@ -110,10 +119,8 @@ export default function AddForm({ isAuthenticated }) {
                     autoClose: 2000,
                     hideProgressBar: true,
                     theme: "light",
-                });
-                return;
-            }
-        } catch (error) {
+                })}
+            })} catch (error) {
             console.error("Error uploading file:", error);
             setMessage("An error occurred during the upload.");
             toast.error("Errore durante l'upload dell'immagine.", {
@@ -127,17 +134,17 @@ export default function AddForm({ isAuthenticated }) {
 
         // Send form data to the server
         try {
-            const response = await fetch('http://localhost:3000/apartments', {
+            fetch('http://localhost:3000/apartments', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json", // Specify the content type as JSON
                 },
                 credentials: 'include',
-                body: JSON.stringify({ ...formData, apartments_images: formData.apartments_images }),
-            });
-
-            const data = await response.json();
-            if (response.ok) {
+                body: JSON.stringify({ ...formData }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
                 setFormData(initialFormData);
                 toast.success("Inserimento avvenuto con successo!", {
                     position: "top-center",
@@ -154,6 +161,7 @@ export default function AddForm({ isAuthenticated }) {
             } else {
                 throw new Error("Failed to submit form data");
             }
+        })
         } catch (err) {
             console.error(err);
             toast.error("Errore durante l'inserimento", {

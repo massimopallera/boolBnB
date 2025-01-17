@@ -92,7 +92,7 @@ const store = async (req, res) => {
             added_services
         } = req.body;
 
-        const apartments_images = `/uploads/${req.body.apartments_images}`
+        const apartments_images = req.body.apartments_images
 
         // Inizia una transazione
         await connection.beginTransaction();
@@ -130,7 +130,7 @@ const store = async (req, res) => {
         await connection.commit();
 
         // Rispondi al client
-        res.status(201).json({ message: 'Appartamento inserito con successo' });
+        res.status(201).json({success: true, message: 'Appartamento inserito con successo' });
 
     } catch (error) {
         console.error('Errore durante l\'inserimento:', error);
