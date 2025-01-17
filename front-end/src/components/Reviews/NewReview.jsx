@@ -13,6 +13,7 @@ const initialFormData = {
 export default function NewReview({ id }) {
 
     const [formData, setFormData] = useState(initialFormData);
+    const [formSubmitted, setFormSubmitted] = useState(false); // Stato per tracciare se il form è stato inviato
 
     function handleForm(e) {
 
@@ -47,7 +48,6 @@ export default function NewReview({ id }) {
                 theme: "light",
             });
             return;
-            return;
         }
         // if (formData.date === '') {
         //     alert('Il campo Data non può essere vuoto');
@@ -73,8 +73,10 @@ export default function NewReview({ id }) {
                     toast.error('Errore durante il salvataggio della recensione');
                     return;
                 }
-                toast.success('Recensione salvata con successo!');
-                setFormData(initialFormData);
+                toast.success('Recensione salvata con successo!', { position: "top-center", autoClose: 2000 });
+                setFormData(initialFormData); // Resetta il form
+                setFormSubmitted(true); // Nasconde il pulsante "Salva"
+
                 /* setTimeout(() => {
                     window.location.reload();
                 }, 2000);  */// Aggiungi un ritardo per mostrare il messaggio prima del refresh
@@ -88,38 +90,49 @@ export default function NewReview({ id }) {
     return (
         <>
             <ToastContainer />
+            {!formSubmitted && (
+                <form
+                    className="card bg-light bg-gradient shadow-sm d-flex flex-column p-3"
+                    onSubmit={handleForm}
+                >
+                    <h4 className="text-center">Lascia la tua recensione</h4>
+                    <div className="mb-3">
+                        <label htmlFor="name" className="form-label">
+                            Nome
+                        </label>
+                        <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            className="form-control"
+                            placeholder="Scrivi il tuo nome"
+                            value={formData.name}
+                            onChange={(e) =>
+                                setFormData({ ...formData, name: e.target.value })
+                            }
+                        />
+                    </div>
 
-            <form className="card bg-light bg-gradient shadow-sm d-flex flex-column p-3" onSubmit={handleForm}>
-                <h4 className="text-center">Lascia la tua recensione</h4>
-                <div className="mb-3">
-                    <label htmlFor="name" className="form-label">Nome</label>
-                    <input
-                        type="text"
-                        name="name"
-                        id="name"
-                        className="form-control"
-                        placeholder="Scrivi il tuo nome"
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    />
-                </div>
+                    <div className="mb-3">
+                        <label htmlFor="days_of_stay" className="form-label">
+                            Giorni di permanenza
+                        </label>
+                        <input
+                            type="number"
+                            min="0"
+                            max="30"
+                            name="days_of_stay"
+                            id="days_of_stay"
+                            className="form-control"
+                            placeholder="segna quanti giorni hai pernottato in questo appartamento"
+                            value={formData.days_of_stay}
+                            onChange={(e) =>
+                                setFormData({ ...formData, days_of_stay: Number(e.target.value) })
+                            }
+                        />
+                    </div>
 
-                <div className="mb-3">
-                    <label htmlFor="days_of_stay" className="form-label">Giorni di permanenza</label>
-                    <input
-                        type="number"
-                        min="0"
-                        max="30"
-                        name="days_of_stay"
-                        id="days_of_stay"
-                        className="form-control"
-                        placeholder="segna quanti giorni hai pernottato in questo appartamento"
-                        value={formData.days_of_stay}
-                        onChange={(e) => setFormData({ ...formData, days_of_stay: Number(e.target.value) })}
-                    />
-                </div>
-
-                {/* <div className="mb-3">
+                    {/* <div className="mb-3">
                     <label htmlFor="date" className="form-label">Data</label>
                     <input
                         type="date"
@@ -127,24 +140,31 @@ export default function NewReview({ id }) {
                         id="date"
                         className="form-control"
                         value={formData.date}
-                        onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                    />
-                </div> */}
+                        onChange={(e) => setFormData({ ...formData, date: e.target.value })}/>
+                    </div> */}
 
-                <div className="mb-3">
-                    <label htmlFor="text" className="form-label">Recensione</label>
-                    <textarea
-                        name="text"
-                        id="text"
-                        className="form-control"
-                        placeholder="Scrivi la tua recensione"
-                        value={formData.text}
-                        onChange={(e) => setFormData({ ...formData, text: e.target.value })}
-                    ></textarea>
-                </div>
+                    <div className="mb-3">
+                        <label htmlFor="text" className="form-label">
+                            Recensione
+                        </label>
+                        <textarea
+                            name="text"
+                            id="text"
+                            className="form-control"
+                            placeholder="Scrivi la tua recensione"
+                            value={formData.text}
+                            onChange={(e) =>
+                                setFormData({ ...formData, text: e.target.value })
+                            }
+                        ></textarea>
+                    </div>
 
-                <button type="submit" className="btn btn-primary">Salva</button>
-            </form>
+                    <button type="submit" className="btn btn-primary">
+                        Salva
+                    </button>
+                </form>
+            )}
         </>
     )
 }
+
