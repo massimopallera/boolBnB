@@ -29,7 +29,7 @@ export default function Login() {
                 body: JSON.stringify({ ...formData }),
                 credentials: "include", // Include i cookie nella richiesta
             })
-              // Controlla lo status HTTP della risposta
+            // Controlla lo status HTTP della risposta
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
@@ -57,8 +57,12 @@ export default function Login() {
                     window.location.reload();
                 }, 1000);
 
-                    }
+            }
         } catch (error) {
+
+
+
+
             console.error("Errore durante il login:", error);
             toast.error("Si è verificato un errore imprevisto.", {
                 position: "top-center",
