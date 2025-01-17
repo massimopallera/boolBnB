@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import FileUpload from "../../FileUpload";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const initialFormData = {
     rooms: '',
@@ -7,77 +8,30 @@ const initialFormData = {
     toilets: '',
     sq_meters: '',
     address: '',
-    // apartments_images: '',
+    apartments_images: '',
     description: '',
     added_services: []
-
-}
-
+};
 
 export default function AddForm({ isAuthenticated }) {
-
     const [formData, setFormData] = useState(initialFormData);
-    const [services, setServices] = useState()
+    const [services, setServices] = useState();
     const [errors, setErrors] = useState({});
 
-
-    const [file, setFile] = useState(null);
-    const [message, setMessage] = useState("");
-
-    const allowedExtensions = ["jpeg", "jpg", "gif"];
-    const maxFileSize = 3 * 1024 * 1024; // 3MB in byte
-
-    const handleFileChange = (event) => {
-        const selectedFile = event.target.files[0];
-        console.log(file);
-        
-        if (selectedFile) {
-            setFile(selectedFile);
-        }
-    };
-    
-
-
-
-    async function handleForm(e) {
+    // Funzione di gestione del form
+    function handleForm(e) {
         e.preventDefault();
-
-
-
-        if (!file) {
-            setMessage("Please select a file to upload.");
-            return;
-        }
-
-        const fileName = file.name;
-        const fileSize = file.size;
-        const fileExtension = fileName.split(".").pop().toLowerCase();
-
-        let isGood = false;
-
-        if (!allowedExtensions.includes(fileExtension)) {
-            setMessage("File type is not allowed (Upload jpeg, jpg, gif).");
-            isGood = true;
-        }
-
-        if (fileSize > maxFileSize) {
-            setMessage("File is over 3MB in size.");
-            isGood = true;
-        }
-
-        if (isGood) return;
 
         let formErrors = {};
 
-
+        // Validazioni del form
         if (!formData.rooms) formErrors.rooms = "Il numero di stanze è obbligatorio";
         if (!formData.beds) formErrors.beds = "Il numero di letti è obbligatorio";
         if (!formData.toilets) formErrors.toilets = "Il numero di bagni è obbligatorio";
         if (!formData.sq_meters) formErrors.sq_meters = "La grandezza in metri quadri è obbligatoria";
         if (!formData.address) formErrors.address = "L'indirizzo è obbligatorio";
-        // if (!formData.apartments_images) formErrors.apartments_images = "L'indirizzo è obbligatorio";
-        if (!formData.description) formErrors.description = "L'indirizzo è obbligatorio";
-
+        if (!formData.apartments_images) formErrors.apartments_images = "L'immagine è obbligatoria";
+        if (!formData.description) formErrors.description = "La descrizione è obbligatoria";
 
         if (Object.keys(formErrors).length > 0) {
             setErrors(formErrors);
@@ -85,68 +39,56 @@ export default function AddForm({ isAuthenticated }) {
         }
         setErrors({});
 
-        /* 😁 ADD CONTROLS CLIENT SIDE */
-        const formImageData = new FormData();
-        formImageData.append("file", file);
-
-        try {
-            const response = await fetch("http://localhost:3000/apartments/image", {
-                method: "POST",
-                body: formImageData,
-                credentials: "include" // Include cookies in the request
-            });
-
-            if (response.ok) {
-                setMessage(`File ${fileName} was uploaded successfully!`);
-            } else {
-                setMessage("Upload failed. Please try again.");
-            }
-        } catch (error) {
-            console.error("Error uploading file:", error);
-            setMessage("An error occurred during the upload.");
-        }
-
-        // send form data to server
+        // Invia i dati al server
         fetch('http://localhost:3000/apartments', {
             method: 'POST',
             headers: {
-                "Content-Type": "application/json" // Specifica il tipo di contenuto come JSON
+                "Content-Type": "application/json"
             },
             credentials: 'include',
-            body: JSON.stringify({ ...formData, apartments_images: file.name })
+            body: JSON.stringify({ ...formData })
         })
             .then(resp => resp.json())
             .then(data => {
-
-                
-    
-
                 setFormData(initialFormData);
-                window.location.reload()
+                // Mostra il Toast di successo
+                toast.success("Inserimento avvenuto con successo!", {
+                    position: "top-center",
+                    autoClose: 2000, // Tempo di visualizzazione del toast
+                    hideProgressBar: true,
+                    theme: "light",
+                });
+
+                // Delay per vedere il toast prima di ricaricare
+                setTimeout(() => {
+                    window.location.reload(); // Ricarica la pagina dopo il successo
+                }, 2500); // 2.5 secondi per vedere il toast
+
             })
-            .catch(err => console.log(err))
-
-
-    // } catch (err) {
-    //     console.log(err);
-    // }
+            .catch(err => {
+                // Gestione dell'errore
+                toast.error("Errore durante l'inserimento", {
+                    position: "top-center",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    theme: "light",
+                });
+            });
     }
 
-    // get services FOR CHECKBOXES
+    // Funzione per ottenere i servizi da usare nei checkbox
     function getServices() {
         fetch('http://localhost:3000/apartments/services')
             .then(resp => resp.json())
             .then(data =>
                 setServices(data.data)
             )
-            .catch(err => console.log(err))
+            .catch(err => console.log(err));
     }
 
-    // checkbox logic
+    // Funzione per gestire la selezione dei checkbox
     function handleCheckbox(e) {
         const { value, checked } = e.target;
-        let formErrors = {};
-
         let updatedServices = [...formData.added_services];
 
         if (checked) {
@@ -158,13 +100,12 @@ export default function AddForm({ isAuthenticated }) {
         }
 
         setFormData({ ...formData, added_services: updatedServices });
-
     }
-    useEffect(() => { getServices() }, [isAuthenticated])
 
+    useEffect(() => { getServices() }, [isAuthenticated]);
 
     return (
-        <div className="container mt-5 ">
+        <div className="container mt-5">
             <form className="card bg-light bg-gradientd-flex flex-column p-3 mb-3" onSubmit={handleForm}>
                 <h4 className="text-center">Aggiungi inserzione</h4>
                 <div className="mb-3">
@@ -179,7 +120,7 @@ export default function AddForm({ isAuthenticated }) {
                 <div className="mb-3">
                     <label htmlFor="beds" className="form-label">Letti</label>
                     <input type="number" min="0" className="form-control" name="beds" id="beds" placeholder="Inserisci il numero di letti dell'appartamento" value={formData.beds} onChange={(e) => setFormData({ ...formData, beds: e.target.value })} />
-                    {errors.rooms && (
+                    {errors.beds && (
                         <label className="text-danger" style={{ fontSize: "15px" }}>
                             {errors.beds}
                         </label>
@@ -212,7 +153,7 @@ export default function AddForm({ isAuthenticated }) {
                         </label>
                     )}
                 </div>
-                {/* <div className="mb-3">
+                <div className="mb-3">
                     <label htmlFor="apartments_images" className="form-label">Immagine</label>
                     <input type="text" className="form-control" name="apartments_images" id="apartments_images" placeholder="inserisci un'immagine dell'appartamento" value={formData.apartments_images} onChange={(e) => setFormData({ ...formData, apartments_images: e.target.value })} />
                     {errors.apartments_images && (
@@ -220,12 +161,7 @@ export default function AddForm({ isAuthenticated }) {
                             {errors.apartments_images}
                         </label>
                     )}
-                </div> */}
-                {/* <FileUpload /> */}
-                <div style={{ padding: "20px" }}>
-            <h2>File Uploader</h2>
-            <input type="file" onChange={handleFileChange} />        
-            </div>
+                </div>
                 <div className="mb-3">
                     <label htmlFor="description" className="form-label">Descrizione</label>
                     <textarea className="form-control" name="text" id="description" placeholder="Descrivi brevemente l'appartamento" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })}></textarea>
@@ -235,7 +171,7 @@ export default function AddForm({ isAuthenticated }) {
                         </label>
                     )}
                 </div>
-                
+
                 {services ? (services.map(service =>
                     <div key={service.id} className="form-check">
                         <input className="form-check-input" type="checkbox" value={service.id} id={`service-${service.id}`} onChange={(e) => handleCheckbox(e)} />
@@ -244,11 +180,11 @@ export default function AddForm({ isAuthenticated }) {
                 ))
                     : null}
 
-
-
-
                 <button type="submit" className="btn btn-primary">Salva</button>
             </form>
+
+            {/* ToastContainer per visualizzare i toast */}
+            <ToastContainer />
         </div>
-    )
+    );
 }
