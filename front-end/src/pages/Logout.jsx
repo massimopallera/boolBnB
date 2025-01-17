@@ -22,7 +22,7 @@ export default function Logout(){
                 return;
             } else {
                 // alert('Nessun login effettuato, redirect a login');
-                navigate('/login'); // Redirigi se non autenticato
+                navigate('/'); // Redirigi se non autenticato
             }
         } catch (error) {
             console.error('Errore durante la verifica della sessione:', error);

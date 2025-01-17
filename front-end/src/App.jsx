@@ -29,12 +29,12 @@ function App() {
             <Route element={<DefaultLayout />}>
 
               <Route index element={<Homepage />} />
-              <Route path="apartments/:id" element={<SingleApartment />} />
-              <Route path="apartments/addNew" element={<AddApartment />} />
-              <Route path='login' element={<Login />} />
-              <Route path='logout' element={<Logout />} />
-              <Route path='sign-in' element={<SignIn />} />
-              <Route path='send-mail' element={<SendMail />} />
+              <Route path="/apartments/:id" element={<SingleApartment />} />
+              <Route path="/apartments/addNew" element={<AddApartment />} />
+              <Route path='/login' element={<Login />} />
+              <Route path='/logout' element={<Logout />} />
+              <Route path='/sign-in' element={<SignIn />} />
+              <Route path='/send-mail' element={<SendMail />} />
 
             </Route>
             
