@@ -7,11 +7,12 @@ export default function HomePage() {
 
     return (
         <>
-            <div className="container" style={{maxWidth:"2000px"}}>
+            <div className="container" style={{ maxWidth: "1800px" }}>
                 <h2 className=' pb-4'>STRUTTURE: </h2>
-                <div className='row row-cols-sm-12 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-5 align-items-stretch'>
+                <div className='row row-cols-sm-12 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 align-items-stretch justify-content-center g-5'>
+
                     {apartments.map(apartment => (
-                        <HomepageCard apartment={apartment} key={apartment.id}/>
+                        <HomepageCard apartment={apartment} key={apartment.id} />
                     ))
                     }
                 </div>
