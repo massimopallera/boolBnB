@@ -67,9 +67,25 @@ export default function AddForm({ isAuthenticated }) {
 
         if (Object.keys(formErrors).length > 0) {
             setErrors(formErrors);
-            return;
+
+            for (let key in formErrors) {
+                if (formErrors.hasOwnProperty(key)) {
+                    toast.error(formErrors[key], {
+                        position: "top-center",
+                        autoClose: 2000,
+                        hideProgressBar: true,
+                        theme: "light",
+                    });
+                }
+            }
+
+
+
         }
         setErrors({});
+
+
+
 
         // Create a FormData instance for image upload
         const formImageData = new FormData();
@@ -129,7 +145,12 @@ export default function AddForm({ isAuthenticated }) {
                     hideProgressBar: true,
                     theme: "light",
                 });
-                window.location.reload();
+
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+
+
             } else {
                 throw new Error("Failed to submit form data");
             }
@@ -177,37 +198,30 @@ export default function AddForm({ isAuthenticated }) {
                 <div className="mb-3">
                     <label htmlFor="rooms" className="form-label">Stanze</label>
                     <input type="number" min="0" className="form-control" name="rooms" id="rooms" placeholder="Inserisci il numero di stanze" value={formData.rooms} onChange={(e) => setFormData({ ...formData, rooms: e.target.value })} />
-                    {errors.rooms && <label className="text-danger" style={{ fontSize: "15px" }}>{errors.rooms}</label>}
                 </div>
                 <div className="mb-3">
                     <label htmlFor="beds" className="form-label">Letti</label>
                     <input type="number" min="0" className="form-control" name="beds" id="beds" placeholder="Inserisci il numero di letti" value={formData.beds} onChange={(e) => setFormData({ ...formData, beds: e.target.value })} />
-                    {errors.beds && <label className="text-danger" style={{ fontSize: "15px" }}>{errors.beds}</label>}
                 </div>
                 <div className="mb-3">
                     <label htmlFor="toilets" className="form-label">Bagni</label>
                     <input type="number" min="0" className="form-control" name="toilets" id="toilets" placeholder="Inserisci il numero di bagni" value={formData.toilets} onChange={(e) => setFormData({ ...formData, toilets: e.target.value })} />
-                    {errors.toilets && <label className="text-danger" style={{ fontSize: "15px" }}>{errors.toilets}</label>}
                 </div>
                 <div className="mb-3">
                     <label htmlFor="sq_meters" className="form-label">Metri quadri</label>
                     <input type="number" min="0" className="form-control" name="sq_meters" id="sq_meters" placeholder="Inserisci la grandezza in metri quadri" value={formData.sq_meters} onChange={(e) => setFormData({ ...formData, sq_meters: e.target.value })} />
-                    {errors.sq_meters && <label className="text-danger" style={{ fontSize: "15px" }}>{errors.sq_meters}</label>}
                 </div>
                 <div className="mb-3">
                     <label htmlFor="address" className="form-label">Indirizzo</label>
                     <input type="text" className="form-control" name="address" id="address" placeholder="Inserisci l'indirizzo" value={formData.address} onChange={(e) => setFormData({ ...formData, address: e.target.value })} />
-                    {errors.address && <label className="text-danger" style={{ fontSize: "15px" }}>{errors.address}</label>}
                 </div>
                 <div className="mb-3">
                     <label htmlFor="file" className="form-label">Immagine</label>
                     <input type="file" className="form-control" name="file" id="file" onChange={handleFileChange} />
-                    {message && <p className="text-danger">{message}</p>}
                 </div>
                 <div className="mb-3">
                     <label htmlFor="description" className="form-label">Descrizione</label>
                     <textarea className="form-control" name="description" id="description" placeholder="Descrivi brevemente l'appartamento" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })}></textarea>
-                    {errors.description && <label className="text-danger" style={{ fontSize: "15px" }}>{errors.description}</label>}
                 </div>
                 {services && services.map(service =>
                     <div key={service.id} className="form-check">
