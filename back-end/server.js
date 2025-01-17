@@ -50,7 +50,7 @@ server.listen(PORT, () => {
 
 // middleware
 server.use('/', logger)
-server.use('/uploads', express.static/* (path.join(__dirname, 'uploads')) */);
+server.use('/uploads',express.static('uploads'));
 
 
 // 🔁 routes
