@@ -2,17 +2,17 @@ import sgMail from '../keys/setMailApi.js'
 
 
 // send an email
-const sendEmail = (req,res,msg) => {
+const sendEmail = (req, res, msg) => {
   sgMail
-    .send(msg) 
+    .send(msg)
     .then(() => {
-    //   console.log('Email sent')
-      res.status(200).json({message: 'Email sent'})
+      //   console.log('Email sent')
+      res.status(200).json({ statusCode: 200, message: 'Email sent' })
     })
     .catch((error) => {
       console.error(error)
-      res.status(500).json({message: 'Failed to send email'})
+      res.status(500).json({ statusCode: 500, message: 'Failed to send email' })
     })
 }
 
-export default {sendEmail} //in an object in case of future functions for controller
+export default { sendEmail } //in an object in case of future functions for controller

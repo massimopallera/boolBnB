@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom"
 import { useState } from "react"
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { useNavigate } from "react-router-dom";
 const initialFormData = {
     to: '',
     subject: '',
@@ -16,14 +16,14 @@ export default function SendMail() {
 
     const location = useLocation()
     const { ownerEmail } = location.state || ''
-
+    const navigate = useNavigate()
 
     const [formData, setFormData] = useState({ initialFormData, to: ownerEmail })
     //send email
     function handleMail(e) {
         e.preventDefault()
 
-        if (formData.subject === '') {
+        if (!formData.subject) {
             toast.error("Il campo oggetto non può rimanere vuoto.", {
                 position: "top-center",
                 autoClose: 1000,
@@ -37,7 +37,7 @@ export default function SendMail() {
             return;
         }
 
-        if (formData.text === '') {
+        if (!formData.text) {
             toast.error("Il campo testo non può rimanere vuoto.", {
                 position: "top-center",
                 autoClose: 1000,
@@ -66,20 +66,17 @@ export default function SendMail() {
                 });
                 setTimeout(() => {
                     navigate(-1);
-                    /*    window.location.reload(); */
+
                 }, 1000);
             })
             .catch(err => {
                 console.error(err);
-                /* if(){
-
-                }
                 toast.error("Errore durante l'invio dell'email.", {
                     position: "top-center",
                     autoClose: 2000,
                     hideProgressBar: true,
                     theme: "light",
-                }); */
+                });
             });
     }
 
