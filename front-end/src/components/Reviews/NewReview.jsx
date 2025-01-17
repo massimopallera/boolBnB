@@ -25,7 +25,7 @@ export default function NewReview({ id }) {
             toast.error('Il campo "Nome" non può essere vuoto', {
                 position: "top-center",
                 autoClose: 2000,
-                hideProgressBar: false,
+                hideProgressBar: true,
                 theme: "light",
             });
             return;
@@ -35,7 +35,7 @@ export default function NewReview({ id }) {
             toast.error('Il campo "Recensioni" non può essere vuoto', {
                 position: "top-center",
                 autoClose: 2000,
-                hideProgressBar: false,
+                hideProgressBar: true,
                 theme: "light",
             });
             return;
@@ -44,7 +44,7 @@ export default function NewReview({ id }) {
             toast.error('Il campo "Giorni di permanenza" deve essere un numero maggiore di 0', {
                 position: "top-center",
                 autoClose: 2000,
-                hideProgressBar: false,
+                hideProgressBar: true,
                 theme: "light",
             });
             return;
@@ -73,7 +73,12 @@ export default function NewReview({ id }) {
                     toast.error('Errore durante il salvataggio della recensione');
                     return;
                 }
-                toast.success('Recensione salvata con successo!', { position: "top-center", autoClose: 2000 });
+                toast.success('Recensione salvata con successo!', {
+                    position: "top-center",
+                    autoClose: 2000,
+                    hideProgressBar: true,
+                    theme: "light",
+                });
                 setFormData(initialFormData); // Resetta il form
                 setFormSubmitted(true); // Nasconde il pulsante "Salva"
 
@@ -167,4 +172,3 @@ export default function NewReview({ id }) {
         </>
     )
 }
-
