@@ -23,11 +23,13 @@ export default function SingleApartment() {
                 </div>
 
 
+
                 <h3 className='text-center mt-5'>Recensioni: {reviewCounter} </h3> {/* COUNTER RECENSIONI */}
-                <div className='d-flex flex-wrap justify-content-between'>
+                <div className='d-flex flex-wrap justify-content-center'>
+
 
                     {/* Reviews Form */}
-                    <div className='col-12 col-lg-4 my-3'><NewReview id={id}></NewReview></div>
+                    <div className='col-12 col-lg-4 my-3' id="hide-form" ><NewReview id={id}></NewReview></div>
 
 
                     {/* Reviews */}
