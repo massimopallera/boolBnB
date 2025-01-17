@@ -39,7 +39,15 @@ export default function ShowOwnerAps({ isAuthenticated }) {
                             </div>
                         </div>
                     </div>
-                ))) : null}
+                ))) : <>
+
+                    <div className="py-3">
+                        <h5>Non hai aggiunto ancora nessun appartamento</h5>
+                    </div>
+
+
+
+                </>}
 
             </div>
         </>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import FileUpload from "../../FileUpload";
 
 const initialFormData = {
     rooms: '',
@@ -6,7 +7,7 @@ const initialFormData = {
     toilets: '',
     sq_meters: '',
     address: '',
-    apartments_images: '',
+    // apartments_images: '',
     description: '',
     added_services: []
 
@@ -20,9 +21,51 @@ export default function AddForm({ isAuthenticated }) {
     const [errors, setErrors] = useState({});
 
 
+    const [file, setFile] = useState(null);
+    const [message, setMessage] = useState("");
 
-    function handleForm(e) {
+    const allowedExtensions = ["jpeg", "jpg", "gif"];
+    const maxFileSize = 3 * 1024 * 1024; // 3MB in byte
+
+    const handleFileChange = (event) => {
+        const selectedFile = event.target.files[0];
+        console.log(file);
+        
+        if (selectedFile) {
+            setFile(selectedFile);
+        }
+    };
+    
+
+
+
+    async function handleForm(e) {
         e.preventDefault();
+
+
+
+        if (!file) {
+            setMessage("Please select a file to upload.");
+            return;
+        }
+
+        const fileName = file.name;
+        const fileSize = file.size;
+        const fileExtension = fileName.split(".").pop().toLowerCase();
+
+        let isGood = false;
+
+        if (!allowedExtensions.includes(fileExtension)) {
+            setMessage("File type is not allowed (Upload jpeg, jpg, gif).");
+            isGood = true;
+        }
+
+        if (fileSize > maxFileSize) {
+            setMessage("File is over 3MB in size.");
+            isGood = true;
+        }
+
+        if (isGood) return;
 
         let formErrors = {};
 
@@ -32,7 +75,7 @@ export default function AddForm({ isAuthenticated }) {
         if (!formData.toilets) formErrors.toilets = "Il numero di bagni è obbligatorio";
         if (!formData.sq_meters) formErrors.sq_meters = "La grandezza in metri quadri è obbligatoria";
         if (!formData.address) formErrors.address = "L'indirizzo è obbligatorio";
-        if (!formData.apartments_images) formErrors.apartments_images = "L'indirizzo è obbligatorio";
+        // if (!formData.apartments_images) formErrors.apartments_images = "L'indirizzo è obbligatorio";
         if (!formData.description) formErrors.description = "L'indirizzo è obbligatorio";
 
 
@@ -43,6 +86,25 @@ export default function AddForm({ isAuthenticated }) {
         setErrors({});
 
         /* 😁 ADD CONTROLS CLIENT SIDE */
+        const formImageData = new FormData();
+        formImageData.append("file", file);
+
+        try {
+            const response = await fetch("http://localhost:3000/apartments/image", {
+                method: "POST",
+                body: formImageData,
+                credentials: "include" // Include cookies in the request
+            });
+
+            if (response.ok) {
+                setMessage(`File ${fileName} was uploaded successfully!`);
+            } else {
+                setMessage("Upload failed. Please try again.");
+            }
+        } catch (error) {
+            console.error("Error uploading file:", error);
+            setMessage("An error occurred during the upload.");
+        }
 
         // send form data to server
         fetch('http://localhost:3000/apartments', {
@@ -51,16 +113,23 @@ export default function AddForm({ isAuthenticated }) {
                 "Content-Type": "application/json" // Specifica il tipo di contenuto come JSON
             },
             credentials: 'include',
-            body: JSON.stringify({ ...formData })
+            body: JSON.stringify({ ...formData, apartments_images: file.name })
         })
             .then(resp => resp.json())
             .then(data => {
+
+                
+    
+
                 setFormData(initialFormData);
                 window.location.reload()
             })
             .catch(err => console.log(err))
 
 
+    // } catch (err) {
+    //     console.log(err);
+    // }
     }
 
     // get services FOR CHECKBOXES
@@ -143,7 +212,7 @@ export default function AddForm({ isAuthenticated }) {
                         </label>
                     )}
                 </div>
-                <div className="mb-3">
+                {/* <div className="mb-3">
                     <label htmlFor="apartments_images" className="form-label">Immagine</label>
                     <input type="text" className="form-control" name="apartments_images" id="apartments_images" placeholder="inserisci un'immagine dell'appartamento" value={formData.apartments_images} onChange={(e) => setFormData({ ...formData, apartments_images: e.target.value })} />
                     {errors.apartments_images && (
@@ -151,7 +220,12 @@ export default function AddForm({ isAuthenticated }) {
                             {errors.apartments_images}
                         </label>
                     )}
-                </div>
+                </div> */}
+                {/* <FileUpload /> */}
+                <div style={{ padding: "20px" }}>
+            <h2>File Uploader</h2>
+            <input type="file" onChange={handleFileChange} />        
+            </div>
                 <div className="mb-3">
                     <label htmlFor="description" className="form-label">Descrizione</label>
                     <textarea className="form-control" name="text" id="description" placeholder="Descrivi brevemente l'appartamento" value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })}></textarea>
