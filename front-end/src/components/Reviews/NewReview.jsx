@@ -1,5 +1,7 @@
 import { useState } from "react";
 import dayjs from "dayjs"
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 const initialFormData = {
@@ -19,16 +21,32 @@ export default function NewReview({ id }) {
         /* 😁 ADD CONTROLS CLIENT SIDE */
         // Creare un div dove inserire gli errori del form
         if (formData.name === '') {
-            alert('Il campo Name non può essere vuoto');
+            toast.error('Il campo "Nome" non può essere vuoto', {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                theme: "light",
+            });
             return;
         }
 
         if (formData.text === '') {
-            alert('Il campo Review non può essere vuoto');
+            toast.error('Il campo "Recensioni" non può essere vuoto', {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                theme: "light",
+            });
             return;
         }
         if (formData.days_of_stay < 1 || (typeof (formData.days_of_stay) !== "number")) {
-            alert('Il campo Days of stay deve essere un numero e maggiore di 0');
+            toast.error('Il campo "Giorni di permanenza" deve essere un numero maggiore di 0', {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                theme: "light",
+            });
+            return;
             return;
         }
         // if (formData.date === '') {
@@ -43,7 +61,6 @@ export default function NewReview({ id }) {
         //     return
         // }
 
-
         // send form data to server
         fetch('http://localhost:3000/reviews', {
             method: 'POST',
@@ -52,15 +69,25 @@ export default function NewReview({ id }) {
         })
             .then(resp => resp.json())
             .then(data => {
+                if (data.statusCode !== 201) {
+                    toast.error('Errore durante il salvataggio della recensione');
+                    return;
+                }
+                toast.success('Recensione salvata con successo!');
                 setFormData(initialFormData);
-                if (data.statusCode !== 201) return console.log('Errore');
-                window.location.reload()
+                /* setTimeout(() => {
+                    window.location.reload();
+                }, 2000);  */// Aggiungi un ritardo per mostrare il messaggio prima del refresh
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                console.error(err);
+                toast.error('Errore di connessione al server');
+            });
     }
 
     return (
         <>
+            <ToastContainer />
 
             <form className="card bg-light bg-gradient shadow-sm d-flex flex-column p-3" onSubmit={handleForm}>
                 <h4 className="text-center">Lascia la tua recensione</h4>
@@ -76,7 +103,6 @@ export default function NewReview({ id }) {
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     />
                 </div>
-
 
                 <div className="mb-3">
                     <label htmlFor="days_of_stay" className="form-label">Giorni di permanenza</label>
@@ -119,8 +145,6 @@ export default function NewReview({ id }) {
 
                 <button type="submit" className="btn btn-primary">Salva</button>
             </form>
-
-
         </>
     )
 }
