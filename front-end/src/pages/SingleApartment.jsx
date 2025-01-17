@@ -23,7 +23,7 @@ export default function SingleApartment() {
                 </div>
 
 
-                <h3 className='text-center mt-5'>Recensioni {reviewCounter} </h3> {/* COUNTER RECENSIONI */}
+                <h3 className='text-center mt-5'>Recensioni: {reviewCounter} </h3> {/* COUNTER RECENSIONI */}
                 <div className='d-flex flex-wrap justify-content-between'>
 
                     {/* Reviews Form */}
@@ -32,7 +32,7 @@ export default function SingleApartment() {
 
                     {/* Reviews */}
                     <span className="col-12 col-lg-8 reviewBox my-3 ">
-                        <ReviewsSection id={id} setCounter={ (cont) => setReviewCounter(cont) }>
+                        <ReviewsSection id={id} setCounter={(cont) => setReviewCounter(cont)}>
                         </ReviewsSection>
                     </span>
 
