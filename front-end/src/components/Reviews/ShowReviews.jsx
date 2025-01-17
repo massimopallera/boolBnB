@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 
 
 
-export default function ReviewsSection({ id }) {
+export default function ReviewsSection({ id, setCounter }) {
 
     const [reviews, setReviews] = useState([])
 
@@ -12,7 +12,7 @@ export default function ReviewsSection({ id }) {
     useEffect(() => {
         fetch(reviewsApi)
             .then(resp => resp.json())
-            .then(data => {setReviews(data.data) })
+            .then(data => {setReviews(data.data), setCounter(data.data.length) })
             .catch(err => console.error(err))
     }, [])
 

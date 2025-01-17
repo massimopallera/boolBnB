@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
 import { useGlobalContext } from "../context/GlobalContext";
+
 import AddForm from '../components/AddApartment/AddForm';
 import ShowOwnerAps from '../components/AddApartment/ShowOwnerAps';
 
@@ -9,11 +10,9 @@ import ShowOwnerAps from '../components/AddApartment/ShowOwnerAps';
 export default function AddApartment() {
 
     const { checkAuthentication, isAuthenticated } = useGlobalContext()
-
    
     useEffect(() => {
         checkAuthentication()
-        // getServices()
     }, [isAuthenticated])
 
     return (

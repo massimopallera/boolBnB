@@ -89,7 +89,7 @@ const store = async (req, res) => {
             address,
             apartments_images,
             description,
-            // price,
+            // ,
             added_services
         } = req.body;
 
@@ -109,7 +109,7 @@ const store = async (req, res) => {
             Number(toilets),
             Number(sq_meters),
             address,
-            // price,
+            // ,
             apartments_images
         ]);
 
