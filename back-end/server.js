@@ -2,6 +2,12 @@
 import express from "express"
 import cors from 'cors'
 import cookieParser from 'cookie-parser' // for cookies parsing
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+// Calcola __dirname con ES6
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // import routes
 import apartmentsRouter from "./routes/apartmentsRoutes.js"
@@ -21,7 +27,7 @@ const server = express()
 const corsOptions = {
     origin: 'http://localhost:5173', // Indica l'origine esatta del frontend
     credentials: true, // Consenti l'invio di credenziali
-  };
+};
 
 
 server.use(express.json())
@@ -56,3 +62,7 @@ server.get('/dashboard', authenticateJWT, (req, res) => {
 
 // 🤝 handler
 server.use(handlers.NotFound)
+
+
+
+server.use('/uploads', express.static(path.join(__dirname, 'uploads')));

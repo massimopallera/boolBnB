@@ -16,7 +16,7 @@ function serviceIndex(req, res) {
     const sql = 'SELECT * FROM added_services'
 
     pool.query(sql, (err, results) => {
-        handlers.statusCode(req, res, results) 
+        handlers.statusCode(req, res, results)
     })
 }
 
@@ -24,7 +24,7 @@ function serviceIndex(req, res) {
 function showOwnerApartments(req, res) {
 
     // const id = Number(req.params.id)
-    
+
     const token = req.cookies.jwt
     if (token) {
         const decoded = verifyToken(token)
@@ -45,8 +45,8 @@ function showOwnerApartments(req, res) {
             // if (err) return res.status(500).json({message: err.message})
             // res.status(200).json(results)
         })
-    } else res.status(404).json({message: 'nuh uh'})
-    
+    } else res.status(404).json({ message: 'nuh uh' })
+
 }
 
 function show(req, res) {
@@ -62,10 +62,10 @@ function show(req, res) {
     WHERE ap.id = ?
     GROUP BY ap.id
     `
-    
+
     pool.query(sql, [id], (err, results) => {
         handlers.statusCode(req, res, results)
-    })    
+    })
 }
 
 
@@ -87,11 +87,13 @@ const store = async (req, res) => {
             toilets,
             sq_meters,
             address,
-            apartments_images,
+            /*   apartments_images, */
             description,
             // ,
             added_services
         } = req.body;
+
+        const apartments_images = `/uploads/${req.body.apartments_images}`
 
         // Inizia una transazione
         await connection.beginTransaction();
@@ -152,7 +154,7 @@ function update(req, res) {
 
     const id = Number(req.params.id)
 
-    const {hearts_counter} = req.body
+    const { hearts_counter } = req.body
 
     const sql = `
     UPDATE apartments
@@ -160,10 +162,10 @@ function update(req, res) {
         hearts_counter = ?
     WHERE id = ?
     `
-    pool.query(sql, [hearts_counter+1, id], (err, results) => {
-        if (err) res.status(500).json({message: 'fdp'})
-            show(req,res)
-        })
+    pool.query(sql, [hearts_counter + 1, id], (err, results) => {
+        if (err) res.status(500).json({ message: 'fdp' })
+        show(req, res)
+    })
 }
 
 
