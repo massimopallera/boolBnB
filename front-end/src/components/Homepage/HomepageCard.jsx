@@ -15,7 +15,7 @@ export default function HomepageCard({ apartment }) {
                     </div>
 
                     <img
-                        src={apartment.apartment_images || "/placeholder.png"}
+                        src={`http://localhost:3000/uploads/${apartment.apartments_images}` || "/placeholder.png"}
                         alt="Apartment"
                         className="img-fluid rounded shadow-sm"
                         style={{ maxHeight: '100%', objectFit: 'cover' }}
