@@ -13,6 +13,7 @@ import Homepage from "./pages/Homepage"
 import Logout from "./pages/Logout.jsx"
 import SignIn from "./pages/SignIn.jsx"
 import Login from './pages/Login.jsx'
+import FileUpload from './FileUpload.jsx'
 
 // CSS
 import './App.css'
@@ -35,6 +36,7 @@ function App() {
               <Route path='/logout' element={<Logout />} />
               <Route path='/sign-in' element={<SignIn />} />
               <Route path='/send-mail' element={<SendMail />} />
+              <Route path='/dev' element={<FileUpload />} />
 
             </Route>
             

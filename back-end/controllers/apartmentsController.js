@@ -89,9 +89,12 @@ const store = async (req, res) => {
             address,
             apartments_images,
             description,
-            // ,
             added_services
         } = req.body;
+
+        //upload
+        console.log(req);
+        
 
         // Inizia una transazione
         await connection.beginTransaction();
@@ -109,7 +112,6 @@ const store = async (req, res) => {
             Number(toilets),
             Number(sq_meters),
             address,
-            // ,
             apartments_images
         ]);
 
@@ -166,12 +168,20 @@ function update(req, res) {
         })
 }
 
+function storeImg(req, res) {
+    if (!req.file) {
+        return res.status(400).json({ success: false, message: "No file uploaded." });
+    }
+    res.status(200).json({ success: true, message: "File uploaded successfully." });
+}
+
 
 export default {
     index,
     show,
     showOwnerApartments,
     store,
+    storeImg,
     update,
     serviceIndex
 }
