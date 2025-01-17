@@ -75,19 +75,16 @@ export default function NewReview({ id }) {
                 }
                 toast.success('Recensione salvata con successo!', {
                     position: "top-center",
-                    autoClose: 2000,
+                    autoClose: 1000,
                     hideProgressBar: true,
                     theme: "light",
                 });
                 setFormData(initialFormData); // Resetta il form
-                // setFormSubmitted(true); // Nasconde il pulsante "Salva"
-                const formEl = document.getElementById('hide-form')
-                formEl.classList.add('d-none')
+                setFormSubmitted(true); // Nasconde il pulsante "Salva"
 
-
-                /* setTimeout(() => {
+                setTimeout(() => {
                     window.location.reload();
-                }, 2000);  */// Aggiungi un ritardo per mostrare il messaggio prima del refresh
+                }, 500);
             })
             .catch(err => {
                 console.error(err);
@@ -98,8 +95,8 @@ export default function NewReview({ id }) {
     return (
         <>
             <ToastContainer />
+            {!formSubmitted && (
                 <form
-                
                     className="card bg-light bg-gradient shadow-sm d-flex flex-column p-3"
                     onSubmit={handleForm}
                 >
@@ -171,6 +168,7 @@ export default function NewReview({ id }) {
                         Salva
                     </button>
                 </form>
+            )}
         </>
     )
 }
