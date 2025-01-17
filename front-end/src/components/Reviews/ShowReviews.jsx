@@ -12,7 +12,7 @@ export default function ReviewsSection({ id, setCounter }) {
     useEffect(() => {
         fetch(reviewsApi)
             .then(resp => resp.json())
-            .then(data => {setReviews(data.data), setCounter(data.data.length) })
+            .then(data => { setReviews(data.data), setCounter(data.data.length) })
             .catch(err => console.error(err))
     }, [])
 
@@ -30,7 +30,13 @@ export default function ReviewsSection({ id, setCounter }) {
                     <div> <strong>Data</strong> : {dayjs(review.date).format('YYYY-MM-DD')}</div>
                     <div> <strong>Giorni di permanenza</strong> : {review.days_of_stay}</div>
                 </div>
-            )) : 'NotFound'}
+            )) :
+                <>
+                    <div className="ms-5">
+                        <h5>Non ci sono ancora recensioni. Sii il primo!</h5>
+                    </div>
+                </>
+            }
 
         </>
     )
