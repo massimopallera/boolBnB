@@ -80,7 +80,10 @@ export default function NewReview({ id }) {
                     theme: "light",
                 });
                 setFormData(initialFormData); // Resetta il form
-                setFormSubmitted(true); // Nasconde il pulsante "Salva"
+                // setFormSubmitted(true); // Nasconde il pulsante "Salva"
+                const formEl = document.getElementById('hide-form')
+                formEl.classList.add('d-none')
+
 
                 /* setTimeout(() => {
                     window.location.reload();
@@ -95,8 +98,8 @@ export default function NewReview({ id }) {
     return (
         <>
             <ToastContainer />
-            {!formSubmitted && (
                 <form
+                
                     className="card bg-light bg-gradient shadow-sm d-flex flex-column p-3"
                     onSubmit={handleForm}
                 >
@@ -168,7 +171,6 @@ export default function NewReview({ id }) {
                         Salva
                     </button>
                 </form>
-            )}
         </>
     )
 }
