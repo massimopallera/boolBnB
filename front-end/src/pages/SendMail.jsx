@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom"
 import { useState } from "react"
 
 const initialFormData = {
@@ -7,17 +8,33 @@ const initialFormData = {
 }
 
 
+
+
 export default function SendMail(){
     
-    const [formData, setFormData] = useState(initialFormData)
+    const location = useLocation()
+    const {ownerEmail} = location.state || ''
+
+
+    const [formData, setFormData] = useState({initialFormData, to: ownerEmail})
     //send email
     function handleMail(e) {
         e.preventDefault()
 
+        if(formData.subject === ''){
+            //toast
+            return;
+        }
+
+        if (formData.text === ''){
+            //toast
+            return;
+        }
+
         fetch('http://127.0.0.1:3000/info', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData)
+            body: JSON.stringify({...formData, to: ownerEmail})
         }).then(resp => resp.json())
             .then(data => console.log(data))
             .catch(err => console.log(err))
@@ -31,7 +48,7 @@ export default function SendMail(){
 
                 <div>
                     <label htmlFor="to">Cc</label>
-                    <input type="email" id="to" name="to" value={formData.to} onChange={(e) => setFormData({ ...formData, to: e.target.value })} />
+                    <input type="email" id="to" name="to" value={formData.to} onChange={(e) => e.target.value = formData.to} disabled/>
                 </div>
                 <div>
                     <label htmlFor="subject">Oggetto</label>

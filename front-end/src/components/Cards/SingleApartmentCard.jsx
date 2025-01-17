@@ -66,7 +66,7 @@ export default function SingleApartment({ id }) {
                                     <span>{likesCounter} </span>
                                 </div>
 
-                                <Link to={'/send-mail'}>
+                                <Link to={'/send-mail'} state={{ownerEmail: apartment.email}}>
                                     <button className="btn btn-primary">Contatta proprietario</button>
                                 </Link>
                             </div>
