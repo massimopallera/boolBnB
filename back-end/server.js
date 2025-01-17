@@ -15,6 +15,11 @@ import infoRouter from "./routes/infoRoutes.js"
 import logger from "./middleware/logger.js"
 import handlers from "./middleware/handlers.js"
 
+
+
+//dev
+// import controller from "./fileUpload/controller.js"
+
 const server = express()
 
 
@@ -48,6 +53,8 @@ server.use('/reviews', reviewsRouter)
 server.use('/user', ownersRouter)
 server.use('/info', infoRouter)
 server.use('/', authRouter)
+
+// server.use('/upload', controller)
 
 // authenticateJWT controls if a user is authenticated
 server.get('/dashboard', authenticateJWT, (req, res) => {
