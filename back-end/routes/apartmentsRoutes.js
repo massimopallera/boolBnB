@@ -15,13 +15,13 @@ const storage = multer.diskStorage({
         cb(null, "./uploads");
     },
     filename: (req, file, cb) => {
-        cb(null, Date.now() + "-" + file.originalname);
+        cb(null, /* Date.now() */ /* + "-"  + */ file.originalname);
     },
 });
 
 
 // Crea la cartella 'uploads' se non esiste
-if (!fs.existsSync(dir)){
+if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir);
 }
 
@@ -42,9 +42,9 @@ router.get('/:id', controller.show)
 
 //add new element
 router.post('/', controller.store)
-router.post('/image', upload.single("file"), (req,res) => {
+router.post('/image', upload.single("file"), (req, res) => {
     console.log(req);
-    
+
     if (!req.file) {
         return res.status(400).json({ success: false, message: "No file uploaded." });
     }
