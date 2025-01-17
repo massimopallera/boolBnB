@@ -28,7 +28,7 @@ export default function ShowOwnerAps({isAuthenticated}){
      return(
         <>
              <div className="row row-cols-1">
-                {apartments.map((element) => (
+                { apartments ? (apartments.map((element) => (
                     <div key={element.id} className=" col mb-3">
                         <div className="card" >
                             <img src={element.apartments_images} className="card-img-top" alt="..."></img>
@@ -39,7 +39,7 @@ export default function ShowOwnerAps({isAuthenticated}){
                             </div>
                         </div>
                     </div>
-                ))}
+                ))) : null}
                         
             </div>
         </>

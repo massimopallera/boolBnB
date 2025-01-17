@@ -62,7 +62,7 @@ export default function Header() {
                                     type="button"
                                     className="btn btn-primary"
                                     >
-                                    <i class="bi bi-box-arrow-right fs-5"></i>
+                                    <i className="bi bi-box-arrow-right fs-5"></i>
 
                                 </button>
                             </NavLink>
@@ -76,7 +76,7 @@ export default function Header() {
                                     type="button"
                                     className="btn btn-primary"
                                     >
-                                    <i class="bi bi-box-arrow-right"></i>
+                                    <i className="bi bi-box-arrow-right"></i>
 
                                 </button>
                             </NavLink>
