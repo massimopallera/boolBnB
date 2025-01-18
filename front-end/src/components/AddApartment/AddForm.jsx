@@ -27,10 +27,10 @@ export default function AddForm({ isAuthenticated }) {
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
         console.log(selectedFile);
-        
+
         if (selectedFile) {
             setFile(selectedFile);
-            setFormData({...formData, apartments_images: selectedFile.name})
+            setFormData({ ...formData, apartments_images: selectedFile.name })
         }
     };
 
@@ -40,6 +40,14 @@ export default function AddForm({ isAuthenticated }) {
         let formErrors = {};
         let isGood = false;
 
+
+
+        if (!formData.rooms) formErrors.rooms = "Il numero di stanze è obbligatorio";
+        if (!formData.beds) formErrors.beds = "Il numero di letti è obbligatorio";
+        if (!formData.toilets) formErrors.toilets = "Il numero di bagni è obbligatorio";
+        if (!formData.sq_meters) formErrors.sq_meters = "La grandezza in metri quadri è obbligatoria";
+        if (!formData.address) formErrors.address = "L'indirizzo è obbligatorio";
+        if (!formData.description) formErrors.description = "La descrizione è obbligatoria";
         if (!file) {
             formErrors.file = "inserisci una foto.";
             isGood = true;
@@ -57,14 +65,6 @@ export default function AddForm({ isAuthenticated }) {
                 isGood = true;
             }
         }
-
-        if (!formData.rooms) formErrors.rooms = "Il numero di stanze è obbligatorio";
-        if (!formData.beds) formErrors.beds = "Il numero di letti è obbligatorio";
-        if (!formData.toilets) formErrors.toilets = "Il numero di bagni è obbligatorio";
-        if (!formData.sq_meters) formErrors.sq_meters = "La grandezza in metri quadri è obbligatoria";
-        if (!formData.address) formErrors.address = "L'indirizzo è obbligatorio";
-        if (!formData.description) formErrors.description = "La descrizione è obbligatoria";
-
         for (let key in formErrors) {
             if (formErrors.hasOwnProperty(key)) {
                 toast.error(formErrors[key], {
@@ -131,7 +131,7 @@ export default function AddForm({ isAuthenticated }) {
             return;
         }
         console.log(formData);
-        
+
 
         // Send form data to the server
         try {
@@ -184,9 +184,9 @@ export default function AddForm({ isAuthenticated }) {
 
     function getCategories() {
         fetch('http://localhost:3000/categories')
-           .then(resp => resp.json())
-           .then(data => setCategories(data.data))
-           .catch(err => console.log(err));
+            .then(resp => resp.json())
+            .then(data => setCategories(data.data))
+            .catch(err => console.log(err));
     }
 
     // Checkbox logic for selecting services
@@ -252,7 +252,7 @@ export default function AddForm({ isAuthenticated }) {
                 )}
 
                 <div>
-                    <select name="categories" id="" onChange={(e) => setFormData({...formData, category: e.target.value})}>
+                    <select name="categories" id="" onChange={(e) => setFormData({ ...formData, category: e.target.value })}>
                         <option value="">Seleziona una categoria</option>
                         {categories && categories.map(category =>
                             <option key={category.id} value={category.id}>{category.name}</option>
