@@ -1,3 +1,5 @@
+<!-- VECCHIO CODICE CON IL PROBLEMA DEL TOAST IMG -->
+
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -33,26 +35,37 @@ export default function AddForm({ isAuthenticated }) {
     async function handleForm(e) {
         e.preventDefault();
 
-        let formErrors = {};
+        if (!file) {
+            setMessage("Please select a file to upload.");
+            toast.error("inserisci una foto.", {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: true,
+                theme: "light",
+            })
+
+            return;
+        }
+
+        const fileName = file.name;
+        const fileSize = file.size;
+        const fileExtension = fileName.split(".").pop().toLowerCase();
+
         let isGood = false;
 
-        if (!file) {
-            formErrors.file = "inserisci una foto.";
+        if (!allowedExtensions.includes(fileExtension)) {
+            setMessage("File type is not allowed (Upload jpeg, jpg, gif).");
             isGood = true;
-        } else {
-            const fileName = file.name;
-            const fileSize = file.size;
-            const fileExtension = fileName.split(".").pop().toLowerCase();
-
-            if (!allowedExtensions.includes(fileExtension)) {
-                formErrors.file = "File type is not allowed (Upload jpeg, jpg, gif).";
-                isGood = true;
-            }
-            if (fileSize > maxFileSize) {
-                formErrors.file = "File is over 3MB in size.";
-                isGood = true;
-            }
         }
+
+        if (fileSize > maxFileSize) {
+            setMessage("File is over 3MB in size.");
+            isGood = true;
+        }
+
+        if (isGood) return;
+
+        let formErrors = {};
 
         if (!formData.rooms) formErrors.rooms = "Il numero di stanze è obbligatorio";
         if (!formData.beds) formErrors.beds = "Il numero di letti è obbligatorio";
@@ -61,23 +74,20 @@ export default function AddForm({ isAuthenticated }) {
         if (!formData.address) formErrors.address = "L'indirizzo è obbligatorio";
         if (!formData.description) formErrors.description = "La descrizione è obbligatoria";
 
-        for (let key in formErrors) {
-            if (formErrors.hasOwnProperty(key)) {
-                toast.error(formErrors[key], {
-                    position: "top-center",
-                    autoClose: 2000,
-                    hideProgressBar: true,
-                    theme: "light",
-                });
-            }
-        }
-
-        // Interrompi se ci sono errori
         if (Object.keys(formErrors).length > 0) {
             setErrors(formErrors);
-            return;
-        }
 
+            for (let key in formErrors) {
+                if (formErrors.hasOwnProperty(key)) {
+                    toast.error(formErrors[key], {
+                        position: "top-center",
+                        autoClose: 2000,
+                        hideProgressBar: true,
+                        theme: "light",
+                    });
+                }
+            }
+        }
         setErrors({});
 
         // Create a FormData instance for image upload
@@ -194,7 +204,6 @@ export default function AddForm({ isAuthenticated }) {
 
     useEffect(() => { getServices() }, [isAuthenticated]);
 
-
     return (
         <div className="container mt-5">
             <form className="card bg-light bg-gradientd-flex flex-column p-3 mb-3" onSubmit={handleForm}>
@@ -239,20 +248,3 @@ export default function AddForm({ isAuthenticated }) {
         </div>
     );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
