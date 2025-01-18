@@ -9,6 +9,7 @@ const initialFormData = {
     sq_meters: '',
     address: '',
     description: '',
+    name: '',
     added_services: []
 };
 
@@ -212,6 +213,10 @@ export default function AddForm({ isAuthenticated }) {
         <div className="container mt-5">
             <form className="card bg-light bg-gradientd-flex flex-column p-3 mb-3" onSubmit={handleForm}>
                 <h4 className="text-center">Aggiungi inserzione</h4>
+                <div className="mb-3">
+                    <label htmlFor="name" className="form-label">Nome Inserzione</label>
+                    <input type="text" min="0" className="form-control" name="name" id="name" placeholder="Inserisci il nome appartamento" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
+                </div>
                 <div className="mb-3">
                     <label htmlFor="rooms" className="form-label">Stanze</label>
                     <input type="number" min="0" className="form-control" name="rooms" id="rooms" placeholder="Inserisci il numero di stanze" value={formData.rooms} onChange={(e) => setFormData({ ...formData, rooms: e.target.value })} />
