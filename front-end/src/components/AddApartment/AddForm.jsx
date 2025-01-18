@@ -10,6 +10,7 @@ const initialFormData = {
     address: '',
     description: '',
     name: '',
+    category: '',
     added_services: []
 };
 
@@ -26,9 +27,10 @@ export default function AddForm({ isAuthenticated }) {
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
         console.log(selectedFile);
-
+        
         if (selectedFile) {
             setFile(selectedFile);
+            setFormData({...formData, apartments_images: selectedFile.name})
         }
     };
 
@@ -84,14 +86,14 @@ export default function AddForm({ isAuthenticated }) {
 
         // Create a FormData instance for image upload
         const formImageData = new FormData();
-        setFormData({ ...formData, apartments_images: file.name });
+        // setFormData({ ...formData, apartments_images: file.name });
 
         formImageData.append("file", file);
         // const imgName = formImageData.name
 
         // const imageBlob = new Blob(file, { type: 'image/jpeg' }); 
 
-        console.log(formImageData);
+        // console.log(formImageData);
 
         try {
             fetch("http://localhost:3000/apartments/image", {
@@ -103,7 +105,7 @@ export default function AddForm({ isAuthenticated }) {
                 .then(data => {
 
                     if (data.success) {
-                        setMessage(`File ${fileName} was uploaded successfully!`);
+                        setMessage(`File ${`giacomino`} was uploaded successfully!`);
                         /* const imageData = await response.json();
                         // Assuming the image name is returned and stored in the database
                         */
@@ -128,6 +130,8 @@ export default function AddForm({ isAuthenticated }) {
             });
             return;
         }
+        console.log(formData);
+        
 
         // Send form data to the server
         try {
@@ -179,7 +183,7 @@ export default function AddForm({ isAuthenticated }) {
     }
 
     function getCategories() {
-        fetch('http://localhost:3000/apartments/categories')
+        fetch('http://localhost:3000/categories')
            .then(resp => resp.json())
            .then(data => setCategories(data.data))
            .catch(err => console.log(err));
@@ -201,7 +205,7 @@ export default function AddForm({ isAuthenticated }) {
         setFormData({ ...formData, added_services: updatedServices });
     }
 
-    useEffect(() => { getServices() }, [isAuthenticated]);
+    useEffect(() => { getServices(), getCategories() }, [isAuthenticated]);
 
 
     return (
@@ -248,7 +252,7 @@ export default function AddForm({ isAuthenticated }) {
                 )}
 
                 <div>
-                    <select name="categories" id="">
+                    <select name="categories" id="" onChange={(e) => setFormData({...formData, category: e.target.value})}>
                         <option value="">Seleziona una categoria</option>
                         {categories && categories.map(category =>
                             <option key={category.id} value={category.id}>{category.name}</option>

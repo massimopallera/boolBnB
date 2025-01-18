@@ -89,7 +89,8 @@ const store = async (req, res) => {
             address,
             name,
             description,
-            added_services
+            added_services,
+            category
         } = req.body;
 
         const apartments_images = req.body.apartments_images
@@ -116,16 +117,22 @@ const store = async (req, res) => {
 
         // Ottieni l'ID dell'appartamento appena inserito
         const apartment_id = apartmentResult.insertId;
-
+        const category_id = Number(category)
         // Inserisci i servizi aggiuntivi nella tabella ponte
         const serviceQuery = `
             INSERT INTO \`apartment-added_service\` (apartment_id_fk, added_service_id_fk)
             VALUES (?, ?)
         `;
 
+        const categoryQuery = `
+            INSERT INTO \`apartment_category\` (id_apartment_fk, id_category_fk)  VALUES (?, ?)
+        `
+
         for (const id of added_services) {
             await connection.query(serviceQuery, [apartment_id, id]);
         }
+
+        await connection.query(categoryQuery, [apartment_id, category_id])
 
         // Conferma la transazione
         await connection.commit();
