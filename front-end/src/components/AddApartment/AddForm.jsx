@@ -35,6 +35,13 @@ export default function AddForm({ isAuthenticated }) {
 
         if (!file) {
             setMessage("Please select a file to upload.");
+            toast.error("inserisci una foto.", {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: true,
+                theme: "light",
+            })
+
             return;
         }
 
@@ -89,7 +96,7 @@ export default function AddForm({ isAuthenticated }) {
 
         // Create a FormData instance for image upload
         const formImageData = new FormData();
-        setFormData({...formData, apartments_images: file.name}); 
+        setFormData({ ...formData, apartments_images: file.name });
 
         formImageData.append("file", file);
         // const imgName = formImageData.name
@@ -97,30 +104,32 @@ export default function AddForm({ isAuthenticated }) {
         // const imageBlob = new Blob(file, { type: 'image/jpeg' }); 
 
         console.log(formImageData);
-        
+
         try {
             fetch("http://localhost:3000/apartments/image", {
                 method: "POST",
                 body: formImageData,
                 credentials: "include", // Include cookies in the request
             })
-            .then(response => response.json())
-            .then(data => {
+                .then(response => response.json())
+                .then(data => {
 
-            if (data.success) {
-                setMessage(`File ${fileName} was uploaded successfully!`);
-                /* const imageData = await response.json();
-                // Assuming the image name is returned and stored in the database
-                */
-            } else {
-                setMessage("Upload failed. Please try again.");
-                toast.error("Errore durante l'upload dell'immagine.", {
-                    position: "top-center",
-                    autoClose: 2000,
-                    hideProgressBar: true,
-                    theme: "light",
-                })}
-            })} catch (error) {
+                    if (data.success) {
+                        setMessage(`File ${fileName} was uploaded successfully!`);
+                        /* const imageData = await response.json();
+                        // Assuming the image name is returned and stored in the database
+                        */
+                    } else {
+                        setMessage("Upload failed. Please try again.");
+                        toast.error("Errore durante l'upload dell'immagine.", {
+                            position: "top-center",
+                            autoClose: 2000,
+                            hideProgressBar: true,
+                            theme: "light",
+                        })
+                    }
+                })
+        } catch (error) {
             console.error("Error uploading file:", error);
             setMessage("An error occurred during the upload.");
             toast.error("Errore durante l'upload dell'immagine.", {
@@ -142,26 +151,26 @@ export default function AddForm({ isAuthenticated }) {
                 credentials: 'include',
                 body: JSON.stringify({ ...formData }),
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                setFormData(initialFormData);
-                toast.success("Inserimento avvenuto con successo!", {
-                    position: "top-center",
-                    autoClose: 2000,
-                    hideProgressBar: true,
-                    theme: "light",
-                });
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        setFormData(initialFormData);
+                        toast.success("Inserimento avvenuto con successo!", {
+                            position: "top-center",
+                            autoClose: 2000,
+                            hideProgressBar: true,
+                            theme: "light",
+                        });
 
-                setTimeout(() => {
-                    window.location.reload();
-                }, 2000);
+                        setTimeout(() => {
+                            window.location.reload();
+                        }, 2000);
 
 
-            } else {
-                throw new Error("Failed to submit form data");
-            }
-        })
+                    } else {
+                        throw new Error("Failed to submit form data");
+                    }
+                })
         } catch (err) {
             console.error(err);
             toast.error("Errore durante l'inserimento", {
