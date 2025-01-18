@@ -70,7 +70,7 @@ export default function SearchField({ setFilteredApartments }) {
                                 type="number"
                                 className="form-control"
                                 id="beds"
-                                placeholder="Min. posti letto"
+                                placeholder="Inserisci i posti letto"
                                 onChange={onChange}
                                 value={searchFields.beds}
                             />
@@ -87,7 +87,7 @@ export default function SearchField({ setFilteredApartments }) {
                                 type="number"
                                 className="form-control"
                                 id="rooms"
-                                placeholder="Min. stanze"
+                                placeholder="Inserisci le stanze"
                                 onChange={onChange}
                                 value={searchFields.rooms}
                             />
