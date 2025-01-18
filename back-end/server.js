@@ -17,6 +17,8 @@ import reviewsRouter from "./routes/reviewsRoutes.js"
 import ownersRouter from "./routes/ownersRoutes.js"
 import infoRouter from "./routes/infoRoutes.js"
 
+import categoriesRouter from "./routes/categoriesRoutes.js"
+
 // import middlewares
 import logger from "./middleware/logger.js"
 import handlers from "./middleware/handlers.js"
@@ -59,6 +61,7 @@ server.use('/reviews', reviewsRouter)
 server.use('/user', ownersRouter)
 server.use('/info', infoRouter)
 server.use('/', authRouter)
+server.use('/categories', categoriesRouter)
 
 // server.use('/upload', controller)
 

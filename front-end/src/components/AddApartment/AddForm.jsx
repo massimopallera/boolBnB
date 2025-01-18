@@ -16,6 +16,7 @@ const initialFormData = {
 export default function AddForm({ isAuthenticated }) {
     const [formData, setFormData] = useState(initialFormData);
     const [services, setServices] = useState();
+    const [categories, setCategories] = useState();
     const [errors, setErrors] = useState({});
     const [file, setFile] = useState(null);
     const [message, setMessage] = useState("");
@@ -177,6 +178,13 @@ export default function AddForm({ isAuthenticated }) {
             .catch(err => console.log(err));
     }
 
+    function getCategories() {
+        fetch('http://localhost:3000/apartments/categories')
+           .then(resp => resp.json())
+           .then(data => setCategories(data.data))
+           .catch(err => console.log(err));
+    }
+
     // Checkbox logic for selecting services
     function handleCheckbox(e) {
         const { value, checked } = e.target;
@@ -238,6 +246,16 @@ export default function AddForm({ isAuthenticated }) {
                         <label className="form-check-label" htmlFor={`service-${service.id}`}>{service.name}</label>
                     </div>
                 )}
+
+                <div>
+                    <select name="categories" id="">
+                        <option value="">Seleziona una categoria</option>
+                        {categories && categories.map(category =>
+                            <option key={category.id} value={category.id}>{category.name}</option>
+                        )}
+                    </select>
+                </div>
+
                 <button type="submit" className="btn btn-primary">Salva</button>
             </form>
             <ToastContainer />

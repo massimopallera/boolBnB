@@ -4,7 +4,7 @@ const index = (req, res) => {
 
     pool.query(sql, (err,results) => {
         if (err) return res.status(500).json({message: 'errore'})
-        res.status(200).json({results})
+        res.status(200).json({data: results})
     })
 }
 

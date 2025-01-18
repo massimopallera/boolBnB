@@ -24,7 +24,7 @@ export default function HomepageCard({ apartment }) {
 
                 {/* DESCRIPTION 👉 TO CHANGE WITH APARTMENT NAME */}
                 <div className="card-body mt-2">
-                    <div className="mb-2">{/* <strong>Descrizione:</strong> */} <strong>{apartment.description}</strong> </div>
+                    <div className="mb-2">{/* <strong>Descrizione:</strong> */} <strong>{apartment.name}</strong> </div>
                     <div> {/* <strong>Indirizzo:</strong> */} {apartment.address}</div>
                 </div>
 
