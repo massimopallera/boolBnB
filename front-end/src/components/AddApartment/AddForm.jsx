@@ -41,13 +41,14 @@ export default function AddForm({ isAuthenticated }) {
         let isGood = false;
 
 
-
+        if (!formData.name) formErrors.name = "Il nome della struttura è obbligatorio";
         if (!formData.rooms) formErrors.rooms = "Il numero di stanze è obbligatorio";
         if (!formData.beds) formErrors.beds = "Il numero di letti è obbligatorio";
         if (!formData.toilets) formErrors.toilets = "Il numero di bagni è obbligatorio";
         if (!formData.sq_meters) formErrors.sq_meters = "La grandezza in metri quadri è obbligatoria";
         if (!formData.address) formErrors.address = "L'indirizzo è obbligatorio";
         if (!formData.description) formErrors.description = "La descrizione è obbligatoria";
+        if (!formData.category) formErrors.category = "La categoria è obbligatoria";
         if (!file) {
             formErrors.file = "inserisci una foto.";
             isGood = true;
@@ -251,14 +252,21 @@ export default function AddForm({ isAuthenticated }) {
                     </div>
                 )}
 
-                <div>
-                    <select name="categories" id="" onChange={(e) => setFormData({ ...formData, category: e.target.value })}>
+                <div class="my-3">
+                    <label for="categories" class="form-label">Seleziona una categoria</label>
+                    <select
+                        class="form-select"
+                        name="categories"
+                        id="categories"
+                        onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                    >
                         <option value="">Seleziona una categoria</option>
-                        {categories && categories.map(category =>
+                        {categories && categories.map(category => (
                             <option key={category.id} value={category.id}>{category.name}</option>
-                        )}
+                        ))}
                     </select>
                 </div>
+
 
                 <button type="submit" className="btn btn-primary">Salva</button>
             </form>
