@@ -46,6 +46,8 @@ router.get('/owner-apartments', controller.showOwnerApartments)
 
 router.get('/services', controller.serviceIndex)
 
+router.post('/search', controller.search)
+
 router.get('/:id', controller.show)
 
 //add new element

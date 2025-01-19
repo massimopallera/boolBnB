@@ -181,6 +181,35 @@ function storeImg(req, res) {
     res.status(200).json({ success: true, message: "File uploaded successfully." });
 }
 
+function search(req, res){
+    const { rooms, beds, address } = req.body
+
+    let sql = 
+    `
+        SELECT ap.*
+        FROM apartments AS ap
+        LEFT JOIN apartment_category ON ap.id = apartment_category.id_apartment_fk
+        LEFT JOIN categories AS c ON c.id = apartment_category.id_category_fk
+        WHERE ap.address LIKE ?
+        
+        `
+        const filterAdress = `%${address}%`
+        
+        if(rooms > 0) {sql += `AND ap.rooms = ? `}
+        if(beds > 0) {sql += `AND ap.beds = ? `}
+        
+        sql += `ORDER BY ap.hearts_counter DESC`
+
+
+
+    pool.query(sql, [filterAdress, rooms, beds], (err, results) => {
+        
+        // handlers.statusCode(req, res, results)
+        if (err) {return res.status(500).json({message: err.message})}
+        res.status(200).json({data: results})    
+    })
+}
+
 
 export default {
     index,
@@ -189,7 +218,8 @@ export default {
     store,
     storeImg,
     update,
-    serviceIndex
+    serviceIndex,
+    search 
 }
 
 
