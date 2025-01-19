@@ -24,6 +24,27 @@ export default function Header() {
 
                     </NavLink>
                     <div >
+
+                    <NavLink to="search" className="me-3 d-none d-sm-inline">
+                        < button
+                            type="button"
+                            className="btn btn-primary"
+                        >
+                            Cerca
+
+                        </button>
+                    </NavLink>
+                    
+                    <NavLink to="search" className="me-2 d-sm-none d-inline">
+                        < button
+                            type="button"
+                            className="btn btn-primary"
+                        >
+                            <i className="bi bi-search fs-5"></i>
+
+                        </button>
+                    </NavLink>
+
                     {isAuthenticated ? ( 
                     <>
                         <NavLink to="apartments/AddNew" className="me-3 d-none d-sm-inline">
@@ -95,16 +116,26 @@ export default function Header() {
 
 
                         </>) : (
-                            <NavLink to="login" className="me-3">
+                            <>
+                        <NavLink to="login" className="me-3">
                             < button
                                 type="button"
                                 className="btn btn-primary"
                             >
-                                Login/Registrati
-
+                                Login
                             </button>
 
                         </NavLink>
+                        <NavLink to="sign-in" className="me-3">
+                            < button
+                                type="button"
+                                className="btn btn-primary"
+                            >
+                                Registrati
+                            </button>
+
+                        </NavLink>
+                        </>
                         )
                         }
                     </div>

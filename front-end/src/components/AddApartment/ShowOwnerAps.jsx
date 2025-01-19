@@ -27,14 +27,21 @@ export default function ShowOwnerAps({ isAuthenticated }) {
 
     return (
         <>
-            <div className="row row-cols-1">
-                {apartments ? (apartments.map((element) => (
-                    <div key={element.id} className=" col mb-3">
-                        <div className="card" >
-                            <img src={`http://localhost:3000/uploads/${element.apartments_images}`} className="card-img-top" alt="..."></img>
+            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 justify-content-center align-items-stretch">
+                {apartments ? (apartments.map((apartment) => (
+                    <div key={apartment.id} className=" col mb-3">
+                        <div className="card h-100">
+                            <div>
+                                <img
+                                src={ apartment.apartments_images != '' ? `http://localhost:3000/uploads/${apartment.apartments_images}` : "/placeholder.png"}
+                                alt="Apartment"
+                                className="img-fluid rounded"
+                                style={{ maxHeight: '100%', objectFit: 'cover' }}
+                                />
+                            </div>
                             <div className="card-body">
-                                <h5 className="card-title">{element.address}</h5>
-                                <p className="card-text">{element.description}</p>
+                                <h5 className="">{apartment.name}</h5>
+                                <p className="">{apartment.address}</p>
 
                             </div>
                         </div>

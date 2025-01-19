@@ -8,7 +8,7 @@ export default function Search(){
              rooms: 0,
          });
 
-         const [filtered, setFiltered] = useState()
+         const [filtered, setFiltered] = useState([])
          const [categories, setCategories] = useState()
      
          function onChange(e) {
@@ -104,9 +104,9 @@ export default function Search(){
                          <div className="col-lg-3 col-md-6 col-sm-12">
                              <div className="form-group">
                                  <select name="" id="">
-                                    {categories.map(category => (
+                                    {categories ? categories.map(category => (
                                         <option key={category.id} value={category.id}>{category.name}</option>
-                                    ))}
+                                    )) : null}
                                  </select>
                              </div>
                          </div>

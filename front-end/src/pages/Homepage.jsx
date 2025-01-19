@@ -6,9 +6,9 @@ export default function HomePage() {
     const { apartments } = useGlobalContext();
 
     return (
-        <div className="container px-4" style={{ maxWidth: "2400px" }}>
+        <div className="container px-5" style={{ maxWidth: "2400px" }}>
         <h1 className="mb-3 text-center">STRUTTURE</h1>
-                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 justify-content-center">
+                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 justify-content-center align-items-stretch">
                     {apartments.map((apartment) => (
                         <HomepageCard apartment={apartment} key={apartment.id} />
                     ))}

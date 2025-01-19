@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import SingleApartmentCard from '../components/Cards/SingleApartmentCard';
 
 
@@ -11,7 +11,8 @@ export default function SingleApartment() {
 
     const [reviewCounter, setReviewCounter] = useState(0);
 
-    const { id } = useParams();
+    const [searchParams] = useSearchParams();
+    const id  = searchParams.get('id');
 
 
     return (
