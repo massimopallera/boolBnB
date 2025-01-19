@@ -124,7 +124,7 @@ export default function RegistrationForm() {
     };
 
     return (
-        <>
+        <div className="container">
             <form onSubmit={handleForm} className="p-5 rounded-3 shadow-lg bg-light">
                 <h2 className="text-center mb-4">Registrati</h2>
 
@@ -223,6 +223,6 @@ export default function RegistrationForm() {
 
             {/* Aggiungi il ToastContainer per gestire i toast */}
             <ToastContainer />
-        </>
+        </div>
     );
 }

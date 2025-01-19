@@ -191,8 +191,7 @@ function search(req, res){
         LEFT JOIN apartment_category ON ap.id = apartment_category.id_apartment_fk
         LEFT JOIN categories AS c ON c.id = apartment_category.id_category_fk
         WHERE ap.address LIKE ?
-        
-        `
+    `
         const filterAdress = `%${address}%`
         
         if(rooms > 0) {sql += `AND ap.rooms >= ? `}

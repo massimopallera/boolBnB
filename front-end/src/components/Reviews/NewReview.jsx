@@ -10,10 +10,9 @@ const initialFormData = {
     days_of_stay: 1,
 }
 
-export default function NewReview({ id }) {
+export default function NewReview({ id, setReviews, setCounter, counter }) {
 
     const [formData, setFormData] = useState(initialFormData);
-    const [formSubmitted, setFormSubmitted] = useState(false); // Stato per tracciare se il form è stato inviato
 
     function handleForm(e) {
 
@@ -49,17 +48,6 @@ export default function NewReview({ id }) {
             });
             return;
         }
-        // if (formData.date === '') {
-        //     alert('Il campo Data non può essere vuoto');
-        //     return;
-        // }
-
-        // controlla che il bro non sia nel futuro
-        // const formattedDate = dayjs().format('YYYY-MM-DD');
-        // if (formData.date > formattedDate) {
-        //     alert('Dove vai Marty McFly?!');
-        //     return
-        // }
 
         // send form data to server
         fetch('http://localhost:3000/reviews', {
@@ -79,12 +67,11 @@ export default function NewReview({ id }) {
                     hideProgressBar: true,
                     theme: "light",
                 });
-                setFormData(initialFormData); // Resetta il form
-                setFormSubmitted(true); // Nasconde il pulsante "Salva"
-
-                setTimeout(() => {
-                    window.location.reload();
-                }, 500);
+                setReviews(formData);
+                setCounter(counter + 1); // Aumenta il contatore delle recensioni
+                // setFormData(initialFormData); // Resetta il form
+                const formEl = document.getElementById('hide-form')
+                formEl.classList.add('d-none')
             })
             .catch(err => {
                 console.error(err);
@@ -95,7 +82,6 @@ export default function NewReview({ id }) {
     return (
         <>
             <ToastContainer />
-            {!formSubmitted && (
                 <form
                     className="card bg-light bg-gradient shadow-sm d-flex flex-column p-3"
                     onSubmit={handleForm}
@@ -168,7 +154,6 @@ export default function NewReview({ id }) {
                         Salva
                     </button>
                 </form>
-            )}
         </>
     )
 }

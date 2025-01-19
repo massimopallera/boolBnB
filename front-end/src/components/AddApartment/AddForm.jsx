@@ -255,7 +255,7 @@ export default function AddForm({ isAuthenticated }) {
                 <div class="my-3">
                     <label for="categories" class="form-label">Seleziona una categoria</label>
                     <select
-                        class="form-select"
+                        className="form-select"
                         name="categories"
                         id="categories"
                         onChange={(e) => setFormData({ ...formData, category: e.target.value })}

@@ -32,7 +32,7 @@ export default function SingleApartment({ id }) {
 
                 <div className="container m-auto ">
 
-                    <div className="bg-lightflex-row bg-gradientd-flex row">
+                    <div className="bg-lightflex-row bg-gradientd-flex">
                         <div className=" d-flex  row justify-content-center flex-wrap border shadow rounded p-4 bg-light bg-gradient">
                             <div className="col-sm-12 col-lg-8 p-0 m-0">
                                 <img

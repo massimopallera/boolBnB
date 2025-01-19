@@ -103,7 +103,7 @@ export default function Search(){
                          {/*  Searchbar: Numero minimo di stanze */}
                          <div className="col-lg-3 col-md-6 col-sm-12">
                              <div className="form-group">
-                                 <select name="" id="">
+                                 <select name="" id="" className="form-select">
                                     {categories ? categories.map(category => (
                                         <option key={category.id} value={category.id}>{category.name}</option>
                                     )) : null}

@@ -3,9 +3,9 @@ import dayjs from 'dayjs';
 
 
 
-export default function ReviewsSection({ id, setCounter }) {
+export default function ReviewsSection({ id, setCounter, reviews, setReviews }) {
 
-    const [reviews, setReviews] = useState([])
+    // const [reviews, setReviews] = useState([])
 
     const reviewsApi = import.meta.env.VITE_EXPRESS_SERVER + "/reviews/" + id
 
