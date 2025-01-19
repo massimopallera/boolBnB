@@ -27,7 +27,7 @@ header {
     width: 400px;
     aspect-ratio: 1;
 
-    transition: transform 0.3s ease;
+    transition: transform 0.25s ease;
     cursor: pointer;
     text-decoration: none;
 
@@ -35,7 +35,7 @@ header {
 
 
     &:hover {
-        transform: scale(1.20);
+        transform: scale(1.1);
     }
 
     .card-body {
@@ -54,6 +54,13 @@ header {
     position: absolute;
     top: 0;
     right: 0;
+    background: white;
+    border-radius: 15px;
+    margin: 2px 3px;
+    padding: 0 .5px;
+    gap: 2px
+    /* font-size: 10px; */
+    
 }
 
 .like {
@@ -72,9 +79,4 @@ header {
 
     scrollbar-width: none;
 
-}
-
-main {
-    flex: 1;
-    min-height: 100vh;
 }

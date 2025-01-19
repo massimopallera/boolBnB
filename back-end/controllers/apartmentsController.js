@@ -205,7 +205,7 @@ function search(req, res){
     pool.query(sql, [filterAdress, rooms, beds], (err, results) => {
         
         // handlers.statusCode(req, res, results)
-        if (err) {return res.status(500).json({message: err.message})}
+        if (err) { return res.status(500).json({message: err.message})}
         res.status(200).json({data: results})    
     })
 }

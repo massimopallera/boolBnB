@@ -50,10 +50,6 @@ export function GlobalContextProvider({ children }) {
             } else {
                 setIsAuthenticated(false)
                 console.log('non dentro');
-                
-                // ADD MESSAGE FOR USER 
-
-                // goToPage('/')
             }
         } catch (error) {
             console.error('Errore durante la verifica della sessione:', error);

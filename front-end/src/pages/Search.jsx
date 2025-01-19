@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import HomepageCard from "../components/Homepage/HomepageCard";
 
 export default function Search(){
@@ -9,6 +9,7 @@ export default function Search(){
          });
 
          const [filtered, setFiltered] = useState()
+         const [categories, setCategories] = useState()
      
          function onChange(e) {
              const { id, value } = e.target;
@@ -32,31 +33,19 @@ export default function Search(){
              .then(resp => resp.json())
              .then(data => setFiltered(data.data))
          }
-     
-         // useEffect(() => {
-         //     const filtered = apartments.filter((apartment) => {
-     
-         //         const matchesLocation = searchFields.address
-         //             ? apartment.address.toLowerCase().includes(searchFields.address.toLowerCase())
-         //             : true;
-     
-         //         const matchesBeds = searchFields.beds
-         //             ? apartment.beds === parseInt(searchFields.beds)
-         //             : true;
-         //         const matchesRooms = searchFields.rooms
-         //             ? apartment.rooms === parseInt(searchFields.rooms)
-         //             : true;
-     
-     
-         //         return matchesLocation && matchesBeds && matchesRooms;
-         //     });
-     
-         //     setFilteredApartments(filtered);
-         // }, [searchFields, apartments, setFilteredApartments]);
+
+         useEffect(() => {
+             // Fetch all apartments
+             fetch('http://localhost:3000/categories')
+            .then(resp => resp.json())
+            .then(data => setCategories(data.data))
+         },[])
      
          return (
              <div className="mb-3">
                  <div className="container mt-3">
+                    <h3 className="text-center">RICERCA</h3>
+
                      <form className="row g-3 align-items-end mb-5" onSubmit={handleForm}>
                          {/*  Searchbar: Località */}
                          <div className="col-lg-3 col-md-6 col-sm-12">
@@ -114,6 +103,17 @@ export default function Search(){
                          {/*  Searchbar: Numero minimo di stanze */}
                          <div className="col-lg-3 col-md-6 col-sm-12">
                              <div className="form-group">
+                                 <select name="" id="">
+                                    {categories.map(category => (
+                                        <option key={category.id} value={category.id}>{category.name}</option>
+                                    ))}
+                                 </select>
+                             </div>
+                         </div>
+     
+                         {/*  Searchbar: Numero minimo di stanze */}
+                         <div className="col-lg-3 col-md-6 col-sm-12">
+                             <div className="form-group">
                                  {/* <label htmlFor="rooms" className="form-label">
                                      Cer
                                  </label> */}
@@ -128,7 +128,12 @@ export default function Search(){
                     {/*  Risultati */}
                     {filtered ? (filtered.map(apartment => (
                         <HomepageCard apartment={apartment} key={apartment.id} />
-                    ))) : null}
+                    ))): (<>
+                        <div>
+                            <h5>Spiacente, non ho trovato nulla con i requisiti richiesti.</h5>
+                        </div>        
+                        </>)
+                    }
                     </div>
                  </div>
              </div>
