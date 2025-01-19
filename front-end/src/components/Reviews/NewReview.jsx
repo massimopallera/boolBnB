@@ -61,17 +61,17 @@ export default function NewReview({ id, setReviews, setCounter, counter }) {
                     toast.error('Errore durante il salvataggio della recensione');
                     return;
                 }
+                setReviews(formData);
+                setCounter(counter + 1); // Aumenta il contatore delle recensioni
+                // setFormData(initialFormData); // Resetta il form
+                const formEl = document.getElementById('hide-form')
+                formEl.classList.add('d-none')
                 toast.success('Recensione salvata con successo!', {
                     position: "top-center",
                     autoClose: 1000,
                     hideProgressBar: true,
                     theme: "light",
                 });
-                setReviews(formData);
-                setCounter(counter + 1); // Aumenta il contatore delle recensioni
-                // setFormData(initialFormData); // Resetta il form
-                const formEl = document.getElementById('hide-form')
-                formEl.classList.add('d-none')
             })
             .catch(err => {
                 console.error(err);
