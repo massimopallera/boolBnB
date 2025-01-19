@@ -195,8 +195,8 @@ function search(req, res){
         `
         const filterAdress = `%${address}%`
         
-        if(rooms > 0) {sql += `AND ap.rooms = ? `}
-        if(beds > 0) {sql += `AND ap.beds = ? `}
+        if(rooms > 0) {sql += `AND ap.rooms >= ? `}
+        if(beds > 0) {sql += `AND ap.beds >= ? `}
         
         sql += `ORDER BY ap.hearts_counter DESC`
 
