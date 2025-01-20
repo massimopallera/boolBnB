@@ -59,8 +59,8 @@ header {
     margin: 2px 3px;
     padding: 0 .5px;
     gap: 2px
-    /* font-size: 10px; */
-    
+        /* font-size: 10px; */
+
 }
 
 .like {
@@ -79,4 +79,8 @@ header {
 
     scrollbar-width: none;
 
+}
+
+.logout {
+    height: 65vh;
 }
