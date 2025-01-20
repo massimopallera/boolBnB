@@ -42,10 +42,10 @@ export default function AddForm({ isAuthenticated }) {
         let formErrors = {};
         let isGood = false;
 
-        if (formData.rooms === 0) errors.rooms = "Numero di stanze non valido";
-        if (formData.beds === 0) errors.beds = "Numero di letti non valido";
-        if (formData.toilets === 0) errors.toilets = "Numero di bagni non valido";
-        if (formData.sq_meters === 0) errors.sq_meters = "Superficie non valida";
+        if (formData.rooms === 0) formErrors.rooms = "Numero di stanze non valido";
+        if (formData.beds === 0) formErrors.beds = "Numero di letti non valido";
+        if (formData.toilets === 0) formErrors.toilets = "Numero di bagni non valido";
+        if (formData.sq_meters === 0) formErrors.sq_meters = "Superficie non valida";
         if (!formData.name) formErrors.name = "Il nome della struttura è obbligatorio";
         if (!formData.rooms) formErrors.rooms = "Il numero di stanze è obbligatorio";
         if (!formData.beds) formErrors.beds = "Il numero di letti è obbligatorio";
