@@ -47,7 +47,7 @@ export default function Header() {
 
                         {isAuthenticated ? (
                             <>
-                                <NavLink to="apartments/AddNew" className="me-3 d-none d-sm-inline">
+                                <NavLink to="apartments/AddNew" className="me-2 d-none d-sm-inline">
                                     < button
                                         type="button"
                                         className="btn btn-primary"
@@ -137,22 +137,22 @@ export default function Header() {
 
                                 </NavLink>
 
-                        <NavLink to="login" className="me-2 d-inline d-sm-none">
-                            < button
-                                type="button"
-                                className="btn btn-primary"
-                            >
-                                <i className="bi bi-box-arrow-in-right fs-5"></i>
-                            </button>
+                                <NavLink to="login" className="me-2 d-inline d-sm-none">
+                                    < button
+                                        type="button"
+                                        className="btn btn-primary"
+                                    >
+                                        <i className="bi bi-box-arrow-in-right fs-5"></i>
+                                    </button>
 
-                        </NavLink>
-                        <NavLink to="sign-in" className="me-2 d-inline d-sm-none">
-                            < button
-                                type="button"
-                                className="btn btn-primary"
-                            >
-                                <i className="bi bi-person-plus fs-5"></i>
-                            </button>
+                                </NavLink>
+                                <NavLink to="sign-in" className="me-2 d-inline d-sm-none">
+                                    < button
+                                        type="button"
+                                        className="btn btn-primary"
+                                    >
+                                        <i className="bi bi-person-plus fs-5"></i>
+                                    </button>
 
                                 </NavLink>
                             </>
