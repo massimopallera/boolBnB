@@ -15,8 +15,16 @@ router.post('/', (req, res) => {
     html: `<body>${req.body.html || null}</body>`,
   }
 
-  controller.sendEmail(req, res, msg)
+  const autoMsg = {
+    to: 'michele.fumi96@gmail.com',
+    from: process.env.EMAIL_SENDGRID, // Change to your verified sender
+    subject: 'Grazie per il tuo tempo!',
+    text: 'ciao,Abbiamo inoltrato la tua richiesta al proprietario, attendi pazientemente la risposta.',
+    html: `<body><div>ciao,Abbiamo inoltrato la tua richiesta al proprietario, attendi pazientemente la risposta.</div></body>`,
+  }
+  controller.sendEmail(req, res, msg, autoMsg)
 })
+
 
 
 export default router
