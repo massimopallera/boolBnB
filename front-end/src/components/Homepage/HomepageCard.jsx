@@ -4,7 +4,7 @@ export default function HomepageCard({ apartment }) {
 
     return (
         <div className="col d-flex justify-content-center my-3">
-            <Link to={`/apartments/${apartment.name}?id=${apartment.id}`} className="overviewCard card bg-light bg-gradient shadow-sm d-flex flex-column h-100">
+            <Link to={`/apartments/${apartment.slug}?id=${apartment.id}`} className="overviewCard card bg-light bg-gradient shadow-sm d-flex flex-column h-100">
 
                 <span>
                     <div className="homeLike d-flex px-2" style={{fontSize:'15px', padding: "1px 0"}}>

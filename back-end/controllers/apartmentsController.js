@@ -95,13 +95,15 @@ const store = async (req, res) => {
 
         const apartments_images = req.body.apartments_images
 
+        const slug = name.toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-');
+        
         // Inizia una transazione
         await connection.beginTransaction();
 
         // Query per inserire l'appartamento
         const apartmentQuery = `
-            INSERT INTO apartments (id_user, description, rooms, beds, toilets, sq_meters, address, apartments_images, name)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO apartments (id_user, description, rooms, beds, toilets, sq_meters, address, apartments_images, name, slug)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
         const [apartmentResult] = await connection.query(apartmentQuery, [
             id_user,
@@ -112,7 +114,8 @@ const store = async (req, res) => {
             Number(sq_meters),
             address,
             apartments_images,
-            name
+            name,
+            slug
         ]);
 
         // Ottieni l'ID dell'appartamento appena inserito

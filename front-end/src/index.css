@@ -39,7 +39,6 @@ footer{
 
 .overviewCard {
     width: 400px;
-    aspect-ratio: 1;
 
     transition: transform 0.25s ease;
     cursor: pointer;
