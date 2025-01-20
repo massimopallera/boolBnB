@@ -43,9 +43,13 @@ export default function AddForm({ isAuthenticated }) {
 
         if (!formData.name) formErrors.name = "Il nome della struttura è obbligatorio";
         if (!formData.rooms) formErrors.rooms = "Il numero di stanze è obbligatorio";
+        if (!formData.rooms === 0) formErrors.rooms = "Zero stanze non è un valore valido";
         if (!formData.beds) formErrors.beds = "Il numero di letti è obbligatorio";
+        if (!formData.beds === 0) formErrors.beds = "Zero letti non è un valore valido";
         if (!formData.toilets) formErrors.toilets = "Il numero di bagni è obbligatorio";
+        if (!formData.toilets === 0) formErrors.toilets = "Zero bagni non è un valore valido";
         if (!formData.sq_meters) formErrors.sq_meters = "La grandezza in metri quadri è obbligatoria";
+        if (!formData.sq_meters === 0) formErrors.sq_meters = "Zero mt.quadri non è un valore valido";
         if (!formData.address) formErrors.address = "L'indirizzo è obbligatorio";
         if (!formData.description) formErrors.description = "La descrizione è obbligatoria";
         if (!formData.category) formErrors.category = "La categoria è obbligatoria";
