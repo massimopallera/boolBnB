@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
+
 const initialFormData = {
     rooms: '',
     beds: '',
@@ -214,6 +216,7 @@ export default function AddForm({ isAuthenticated }) {
 
 
     return (
+
         <div className="container mt-5">
             <form className="card bg-light bg-gradientd-flex flex-column p-3 mb-3" onSubmit={handleForm}>
                 <h4 className="text-center">Aggiungi inserzione</h4>
