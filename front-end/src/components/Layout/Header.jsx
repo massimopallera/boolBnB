@@ -25,73 +25,73 @@ export default function Header() {
                     </NavLink>
                     <div>
 
-                    <NavLink to="search" className="me-2 d-none d-sm-inline">
-                        < button
-                            type="button"
-                            className="btn btn-primary"
-                        >
-                            Cerca
-
-                        </button>
-                    </NavLink>
-                    
-                    <NavLink to="search" className="me-2 d-sm-none d-inline">
-                        < button
-                            type="button"
-                            className="btn btn-primary"
-                        >
-                            <i className="bi bi-search fs-5"></i>
-
-                        </button>
-                    </NavLink>
-
-                    {isAuthenticated ? ( 
-                    <>
-                        <NavLink to="apartments/AddNew" className="me-3 d-none d-sm-inline">
+                        <NavLink to="search" className="me-2 d-none d-sm-inline">
                             < button
                                 type="button"
                                 className="btn btn-primary"
                             >
-                                Aggiungi Un Appartamento
+                                Cerca
 
                             </button>
-
                         </NavLink>
 
-                        <NavLink to="logout" className="d-none d-sm-inline">
+                        <NavLink to="search" className="me-2 d-sm-none d-inline">
                             < button
                                 type="button"
                                 className="btn btn-primary"
                             >
-                                Logout
-
-                            </button>
-
-                        </NavLink>
-
-                        <NavLink to="apartments/AddNew" className="me-2 d-inline d-sm-none">
-                                < button
-                                    type="button"
-                                    className="btn btn-primary"
-                                >
-                                    <i className="bi bi-plus fs-5"></i>
-
-                                </button>
-                        </NavLink>
-                        
-                        <NavLink to="logout" className="mx-1 d-inline d-sm-none">
-                            < button
-                                type="button"
-                                className="btn btn-primary"
-                                >
-                                <i className="bi bi-box-arrow-right fs-5"></i>
+                                <i className="bi bi-search fs-5"></i>
 
                             </button>
                         </NavLink>
 
-                            
-                        {/* GOLOSA IDEA BOTTONI IN BASSO */}
-                        {/* 
+                        {isAuthenticated ? (
+                            <>
+                                <NavLink to="apartments/AddNew" className="me-3 d-none d-sm-inline">
+                                    < button
+                                        type="button"
+                                        className="btn btn-primary"
+                                    >
+                                        Aggiungi Un Appartamento
+
+                                    </button>
+
+                                </NavLink>
+
+                                <NavLink to="logout" className="d-none d-sm-inline">
+                                    < button
+                                        type="button"
+                                        className="btn btn-primary"
+                                    >
+                                        Logout
+
+                                    </button>
+
+                                </NavLink>
+
+                                <NavLink to="apartments/AddNew" className="me-2 d-inline d-sm-none">
+                                    < button
+                                        type="button"
+                                        className="btn btn-primary"
+                                    >
+                                        <i className="bi bi-plus fs-5"></i>
+
+                                    </button>
+                                </NavLink>
+
+                                <NavLink to="logout" className="mx-1 d-inline d-sm-none">
+                                    < button
+                                        type="button"
+                                        className="btn btn-primary"
+                                    >
+                                        <i className="bi bi-box-arrow-right fs-5"></i>
+
+                                    </button>
+                                </NavLink>
+
+
+                                {/* GOLOSA IDEA BOTTONI IN BASSO */}
+                                {/* 
                         <div style={{right: "2rem", bottom: "2rem", position:"fixed"}}>
                             <NavLink to="logout" className="d-block d-sm-none">
                                 < button
@@ -116,51 +116,51 @@ export default function Header() {
                         */}
 
 
-                        </>) : (
+                            </>) : (
                             <>
-                        <NavLink to="login" className="mx-1 d-none d-sm-inline">
-                            < button
-                                type="button"
-                                className="btn btn-primary"
-                            >
-                                Login
-                            </button>
-                        </NavLink>
-                        
-                        <NavLink to="sign-in" className="mx-1 d-none d-sm-inline">
-                            < button
-                                type="button"
-                                className="btn btn-primary"
-                            >
-                                Registrati
-                            </button>
+                                <NavLink to="login" className="mx-1 d-none d-sm-inline">
+                                    < button
+                                        type="button"
+                                        className="btn btn-primary"
+                                    >
+                                        Login
+                                    </button>
+                                </NavLink>
 
-                        </NavLink>
+                                <NavLink to="sign-in" className="mx-1 d-none d-sm-inline">
+                                    < button
+                                        type="button"
+                                        className="btn btn-primary"
+                                    >
+                                        Registrati
+                                    </button>
 
-                        <NavLink to="login" className="me-2 d-inline d-sm-none">
-                            < button
-                                type="button"
-                                className="btn btn-primary"
-                            >
-                                <i class="bi bi-box-arrow-in-right fs-5"></i>
-                            </button>
+                                </NavLink>
 
-                        </NavLink>
-                        <NavLink to="sign-in" className="me-2 d-inline d-sm-none">
-                            < button
-                                type="button"
-                                className="btn btn-primary"
-                            >
-                                <i class="bi bi-person-plus fs-5"></i>
-                            </button>
+                                <NavLink to="login" className="me-2 d-inline d-sm-none">
+                                    < button
+                                        type="button"
+                                        className="btn btn-primary"
+                                    >
+                                        <i className="bi bi-box-arrow-in-right fs-5"></i>
+                                    </button>
 
-                        </NavLink>
-                        </>
+                                </NavLink>
+                                <NavLink to="sign-in" className="me-2 d-inline d-sm-none">
+                                    < button
+                                        type="button"
+                                        className="btn btn-primary"
+                                    >
+                                        <i className="bi bi-person-plus fs-5"></i>
+                                    </button>
+
+                                </NavLink>
+                            </>
                         )
                         }
                     </div>
 
-                    
+
 
                 </nav>
             </header>
