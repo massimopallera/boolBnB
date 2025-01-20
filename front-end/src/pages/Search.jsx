@@ -120,7 +120,7 @@ export default function Search(){
                 </form>
 
 
-                <div className="row row-cols-4 g-5">
+                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-5">
 
                     {/*  Risultati */}
                     {filtered ? (filtered.map(apartment => (
