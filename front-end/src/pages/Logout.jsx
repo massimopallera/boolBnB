@@ -19,7 +19,7 @@ export default function Logout() {
                     credentials: 'include', // Necessario per includere i cookie
                 })
                 console.log('Logout effettuato, redirezione alla home...');
-                toast.success("Login effettutato con successo!", {
+                toast.success("Logout effettutato con successo!", {
                     position: "top-center",
                     autoClose: 1000,
                     hideProgressBar: true,
@@ -31,7 +31,7 @@ export default function Logout() {
                 });
                 setTimeout(() => {
                     navigate("/");
-
+                    window.location.reload();
                 }, 1000); /* navigate('/'); // Redirigi se autenticato */
                 return;
             } else {

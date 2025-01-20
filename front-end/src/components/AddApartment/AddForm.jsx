@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
+
 const initialFormData = {
-    rooms: '',
-    beds: '',
-    toilets: '',
-    sq_meters: '',
+    rooms: 0,
+    beds: 0,
+    toilets: 0,
+    sq_meters: 0,
     address: '',
     description: '',
     name: '',
@@ -40,7 +42,10 @@ export default function AddForm({ isAuthenticated }) {
         let formErrors = {};
         let isGood = false;
 
-
+        if (formData.rooms === 0) formErrors.rooms = "Numero di stanze non valido";
+        if (formData.beds === 0) formErrors.beds = "Numero di letti non valido";
+        if (formData.toilets === 0) formErrors.toilets = "Numero di bagni non valido";
+        if (formData.sq_meters === 0) formErrors.sq_meters = "Superficie non valida";
         if (!formData.name) formErrors.name = "Il nome della struttura è obbligatorio";
         if (!formData.rooms) formErrors.rooms = "Il numero di stanze è obbligatorio";
         if (!formData.beds) formErrors.beds = "Il numero di letti è obbligatorio";
@@ -49,6 +54,7 @@ export default function AddForm({ isAuthenticated }) {
         if (!formData.address) formErrors.address = "L'indirizzo è obbligatorio";
         if (!formData.description) formErrors.description = "La descrizione è obbligatoria";
         if (!formData.category) formErrors.category = "La categoria è obbligatoria";
+
         if (!file) {
             formErrors.file = "inserisci una foto.";
             isGood = true;
@@ -210,28 +216,29 @@ export default function AddForm({ isAuthenticated }) {
 
 
     return (
+
         <div className="container mt-5">
             <form className="card bg-light bg-gradientd-flex flex-column p-3 mb-3" onSubmit={handleForm}>
                 <h4 className="text-center">Aggiungi inserzione</h4>
                 <div className="mb-3">
                     <label htmlFor="name" className="form-label">Nome Inserzione</label>
-                    <input type="text" min="0" className="form-control" name="name" id="name" placeholder="Inserisci il nome appartamento" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
+                    <input type="text" className="form-control" name="name" id="name" placeholder="Inserisci il nome appartamento" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="rooms" className="form-label">Stanze</label>
-                    <input type="number" min="0" className="form-control" name="rooms" id="rooms" placeholder="Inserisci il numero di stanze" value={formData.rooms} onChange={(e) => setFormData({ ...formData, rooms: e.target.value })} />
+                    <input type="number" className="form-control" name="rooms" id="rooms" placeholder="Inserisci il numero di stanze" value={formData.rooms} onChange={(e) => setFormData({ ...formData, rooms: e.target.value })} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="beds" className="form-label">Letti</label>
-                    <input type="number" min="0" className="form-control" name="beds" id="beds" placeholder="Inserisci il numero di letti" value={formData.beds} onChange={(e) => setFormData({ ...formData, beds: e.target.value })} />
+                    <input type="number" className="form-control" name="beds" id="beds" placeholder="Inserisci il numero di letti" value={formData.beds} onChange={(e) => setFormData({ ...formData, beds: e.target.value })} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="toilets" className="form-label">Bagni</label>
-                    <input type="number" min="0" className="form-control" name="toilets" id="toilets" placeholder="Inserisci il numero di bagni" value={formData.toilets} onChange={(e) => setFormData({ ...formData, toilets: e.target.value })} />
+                    <input type="number" className="form-control" name="toilets" id="toilets" placeholder="Inserisci il numero di bagni" value={formData.toilets} onChange={(e) => setFormData({ ...formData, toilets: e.target.value })} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="sq_meters" className="form-label">Metri quadri</label>
-                    <input type="number" min="0" className="form-control" name="sq_meters" id="sq_meters" placeholder="Inserisci la grandezza in metri quadri" value={formData.sq_meters} onChange={(e) => setFormData({ ...formData, sq_meters: e.target.value })} />
+                    <input type="number" className="form-control" name="sq_meters" id="sq_meters" placeholder="Inserisci la grandezza in metri quadri" value={formData.sq_meters} onChange={(e) => setFormData({ ...formData, sq_meters: e.target.value })} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="address" className="form-label">Indirizzo</label>

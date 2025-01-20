@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom"
 
 export default function ShowOwnerAps({ isAuthenticated }) {
 
@@ -29,23 +30,25 @@ export default function ShowOwnerAps({ isAuthenticated }) {
         <>
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 justify-content-center align-items-stretch">
                 {apartments ? (apartments.map((apartment) => (
-                    <div key={apartment.id} className=" col mb-3">
-                        <div className="card h-100">
-                            <div>
-                                <img
-                                src={ apartment.apartments_images != '' ? `http://localhost:3000/uploads/${apartment.apartments_images}` : "/placeholder.png"}
-                                alt="Apartment"
-                                className="img-fluid rounded"
-                                style={{ maxHeight: '100%', objectFit: 'cover' }}
-                                />
-                            </div>
-                            <div className="card-body">
-                                <h5 className="">{apartment.name}</h5>
-                                <p className="">{apartment.address}</p>
+                    <Link to={`/apartments/${apartment.name}?id=${apartment.id}`} className="text-decoration-none">
+                        <div key={apartment.id} className=" col mb-3">
+                            <div className="card h-100">
+                                <div>
+                                    <img
+                                        src={apartment.apartments_images != '' ? `http://localhost:3000/uploads/${apartment.apartments_images}` : "/placeholder.png"}
+                                        alt="Apartment"
+                                        className="img-fluid rounded"
+                                        style={{ maxHeight: '100%', objectFit: 'cover' }}
+                                    />
+                                </div>
+                                <div className="card-body">
+                                    <h5 className="">{apartment.name}</h5>
+                                    <p className="">{apartment.address}</p>
 
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 ))) : <>
 
                     <div className="py-3">
@@ -56,7 +59,7 @@ export default function ShowOwnerAps({ isAuthenticated }) {
 
                 </>}
 
-            </div>
+            </div >
         </>
     )
 }
