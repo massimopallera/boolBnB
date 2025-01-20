@@ -16,7 +16,9 @@ export default function HomepageCard({ apartment }) {
                         src={ apartment.apartments_images != '' ? `http://localhost:3000/uploads/${apartment.apartments_images}` : "/placeholder.png"}
                         alt="Apartment"
                         className="img-fluid rounded"
-                        style={{ maxHeight: '100%', objectFit: 'cover' }}
+                        style={{     maxHeight: "250px",
+                            width: "100%",
+                            objectFit: "cover" }}
                     />
                 </span>
 
