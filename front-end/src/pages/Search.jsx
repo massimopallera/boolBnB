@@ -7,7 +7,7 @@ export default function Search() {
         address: "",
         beds: 0,
         rooms: 0,
-        category: 1
+        category: 0
     });
 
     const [filtered, setFiltered] = useState([]);
@@ -69,7 +69,7 @@ export default function Search() {
             address: params.get("address") || "",
             beds: Number(params.get("beds")) || 0,
             rooms: Number(params.get("rooms")) || 0,
-            category: Number(params.get("category")) || 1,
+            category: Number(params.get("category")) || 0,
         };
 
         // Se ci sono parametri validi, aggiorna lo stato e fai una ricerca
@@ -148,6 +148,7 @@ export default function Search() {
                                 onChange={(e) => setSearchFields({ ...searchFields, category: e.target.value })}
                                 value={searchFields.category}
                             >
+                                 <option value={0} selected>Seleziona una categoria</option>
                                 {categories.map((category) => (
                                     <option key={category.id} value={category.id}>{category.name}</option>
                                 ))}
