@@ -252,8 +252,8 @@ export default function AddForm({ isAuthenticated }) {
                     </div>
                 )}
 
-                <div class="my-3">
-                    <label for="categories" class="form-label">Seleziona una categoria</label>
+                <div className="my-3">
+                    <label for="categories" className="form-label">Seleziona una categoria</label>
                     <select
                         className="form-select"
                         name="categories"

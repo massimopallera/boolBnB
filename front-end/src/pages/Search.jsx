@@ -6,17 +6,15 @@ export default function Search(){
              address: "",
              beds: 0,
              rooms: 0,
+             category: 1
          });
 
          const [filtered, setFiltered] = useState([])
          const [categories, setCategories] = useState()
      
          function onChange(e) {
-             const { id, value } = e.target;
-             setSearchFields((prev) => ({
-                 ...prev,
-                 [id]: value,
-             }));
+            console.log(searchFields.category)
+             const {id, value} = e.target;
          }
          
          function handleForm(e) {
@@ -27,11 +25,11 @@ export default function Search(){
 
              fetch('http://localhost:3000/apartments/search', {
                  method: 'POST',
-                 body: JSON.stringify({...searchFields, beds: Number(searchFields.beds), rooms:Number(searchFields.rooms)}),
+                 body: JSON.stringify({address: searchFields.address, beds: Number(searchFields.beds), rooms:Number(searchFields.rooms), category:Number(searchFields.category)}),
                  headers: { 'Content-Type': 'application/json' }
              })
              .then(resp => resp.json())
-             .then(data => setFiltered(data.data))
+             .then(data => {console.log(data);(data.data.length !== 0 ? setFiltered(data.data) : setFiltered())})
          }
 
          useEffect(() => {
@@ -58,7 +56,7 @@ export default function Search(){
                                      className="form-control"
                                      id="address"
                                      placeholder="Inserisci la località"
-                                     onChange={onChange}
+                                     onChange={(e) => setSearchFields({...searchFields, address: e.target.value})}
                                      value={searchFields.address}
                                  />
                              </div>
@@ -76,7 +74,7 @@ export default function Search(){
                                      className="form-control"
                                      id="beds"
                                      placeholder="Inserisci i posti letto"
-                                     onChange={onChange}
+                                     onChange={(e) => setSearchFields({...searchFields, beds: e.target.value})}
                                      value={searchFields.beds}
                                  />
                              </div>
@@ -94,7 +92,7 @@ export default function Search(){
                                      className="form-control"
                                      id="rooms"
                                      placeholder="Inserisci le stanze"
-                                     onChange={onChange}
+                                     onChange={(e) => setSearchFields({...searchFields, rooms: e.target.value})}
                                      value={searchFields.rooms}
                                  />
                              </div>
@@ -103,7 +101,7 @@ export default function Search(){
                          {/*  Searchbar: Numero minimo di stanze */}
                          <div className="col-lg-3 col-md-6 col-sm-12">
                              <div className="form-group">
-                                 <select name="" id="" className="form-select">
+                                 <select name="" id="" className="form-select" onChange={(e) => setSearchFields({...searchFields, category: e.target.value})}>
                                     {categories ? categories.map(category => (
                                         <option key={category.id} value={category.id}>{category.name}</option>
                                     )) : null}

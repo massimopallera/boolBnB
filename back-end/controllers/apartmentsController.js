@@ -182,7 +182,8 @@ function storeImg(req, res) {
 }
 
 function search(req, res){
-    const { rooms, beds, address } = req.body
+    const { rooms, beds, address, category } = req.body
+    console.log(req.body)
 
     let sql = 
     `
@@ -190,18 +191,21 @@ function search(req, res){
         FROM apartments AS ap
         LEFT JOIN apartment_category ON ap.id = apartment_category.id_apartment_fk
         LEFT JOIN categories AS c ON c.id = apartment_category.id_category_fk
-        WHERE ap.address LIKE ?
+        WHERE apartment_category.id_category_fk = ?
     `
         const filterAdress = `%${address}%`
+        const values = [Number(category)]
         
-        if(rooms > 0) {sql += `AND ap.rooms >= ? `}
-        if(beds > 0) {sql += `AND ap.beds >= ? `}
+        if(address != "") {sql+= `AND ap.address LIKE ?`; values.push(filterAdress)}
+        if(rooms > 0) {sql += `AND ap.rooms >= ? `; values.push(Number(rooms))}
+        if(beds > 0) {sql += `AND ap.beds >= ? `; values.push(Number(beds))}
         
         sql += `ORDER BY ap.hearts_counter DESC`
 
 
 
-    pool.query(sql, [filterAdress, rooms, beds], (err, results) => {
+    pool.query(sql, values, (err, results) => {
+        console.log(results);
         
         // handlers.statusCode(req, res, results)
         if (err) { return res.status(500).json({message: err.message})}
