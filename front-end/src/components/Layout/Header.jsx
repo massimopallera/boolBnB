@@ -18,7 +18,7 @@ export default function Header() {
         <>
             <header>
 
-                <nav className="shadow py-2 px-4 mb-5 bg-white d-flex align-items-center justify-content-between">
+                <nav className="shadow py-2 px-4 bg-white d-flex align-items-center justify-content-between">
                     <NavLink to="/" className="text-decoration-none">
                         <img className="logo" src="/logo.png" alt="Logo" />
 

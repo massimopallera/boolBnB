@@ -7,7 +7,7 @@ export default function DefaultLayout() {
         <>
             <Header />
 
-            <main className="pb-5">
+            <main className="py-5">
 
                 <Outlet />
 
