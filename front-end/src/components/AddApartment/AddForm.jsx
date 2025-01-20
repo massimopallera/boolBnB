@@ -43,13 +43,13 @@ export default function AddForm({ isAuthenticated }) {
 
         if (!formData.name) formErrors.name = "Il nome della struttura è obbligatorio";
         if (!formData.rooms) formErrors.rooms = "Il numero di stanze è obbligatorio";
-        if (!formData.rooms === 0) formErrors.rooms = "Zero stanze non è un valore valido";
+        if (!formData.rooms == '0') formErrors.rooms = "Zero stanze non è un valore valido";
         if (!formData.beds) formErrors.beds = "Il numero di letti è obbligatorio";
-        if (!formData.beds === 0) formErrors.beds = "Zero letti non è un valore valido";
+        if (!formData.beds == '0') formErrors.beds = "Zero letti non è un valore valido";
         if (!formData.toilets) formErrors.toilets = "Il numero di bagni è obbligatorio";
-        if (!formData.toilets === 0) formErrors.toilets = "Zero bagni non è un valore valido";
+        if (!formData.toilets == '0') formErrors.toilets = "Zero bagni non è un valore valido";
         if (!formData.sq_meters) formErrors.sq_meters = "La grandezza in metri quadri è obbligatoria";
-        if (!formData.sq_meters === 0) formErrors.sq_meters = "Zero mt.quadri non è un valore valido";
+        if (!formData.sq_meters == '0') formErrors.sq_meters = "Zero mt.quadri non è un valore valido";
         if (!formData.address) formErrors.address = "L'indirizzo è obbligatorio";
         if (!formData.description) formErrors.description = "La descrizione è obbligatoria";
         if (!formData.category) formErrors.category = "La categoria è obbligatoria";
@@ -223,19 +223,19 @@ export default function AddForm({ isAuthenticated }) {
                 </div>
                 <div className="mb-3">
                     <label htmlFor="rooms" className="form-label">Stanze</label>
-                    <input type="number" min="1" className="form-control" name="rooms" id="rooms" placeholder="Inserisci il numero di stanze" value={formData.rooms} onChange={(e) => setFormData({ ...formData, rooms: e.target.value })} />
+                    <input type="number" min="0" className="form-control" name="rooms" id="rooms" placeholder="Inserisci il numero di stanze" value={formData.rooms} onChange={(e) => setFormData({ ...formData, rooms: e.target.value })} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="beds" className="form-label">Letti</label>
-                    <input type="number" min="1" className="form-control" name="beds" id="beds" placeholder="Inserisci il numero di letti" value={formData.beds} onChange={(e) => setFormData({ ...formData, beds: e.target.value })} />
+                    <input type="number" min="0" className="form-control" name="beds" id="beds" placeholder="Inserisci il numero di letti" value={formData.beds} onChange={(e) => setFormData({ ...formData, beds: e.target.value })} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="toilets" className="form-label">Bagni</label>
-                    <input type="number" min="1" className="form-control" name="toilets" id="toilets" placeholder="Inserisci il numero di bagni" value={formData.toilets} onChange={(e) => setFormData({ ...formData, toilets: e.target.value })} />
+                    <input type="number" min="0" className="form-control" name="toilets" id="toilets" placeholder="Inserisci il numero di bagni" value={formData.toilets} onChange={(e) => setFormData({ ...formData, toilets: e.target.value })} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="sq_meters" className="form-label">Metri quadri</label>
-                    <input type="number" min="1" className="form-control" name="sq_meters" id="sq_meters" placeholder="Inserisci la grandezza in metri quadri" value={formData.sq_meters} onChange={(e) => setFormData({ ...formData, sq_meters: e.target.value })} />
+                    <input type="number" min="0" className="form-control" name="sq_meters" id="sq_meters" placeholder="Inserisci la grandezza in metri quadri" value={formData.sq_meters} onChange={(e) => setFormData({ ...formData, sq_meters: e.target.value })} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="address" className="form-label">Indirizzo</label>
