@@ -194,28 +194,36 @@ function search(req, res){
         FROM apartments AS ap
         LEFT JOIN apartment_category ON ap.id = apartment_category.id_apartment_fk
         LEFT JOIN categories AS c ON c.id = apartment_category.id_category_fk
-        WHERE apartment_category.id_category_fk = ?
     `
         const filterAdress = `%${address}%`
-        const values = [Number(category)]
+        const values = []
+
+        let queryString = []
+
+        if (category != 0){queryString.push(` apartment_category.id_category_fk = ? `);  values.push(Number(category))}
+        if(address != "") {queryString.push(` ap.address LIKE ? `); values.push(filterAdress)}
+        if(rooms > 0) {queryString.push(` ap.rooms >= ? `);  values.push(Number(rooms))}
+        if(beds > 0) {queryString.push(` ap.beds >= ? `);  values.push(Number(beds))}
         
-        if(address != "") {sql+= `AND ap.address LIKE ?`; values.push(filterAdress)}
-        if(rooms > 0) {sql += `AND ap.rooms >= ? `; values.push(Number(rooms))}
-        if(beds > 0) {sql += `AND ap.beds >= ? `; values.push(Number(beds))}
-        
+        if (values.length > 0){
+            sql += ` WHERE `
+            for (let i = 0; i < values.length; i++){
+                sql += queryString[i]
+                if(i!= values.length - 1) sql += ` AND `  // append AND if not the last condition
+            }
+
+        }
+
         sql += `ORDER BY ap.hearts_counter DESC`
 
 
 
-    pool.query(sql, values, (err, results) => {
-        console.log(results);
-        
+    pool.query(sql, values, (err, results) => {        
         // handlers.statusCode(req, res, results)
         if (err) { return res.status(500).json({message: err.message})}
         res.status(200).json({data: results})    
     })
 }
-
 
 export default {
     index,
@@ -227,5 +235,3 @@ export default {
     serviceIndex,
     search 
 }
-
-

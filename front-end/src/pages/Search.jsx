@@ -148,7 +148,7 @@ export default function Search() {
                                 onChange={(e) => setSearchFields({ ...searchFields, category: e.target.value })}
                                 value={searchFields.category}
                             >
-                                 <option value={0} selected>Seleziona una categoria</option>
+                                 <option value={0} >Seleziona una categoria</option>
                                 {categories.map((category) => (
                                     <option key={category.id} value={category.id}>{category.name}</option>
                                 ))}

@@ -45,11 +45,11 @@ export function GlobalContextProvider({ children }) {
 
             if (response.ok) {
                 setIsAuthenticated(true)
-                console.log('dentro');
+                // console.log('dentro');
                 goToPage(pagePath)
             } else {
                 setIsAuthenticated(false)
-                console.log('non dentro');
+                // console.log('non dentro');
             }
         } catch (error) {
             console.error('Errore durante la verifica della sessione:', error);
