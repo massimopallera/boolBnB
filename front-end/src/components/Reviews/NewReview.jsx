@@ -82,48 +82,48 @@ export default function NewReview({ id, setReviews, setCounter, counter }) {
     return (
         <>
             <ToastContainer />
-                <form
-                    className="card bg-light bg-gradient shadow-sm d-flex flex-column p-3"
-                    onSubmit={handleForm}
-                >
-                    <h4 className="text-center">Lascia la tua recensione</h4>
-                    <div className="mb-3">
-                        <label htmlFor="name" className="form-label">
-                            Nome
-                        </label>
-                        <input
-                            type="text"
-                            name="name"
-                            id="name"
-                            className="form-control"
-                            placeholder="Scrivi il tuo nome"
-                            value={formData.name}
-                            onChange={(e) =>
-                                setFormData({ ...formData, name: e.target.value })
-                            }
-                        />
-                    </div>
+            <form
+                className="card bg-light bg-gradient shadow-sm d-flex flex-column p-3"
+                onSubmit={handleForm}
+            >
+                <h4 className="text-center">Lascia la tua recensione</h4>
+                <div className="mb-3">
+                    <label htmlFor="name" className="form-label">
+                        Nome
+                    </label>
+                    <input
+                        type="text"
+                        name="name"
+                        id="name"
+                        className="form-control"
+                        placeholder="Scrivi il tuo nome"
+                        value={formData.name}
+                        onChange={(e) =>
+                            setFormData({ ...formData, name: e.target.value })
+                        }
+                    />
+                </div>
 
-                    <div className="mb-3">
-                        <label htmlFor="days_of_stay" className="form-label">
-                            Giorni di permanenza
-                        </label>
-                        <input
-                            type="number"
-                            min="0"
-                            max="30"
-                            name="days_of_stay"
-                            id="days_of_stay"
-                            className="form-control"
-                            placeholder="segna quanti giorni hai pernottato in questo appartamento"
-                            value={formData.days_of_stay}
-                            onChange={(e) =>
-                                setFormData({ ...formData, days_of_stay: Number(e.target.value) })
-                            }
-                        />
-                    </div>
+                <div className="mb-3">
+                    <label htmlFor="days_of_stay" className="form-label">
+                        Giorni di permanenza
+                    </label>
+                    <input
+                        type="number"
+                        min="0"
+                        max="30"
+                        name="days_of_stay"
+                        id="days_of_stay"
+                        className="form-control"
+                        placeholder="segna quanti giorni hai pernottato in questo appartamento"
+                        value={formData.days_of_stay}
+                        onChange={(e) =>
+                            setFormData({ ...formData, days_of_stay: Number(e.target.value) })
+                        }
+                    />
+                </div>
 
-                    {/* <div className="mb-3">
+                {/* <div className="mb-3">
                     <label htmlFor="date" className="form-label">Data</label>
                     <input
                         type="date"
@@ -134,26 +134,26 @@ export default function NewReview({ id, setReviews, setCounter, counter }) {
                         onChange={(e) => setFormData({ ...formData, date: e.target.value })}/>
                     </div> */}
 
-                    <div className="mb-3">
-                        <label htmlFor="text" className="form-label">
-                            Recensione
-                        </label>
-                        <textarea
-                            name="text"
-                            id="text"
-                            className="form-control"
-                            placeholder="Scrivi la tua recensione"
-                            value={formData.text}
-                            onChange={(e) =>
-                                setFormData({ ...formData, text: e.target.value })
-                            }
-                        ></textarea>
-                    </div>
+                <div className="mb-3">
+                    <label htmlFor="text" className="form-label">
+                        Recensione
+                    </label>
+                    <textarea
+                        name="text"
+                        id="text"
+                        className="form-control"
+                        placeholder="Scrivi la tua recensione"
+                        value={formData.text}
+                        onChange={(e) =>
+                            setFormData({ ...formData, text: e.target.value })
+                        }
+                    ></textarea>
+                </div>
 
-                    <button type="submit" className="btn btn-primary">
-                        Salva
-                    </button>
-                </form>
+                <button type="submit" className="btn btn-primary">
+                    Invia
+                </button>
+            </form>
         </>
     )
 }

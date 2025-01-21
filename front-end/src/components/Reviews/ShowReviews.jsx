@@ -27,7 +27,7 @@ export default function ReviewsSection({ id, setCounter, reviews, setReviews }) 
                     <div className="card-body bg-white rounded border my-1">
                         <p>{review.text}</p>
                     </div>
-                    <div> <strong>Data</strong> : {dayjs(review.date).format('YYYY-MM-DD')}</div>
+                    <div> <strong>Data</strong> : {dayjs(review.date).format('DD-MM-YYYY')}</div>
                     <div> <strong>Giorni di permanenza</strong> : {review.days_of_stay}</div>
                 </div>
             )) :

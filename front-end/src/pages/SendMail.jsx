@@ -90,15 +90,15 @@ export default function SendMail() {
                     {/* Campo Email */}
                     <div className="mb-3">
                         <label htmlFor="to" className="form-label">
-                            Destinatario (Cc)
+                            Inserisci una mail
                         </label>
                         <input
                             type="email"
                             id="to"
                             name="to"
                             className="form-control"
-                            value={formData.to}
-                            disabled
+                        /* value={formData.to}
+                        disabled */
                         />
                     </div>
 
