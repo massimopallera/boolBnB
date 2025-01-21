@@ -46,6 +46,7 @@ export default function SingleApartment({ id }) {
 
                                 <div className=" ">
                                     <ul className="list-unstyled p-4">
+                                        <li><strong>Nome:</strong> {apartment.name}</li>
                                         <li><strong>Descrizione:</strong> {apartment.description}</li>
                                         <li><strong>Stanze:</strong> {apartment.rooms}</li>
                                         <li><strong>Letti:</strong> {apartment.beds}</li>
