@@ -18,7 +18,7 @@ export default function SendMail() {
     const { ownerEmail } = location.state || ''
     const navigate = useNavigate()
 
-    const [formData, setFormData] = useState({ initialFormData })
+    const [formData, setFormData] = useState({ initialFormData, to: ownerEmail })
     //send email
     function handleMail(e) {
         e.preventDefault()
@@ -112,7 +112,7 @@ export default function SendMail() {
                             name="to"
                             className="form-control"
                             placeholder="Inserisci la tua email"
-                            value={formData.to}
+                        /* value={formData.to} */
 
                         />
                     </div>
