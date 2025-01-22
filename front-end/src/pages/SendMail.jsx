@@ -37,6 +37,20 @@ export default function SendMail() {
             return;
         }
 
+        if (!formData.to) {
+            toast.error("Il campo mail non può rimanere vuoto.", {
+                position: "top-center",
+                autoClose: 1000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            return;
+        }
+
         if (!formData.text) {
             toast.error("Il campo testo non può rimanere vuoto.", {
                 position: "top-center",
