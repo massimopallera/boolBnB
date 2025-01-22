@@ -18,13 +18,14 @@ export default function SendMail() {
     const { ownerEmail } = location.state || ''
     const navigate = useNavigate()
 
-    const [formData, setFormData] = useState({ initialFormData, to: ownerEmail })
+    const [formData, setFormData] = useState({ initialFormData })
     //send email
     function handleMail(e) {
         e.preventDefault()
 
-        if (!formData.subject) {
-            toast.error("Il campo oggetto non può rimanere vuoto.", {
+
+        if (!formData.to) {
+            toast.error("Il campo mail non può rimanere vuoto.", {
                 position: "top-center",
                 autoClose: 1000,
                 hideProgressBar: true,
@@ -36,9 +37,8 @@ export default function SendMail() {
             });
             return;
         }
-
-        if (!formData.to) {
-            toast.error("Il campo mail non può rimanere vuoto.", {
+        if (!formData.subject) {
+            toast.error("Il campo oggetto non può rimanere vuoto.", {
                 position: "top-center",
                 autoClose: 1000,
                 hideProgressBar: true,
@@ -104,16 +104,16 @@ export default function SendMail() {
                     {/* Campo Email */}
                     <div className="mb-3">
                         <label htmlFor="to" className="form-label">
-                            Inserisci la tua mail
+                            Mail
                         </label>
                         <input
                             type="email"
                             id="to"
                             name="to"
                             className="form-control"
-                            placeholder="tuamail@mail.it"
-                        /* value={formData.to}
-                        disabled */
+                            placeholder="Inserisci la tua email"
+                            value={formData.to}
+
                         />
                     </div>
 
