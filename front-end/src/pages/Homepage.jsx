@@ -1,22 +1,19 @@
-import { useGlobalContext } from '../context/GlobalContext'
-import HomepageCard from '../components/Homepage/HomepageCard'
+
+import { useGlobalContext } from "../context/GlobalContext";
+import HomepageCard from "../components/Homepage/HomepageCard";
 
 export default function HomePage() {
-
-    const { apartments } = useGlobalContext()
+    const { apartments } = useGlobalContext();
 
     return (
-        <>
-            <div className="container" style={{maxWidth:"2000px"}}>
-                <h2 className=' pb-4'>STRUTTURE: </h2>
-                <div className='row row-cols-sm-12 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-5 align-items-stretch'>
-                    {apartments.map(apartment => (
-                        <HomepageCard apartment={apartment} key={apartment.id}/>
-                    ))
-                    }
+        <div className="container px-5" style={{ maxWidth: "2400px" }}>
+        <h1 className="mb-3 text-center">STRUTTURE</h1>
+                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 justify-content-center align-items-stretch">
+                    {apartments.map((apartment) => (
+                        <HomepageCard apartment={apartment} key={apartment.id} />
+                    ))}
                 </div>
-            </div>
-        </>
+        </div>
 
-    )
+    );
 }

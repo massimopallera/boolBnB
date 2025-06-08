@@ -1,13 +1,14 @@
 import { useNavigate } from "react-router-dom"
 import { useEffect } from "react";
 import { useGlobalContext } from "../context/GlobalContext";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+export default function Logout() {
 
-export default function Logout(){
-     
     const navigate = useNavigate()
 
-    const {checkAuthentication, isAuthenticated } = useGlobalContext()
- 
+    const { checkAuthentication, isAuthenticated } = useGlobalContext()
+
     useEffect(() => {
         checkAuthentication();
         try {
@@ -18,20 +19,36 @@ export default function Logout(){
                     credentials: 'include', // Necessario per includere i cookie
                 })
                 console.log('Logout effettuato, redirezione alla home...');
-                navigate('/'); // Redirigi se autenticato
+                toast.success("Logout effettutato con successo!", {
+                    position: "top-center",
+                    autoClose: 1000,
+                    hideProgressBar: true,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                });
+                setTimeout(() => {
+                    navigate("/");
+                    window.location.reload();
+                }, 1000); /* navigate('/'); // Redirigi se autenticato */
                 return;
             } else {
                 // alert('Nessun login effettuato, redirect a login');
-                navigate('/login'); // Redirigi se non autenticato
+                /* navigate('/'); */ // Redirigi se non autenticato
             }
         } catch (error) {
             console.error('Errore durante la verifica della sessione:', error);
         }
-    },[]);
-    
-    return(
-        <>
+    }, []);
 
+    return (
+        <>
+            <div className="logout">
+
+            </div>
+            <ToastContainer />
         </>
     )
 }

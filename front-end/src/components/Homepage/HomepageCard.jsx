@@ -1,35 +1,34 @@
-import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
 export default function HomepageCard({ apartment }) {
 
     return (
-            <div className="col d-flex justify-content-center">
-                <Link to={`/apartments/${apartment.id}`} className="overviewCard card bg-light bg-gradient shadow-sm d-flex flex-column">
+        <div className="col d-flex justify-content-center my-3">
+            <Link to={`/apartments/${apartment.slug}?id=${apartment.id}`} className="overviewCard card bg-light bg-gradient shadow-sm d-flex flex-column h-100">
 
-                    {/* LIKE COUNTER & HEART ICON */}
-                    <span>
-                        <div className="homeLike d-flex  align-items-center">
-                            <span className="mb-1">{apartment.hearts_counter}</span>
-                            <i className=" mx-1 bi bi-heart-fill text-danger"></i>
-                        </div>
-
-                        <img
-                            src={apartment.apartment_images || "/placeholder.png"}
-                            alt="Apartment"
-                            className="img-fluid rounded shadow-sm"
-                            style={{ maxHeight: '100%', objectFit: 'cover' }}
-                        />
-                    </span>
-
-                    {/* DESCRIPTION 👉 TO CHANGE WITH APARTMENT NAME */}
-                    <div className="card-body mt-2">
-                        <div className="mb-2">{/* <strong>Descrizione:</strong> */} <strong>{apartment.description}</strong> </div>
-                        <div> {/* <strong>Indirizzo:</strong> */} {apartment.address}</div>
+                <span>
+                    <div className="homeLike d-flex px-2" style={{fontSize:'15px', padding: "1px 0"}}>
+                        <span className="">{apartment.hearts_counter}</span>
+                        <i className="bi bi-heart-fill text-danger"></i>
                     </div>
 
-                </Link>
-            </div>
+                    <img
+                        src={ apartment.apartments_images != '' ? `http://localhost:3000/uploads/${apartment.apartments_images}` : "/placeholder.png"}
+                        alt="Apartment"
+                        className="img-fluid rounded"
+                        style={{     maxHeight: "250px",
+                            width: "100%",
+                            objectFit: "cover" }}
+                    />
+                </span>
+
+                <div className="card-body mt-2">
+                    <div className="mb-2"><strong>{apartment.name}</strong> </div>
+                    <div>{apartment.address}</div>
+                </div>
+
+            </Link>
+        </div>
     )
 }
 

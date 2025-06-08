@@ -32,11 +32,11 @@ export default function SingleApartment({ id }) {
 
                 <div className="container m-auto ">
 
-                    <div className="bg-lightflex-row bg-gradientd-flex row">
+                    <div className="bg-lightflex-row bg-gradientd-flex">
                         <div className=" d-flex  row justify-content-center flex-wrap border shadow rounded p-4 bg-light bg-gradient">
                             <div className="col-sm-12 col-lg-8 p-0 m-0">
                                 <img
-                                    src={apartment.apartment_images || "/placeholder.png"}
+                                    src={`http://localhost:3000/uploads/${apartment.apartments_images}`}
                                     alt="apartment"
                                     className="img-fluid rounded"
                                 />
@@ -46,6 +46,7 @@ export default function SingleApartment({ id }) {
 
                                 <div className=" ">
                                     <ul className="list-unstyled p-4">
+                                        <li><strong>Nome:</strong> {apartment.name}</li>
                                         <li><strong>Descrizione:</strong> {apartment.description}</li>
                                         <li><strong>Stanze:</strong> {apartment.rooms}</li>
                                         <li><strong>Letti:</strong> {apartment.beds}</li>
@@ -66,7 +67,7 @@ export default function SingleApartment({ id }) {
                                     <span>{likesCounter} </span>
                                 </div>
 
-                                <Link to={'/send-mail'} state={{ownerEmail: apartment.email}}>
+                                <Link to={'/send-mail'} state={{ ownerEmail: apartment.email }}>
                                     <button className="btn btn-primary">Contatta proprietario</button>
                                 </Link>
                             </div>

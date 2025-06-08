@@ -28,11 +28,18 @@ export default function Login() {
                 },
                 body: JSON.stringify({ ...formData }),
                 credentials: "include", // Include i cookie nella richiesta
-            });
+            })
+            // Controlla lo status HTTP della risposta
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
 
-            setFormData(initialFormData);
+            const data = await response.json(); // Estrai i dati dalla risposta
 
-            if (response.ok) {
+            if (data.success) {
+                // Login riuscito
+                setFormData(initialFormData);
+
                 toast.success("Accesso eseguito con successo!", {
                     position: "top-center",
                     autoClose: 1000,
@@ -44,20 +51,18 @@ export default function Login() {
                     theme: "light",
                 });
 
-                setTimeout(() => {navigate("/");window.location.reload()}, 1000); // Ritardo del redirect
-            } else {
-                toast.error("Errore nel login. Controlla le credenziali.", {
-                    position: "top-center",
-                    autoClose: 1000,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                });
+                // Ritardo per redirect
+                setTimeout(() => {
+                    navigate("/");
+                    window.location.reload();
+                }, 1000);
+
             }
         } catch (error) {
+
+
+
+
             console.error("Errore durante il login:", error);
             toast.error("Si è verificato un errore imprevisto.", {
                 position: "top-center",

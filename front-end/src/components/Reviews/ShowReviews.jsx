@@ -3,16 +3,16 @@ import dayjs from 'dayjs';
 
 
 
-export default function ReviewsSection({ id, setCounter }) {
+export default function ReviewsSection({ id, setCounter, reviews, setReviews }) {
 
-    const [reviews, setReviews] = useState([])
+    // const [reviews, setReviews] = useState([])
 
     const reviewsApi = import.meta.env.VITE_EXPRESS_SERVER + "/reviews/" + id
 
     useEffect(() => {
         fetch(reviewsApi)
             .then(resp => resp.json())
-            .then(data => {setReviews(data.data), setCounter(data.data.length) })
+            .then(data => { setReviews(data.data), setCounter(data.data.length) })
             .catch(err => console.error(err))
     }, [])
 
@@ -27,10 +27,16 @@ export default function ReviewsSection({ id, setCounter }) {
                     <div className="card-body bg-white rounded border my-1">
                         <p>{review.text}</p>
                     </div>
-                    <div> <strong>Data</strong> : {dayjs(review.date).format('YYYY-MM-DD')}</div>
+                    <div> <strong>Data</strong> : {dayjs(review.date).format('DD-MM-YYYY')}</div>
                     <div> <strong>Giorni di permanenza</strong> : {review.days_of_stay}</div>
                 </div>
-            )) : 'NotFound'}
+            )) :
+                <>
+                    <div className="ms-5">
+                        <h5>Non ci sono ancora recensioni. Sii il primo!</h5>
+                    </div>
+                </>
+            }
 
         </>
     )
